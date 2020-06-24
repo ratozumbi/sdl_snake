@@ -1,1 +1,1 @@
-/usr/bin/c++  -g   CMakeFiles/sdl_snake.dir/src/main.cpp.o  -o sdl_snake  /usr/lib/x86_64-linux-gnu/libSDL2-2.0.so /usr/lib/x86_64-linux-gnu/libSDL2_image-2.0.so.0 
+/usr/bin/c++  -g   CMakeFiles/sdl_snake.dir/src/main.cpp.o CMakeFiles/sdl_snake.dir/src/GameObject.cpp.o CMakeFiles/sdl_snake.dir/src/ImageGameObject.cpp.o  -o sdl_snake  /usr/lib/x86_64-linux-gnu/libSDL2-2.0.so /usr/lib/x86_64-linux-gnu/libSDL2_image-2.0.so.0 

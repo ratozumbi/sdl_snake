@@ -44,7 +44,9 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/include"/>
 					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/home/ratozumbi/repos/sdl_snake/INCLUDE_DIRECTORIES"/>
 					<Add directory="/usr/include/c++/5"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
 					<Add directory="/usr/include/c++/5/backward"/>
@@ -68,7 +70,9 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/include"/>
 					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/home/ratozumbi/repos/sdl_snake/INCLUDE_DIRECTORIES"/>
 					<Add directory="/usr/include/c++/5"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
 					<Add directory="/usr/include/c++/5/backward"/>
@@ -86,6 +90,18 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/ratozumbi/repos/sdl_snake/include/GameObject.h">
+			<Option target="sdl_snake"/>
+		</Unit>
+		<Unit filename="/home/ratozumbi/repos/sdl_snake/include/ImageGameObject.h">
+			<Option target="sdl_snake"/>
+		</Unit>
+		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/GameObject.cpp">
+			<Option target="sdl_snake"/>
+		</Unit>
+		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/ImageGameObject.cpp">
+			<Option target="sdl_snake"/>
+		</Unit>
 		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/main.cpp">
 			<Option target="sdl_snake"/>
 		</Unit>

@@ -74,12 +74,12 @@ clean: CMakeFiles/sdl_snake.dir/clean
 CMakeFiles/sdl_snake.dir/all:
 	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/depend
 	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target sdl_snake"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4 "Built target sdl_snake"
 .PHONY : CMakeFiles/sdl_snake.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/sdl_snake.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/sdl_snake.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/sdl_snake.dir/rule

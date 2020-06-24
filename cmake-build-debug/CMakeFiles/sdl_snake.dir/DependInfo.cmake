@@ -4,13 +4,17 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/ratozumbi/repos/sdl_snake/src/GameObject.cpp" "/home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles/sdl_snake.dir/src/GameObject.cpp.o"
+  "/home/ratozumbi/repos/sdl_snake/src/ImageGameObject.cpp" "/home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles/sdl_snake.dir/src/ImageGameObject.cpp.o"
   "/home/ratozumbi/repos/sdl_snake/src/main.cpp" "/home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles/sdl_snake.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "/include"
   "/usr/include/SDL2"
+  "../INCLUDE_DIRECTORIES"
   )
 
 # Targets to which this target links.

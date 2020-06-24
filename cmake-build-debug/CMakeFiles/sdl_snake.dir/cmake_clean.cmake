@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/sdl_snake.dir/src/GameObject.cpp.o"
+  "CMakeFiles/sdl_snake.dir/src/ImageGameObject.cpp.o"
   "CMakeFiles/sdl_snake.dir/src/main.cpp.o"
   "sdl_snake"
   "sdl_snake.pdb"

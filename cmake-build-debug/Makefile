@@ -123,6 +123,60 @@ sdl_snake/fast:
 	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/build
 .PHONY : sdl_snake/fast
 
+src/GameObject.o: src/GameObject.cpp.o
+
+.PHONY : src/GameObject.o
+
+# target to build an object file
+src/GameObject.cpp.o:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/GameObject.cpp.o
+.PHONY : src/GameObject.cpp.o
+
+src/GameObject.i: src/GameObject.cpp.i
+
+.PHONY : src/GameObject.i
+
+# target to preprocess a source file
+src/GameObject.cpp.i:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/GameObject.cpp.i
+.PHONY : src/GameObject.cpp.i
+
+src/GameObject.s: src/GameObject.cpp.s
+
+.PHONY : src/GameObject.s
+
+# target to generate assembly for a file
+src/GameObject.cpp.s:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/GameObject.cpp.s
+.PHONY : src/GameObject.cpp.s
+
+src/ImageGameObject.o: src/ImageGameObject.cpp.o
+
+.PHONY : src/ImageGameObject.o
+
+# target to build an object file
+src/ImageGameObject.cpp.o:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/ImageGameObject.cpp.o
+.PHONY : src/ImageGameObject.cpp.o
+
+src/ImageGameObject.i: src/ImageGameObject.cpp.i
+
+.PHONY : src/ImageGameObject.i
+
+# target to preprocess a source file
+src/ImageGameObject.cpp.i:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/ImageGameObject.cpp.i
+.PHONY : src/ImageGameObject.cpp.i
+
+src/ImageGameObject.s: src/ImageGameObject.cpp.s
+
+.PHONY : src/ImageGameObject.s
+
+# target to generate assembly for a file
+src/ImageGameObject.cpp.s:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/ImageGameObject.cpp.s
+.PHONY : src/ImageGameObject.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -159,6 +213,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... sdl_snake"
+	@echo "... src/GameObject.o"
+	@echo "... src/GameObject.i"
+	@echo "... src/GameObject.s"
+	@echo "... src/ImageGameObject.o"
+	@echo "... src/ImageGameObject.i"
+	@echo "... src/ImageGameObject.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
