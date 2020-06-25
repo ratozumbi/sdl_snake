@@ -100,7 +100,7 @@
 		<Unit filename="/home/ratozumbi/repos/sdl_snake/include/Image.h">
 			<Option target="sdl_snake"/>
 		</Unit>
-		<Unit filename="/home/ratozumbi/repos/sdl_snake/include/main.h">
+		<Unit filename="/home/ratozumbi/repos/sdl_snake/include/util.h">
 			<Option target="sdl_snake"/>
 		</Unit>
 		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/Actor.cpp">
@@ -116,6 +116,9 @@
 			<Option target="sdl_snake"/>
 		</Unit>
 		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/main.cpp">
+			<Option target="sdl_snake"/>
+		</Unit>
+		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/util.cpp">
 			<Option target="sdl_snake"/>
 		</Unit>
 		<Unit filename="/home/ratozumbi/repos/sdl_snake/CMakeLists.txt">

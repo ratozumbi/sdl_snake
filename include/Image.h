@@ -16,6 +16,7 @@ using std::string;
 class Image: public GameObject {
 
 public:
+
     SDL_Texture *texture;
     Image (string , SDL_Rect &, SDL_Texture &);
     Image (SDL_Rect &, SDL_Texture &);

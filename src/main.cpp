@@ -3,10 +3,9 @@
 #include <SDL2/SDL_image.h>
 
 #include "../include/Image.h"
-#include "../include/main.h"
+#include "../include/util.h"
 
-using Game::loadImage;
-using Game::allImages;
+//using Game::allImages;
 
 int main(int argc, char **argv)
 {
@@ -28,10 +27,12 @@ int main(int argc, char **argv)
     SDL_QueryTexture(texture, NULL, NULL, &w, &h); // get the width and height of the texture
     SDL_Rect texr; texr.x = 0; texr.y = 0; texr.w = w; texr.h = h;
 
+    Game::init();
+
     Game::loadImage("pointer.png",0,*renderer);
 
-    allImages[0]->rect.x = 190;
-    allImages[0]->rect.y = 480; //360;
+    Game::allImages.at(0)->rect.x = 190;
+    Game::allImages.at(0)->rect.y = 480; //360;
 
     // main loop
     while (1) {
@@ -51,10 +52,10 @@ int main(int argc, char **argv)
         SDL_RenderClear(renderer);
         // copy the texture to the rendering context
         SDL_RenderCopy(renderer, texture, NULL, &texr); //background
-        for (int i = 0; i < 255 ; ++i) {
-            if(allImages[i] != nullptr && allImages[i]->active)
+        for (int i = 0; i < Game::allImages.size() ; ++i) {
+            if(Game::allImages[i] != NULL && Game::allImages[i]->active)
             {
-                SDL_RenderCopy(renderer, allImages[i]->texture, NULL, &allImages[i]->rect);
+                SDL_RenderCopy(renderer, Game::allImages[i]->texture, NULL, &Game::allImages[i]->rect);
             }
 
         }
