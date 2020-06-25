@@ -12,7 +12,6 @@ int main(int argc, char **argv)
 {
 
     int w, h; // texture width & height
-    int w2, h2; // texture width & height
 
     SDL_Window *window;
     SDL_Renderer *renderer;
@@ -21,29 +20,18 @@ int main(int argc, char **argv)
         SDL_Log("Can't init %s", SDL_GetError());
         return 1;
     }
-    window = SDL_CreateWindow("The Game Window2", 100, 100, 800, 600, 0);
+    window = SDL_CreateWindow("Snake", 100, 100, 800, 600, 0);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-    // load our image
+    // //background
     SDL_Texture *texture = IMG_LoadTexture(renderer, "../res/fundo.png");
     SDL_QueryTexture(texture, NULL, NULL, &w, &h); // get the width and height of the texture
-    // put the location where we want the texture to be drawn into a rectangle
     SDL_Rect texr; texr.x = 0; texr.y = 0; texr.w = w; texr.h = h;
 
-    // load our image2
-    SDL_Texture *texture2 = IMG_LoadTexture(renderer, "../res/pointer.png");
-    SDL_QueryTexture(texture2, NULL, NULL, &w2, &h2); // get the width and height of the texture
-    // put the location where we want the texture to be drawn into a rectangle
-    SDL_Rect texr2; texr2.x = 190; texr2.y = 360; texr2.w = w2; texr2.h = h2;
+    Game::loadImage("pointer.png",0,*renderer);
 
-    Image *imgGameObj = new Image("pointer", texr2, *texture2);
-
-    if (texture == NULL){
-        SDL_Log("Can't load image. %s", SDL_GetError());
-//        std::cout << SDL_GetError() << std::endl;
-        return 1;
-    }
-
+    allImages[0]->rect.x = 190;
+    allImages[0]->rect.y = 480; //360;
 
     // main loop
     while (1) {
@@ -62,7 +50,7 @@ int main(int argc, char **argv)
         // clear the screen
         SDL_RenderClear(renderer);
         // copy the texture to the rendering context
-        SDL_RenderCopy(renderer, texture, NULL, &texr);
+        SDL_RenderCopy(renderer, texture, NULL, &texr); //background
         for (int i = 0; i < 255 ; ++i) {
             if(allImages[i] != nullptr && allImages[i]->active)
             {
@@ -70,7 +58,7 @@ int main(int argc, char **argv)
             }
 
         }
-        //SDL_RenderCopy(renderer, imgGameObj.texture, NULL, &imgGameObj->rect);
+
         // flip the backbuffer
         // this means that everything that we prepared behind the screens is actually shown
         SDL_RenderPresent(renderer);

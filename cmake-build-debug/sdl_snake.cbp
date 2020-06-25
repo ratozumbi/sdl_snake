@@ -44,7 +44,6 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/include"/>
 					<Add directory="/usr/include/SDL2"/>
 					<Add directory="/home/ratozumbi/repos/sdl_snake/INCLUDE_DIRECTORIES"/>
 					<Add directory="/usr/include/c++/5"/>
@@ -70,7 +69,6 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/include"/>
 					<Add directory="/usr/include/SDL2"/>
 					<Add directory="/home/ratozumbi/repos/sdl_snake/INCLUDE_DIRECTORIES"/>
 					<Add directory="/usr/include/c++/5"/>
@@ -93,6 +91,9 @@
 		<Unit filename="/home/ratozumbi/repos/sdl_snake/include/Actor.h">
 			<Option target="sdl_snake"/>
 		</Unit>
+		<Unit filename="/home/ratozumbi/repos/sdl_snake/include/Arrow.h">
+			<Option target="sdl_snake"/>
+		</Unit>
 		<Unit filename="/home/ratozumbi/repos/sdl_snake/include/GameObject.h">
 			<Option target="sdl_snake"/>
 		</Unit>
@@ -106,9 +107,6 @@
 			<Option target="sdl_snake"/>
 		</Unit>
 		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/Arrow.cpp">
-			<Option target="sdl_snake"/>
-		</Unit>
-		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/Arrow.h">
 			<Option target="sdl_snake"/>
 		</Unit>
 		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/GameObject.cpp">

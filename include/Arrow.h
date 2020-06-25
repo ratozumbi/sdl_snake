@@ -5,7 +5,7 @@
 #ifndef SDL_SNAKE_ARROW_H
 #define SDL_SNAKE_ARROW_H
 
-#include "../include/Actor.h"
+#include "Actor.h"
 
 class Arrow:public Actor{
 

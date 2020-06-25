@@ -27,8 +27,8 @@ CMakeFiles/sdl_snake.dir/src/Actor.cpp.o: /usr/include/SDL2/begin_code.h
 CMakeFiles/sdl_snake.dir/src/Actor.cpp.o: /usr/include/SDL2/close_code.h
 
 CMakeFiles/sdl_snake.dir/src/Arrow.cpp.o: ../include/Actor.h
+CMakeFiles/sdl_snake.dir/src/Arrow.cpp.o: ../include/Arrow.h
 CMakeFiles/sdl_snake.dir/src/Arrow.cpp.o: ../src/Arrow.cpp
-CMakeFiles/sdl_snake.dir/src/Arrow.cpp.o: ../src/Arrow.h
 CMakeFiles/sdl_snake.dir/src/Arrow.cpp.o: /usr/include/SDL2/SDL_blendmode.h
 CMakeFiles/sdl_snake.dir/src/Arrow.cpp.o: /usr/include/SDL2/SDL_config.h
 CMakeFiles/sdl_snake.dir/src/Arrow.cpp.o: /usr/include/SDL2/SDL_error.h
@@ -76,6 +76,7 @@ CMakeFiles/sdl_snake.dir/src/Image.cpp.o: /usr/include/SDL2/SDL_video.h
 CMakeFiles/sdl_snake.dir/src/Image.cpp.o: /usr/include/SDL2/begin_code.h
 CMakeFiles/sdl_snake.dir/src/Image.cpp.o: /usr/include/SDL2/close_code.h
 
+CMakeFiles/sdl_snake.dir/src/main.cpp.o: ../include/Actor.h
 CMakeFiles/sdl_snake.dir/src/main.cpp.o: ../include/GameObject.h
 CMakeFiles/sdl_snake.dir/src/main.cpp.o: ../include/Image.h
 CMakeFiles/sdl_snake.dir/src/main.cpp.o: ../include/main.h
@@ -83,10 +84,16 @@ CMakeFiles/sdl_snake.dir/src/main.cpp.o: ../src/main.cpp
 CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_blendmode.h
 CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_config.h
 CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_error.h
+CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_events.h
+CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_gamecontroller.h
+CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_gesture.h
+CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_joystick.h
 CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_keyboard.h
 CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_keycode.h
+CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_mouse.h
 CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_pixels.h
 CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_platform.h
+CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_quit.h
 CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_rect.h
 CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_render.h
 CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_rwops.h
@@ -94,6 +101,7 @@ CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_scancode.h
 CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_stdinc.h
 CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_surface.h
 CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_system.h
+CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_touch.h
 CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/SDL_video.h
 CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/begin_code.h
 CMakeFiles/sdl_snake.dir/src/main.cpp.o: /usr/include/SDL2/close_code.h

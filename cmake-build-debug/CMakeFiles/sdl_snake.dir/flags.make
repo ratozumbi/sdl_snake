@@ -6,5 +6,5 @@ CXX_FLAGS = -g   -std=gnu++14
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/include -I/usr/include/SDL2 -I/home/ratozumbi/repos/sdl_snake/INCLUDE_DIRECTORIES 
+CXX_INCLUDES = -I/usr/include/SDL2 -I/home/ratozumbi/repos/sdl_snake/INCLUDE_DIRECTORIES 
 

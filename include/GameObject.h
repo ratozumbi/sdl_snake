@@ -6,9 +6,9 @@
 #define SDL_SNAKE_GAMEOBJECT_H
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <string>
 using std::string;
-#include <SDL2/SDL_image.h>
 
 class GameObject
 {
