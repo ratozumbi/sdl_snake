@@ -32,14 +32,7 @@ namespace Game {
 
     namespace Util {
 
-        inline GameObject *findImage(std::string name){
-            GameObject img;
-            for(int i = 0; i< 255;i++){
-                if(allImages.at(i)->name.compare(name) == 0){
-                    return allImages.at(i);
-                }
-            };
-        }
+        GameObject *findImage(std::string );
 
 
     }

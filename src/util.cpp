@@ -53,3 +53,12 @@ int Game::loadActor(ActorType act, int n_args, ...){
     return 0;
 
 }
+
+GameObject *Game::Util::findImage(std::string name){
+    GameObject img;
+    for(int i = 0; i< 255;i++){
+        if(allImages.at(i)->name.compare(name) == 0){
+            return allImages[i];
+        }
+    };
+}

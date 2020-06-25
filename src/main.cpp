@@ -28,21 +28,37 @@ int main(int argc, char **argv)
     SDL_Rect texr; texr.x = 0; texr.y = 0; texr.w = w; texr.h = h;
 
 
-
-    Game::loadImage("pointer.png",0,*renderer);
+    Game::loadImage("fundo.png",0,*renderer);
+    Game::loadImage("pointer.png",1,*renderer);
     Game::loadActor(Game::ACT_Arrow,0);
 
     Game::allImages.at(0)->rect.x = 190;
     Game::allImages.at(0)->rect.y = 480; //360;
 
+    const int targetFPS = 60;
+    const int frameDelay = 1000/ targetFPS;
+    Uint32 frameStart;
+    int frameTime;
+
     // main loop
     while (1) {
 
-        // event handling
+        frameStart = SDL_GetTicks();
+
         SDL_Event e;
+        //game update
+        for (int i = 0; i < Game::allActors.size() ; ++i) {
+            if (Game::allActors[i]->active) {
+                Game::allActors[i]->update();
+            }
+        }
+
+        // event handling
         if ( SDL_PollEvent(&e) ) {
             for (int i = 0; i < Game::allActors.size() ; ++i) {
-                Game::allActors[i]->onInput(e);
+                if(Game::allActors[i]->active){
+                    Game::allActors[i]->onInput(e);
+                }
             }
             if (e.type == SDL_QUIT)
                 break;
@@ -63,9 +79,14 @@ int main(int argc, char **argv)
             }
         }
 
-        // flip the backbuffer
-        // this means that everything that we prepared behind the screens is actually shown
+        //render the renderer
         SDL_RenderPresent(renderer);
+
+        //60 FPS cap
+        frameTime = SDL_GetTicks() - frameStart;
+        if(frameDelay > frameTime){
+            SDL_Delay(frameDelay - frameTime);
+        }
 
     }
 
