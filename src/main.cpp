@@ -27,9 +27,10 @@ int main(int argc, char **argv)
     SDL_QueryTexture(texture, NULL, NULL, &w, &h); // get the width and height of the texture
     SDL_Rect texr; texr.x = 0; texr.y = 0; texr.w = w; texr.h = h;
 
-    Game::init();
+
 
     Game::loadImage("pointer.png",0,*renderer);
+    Game::loadActor(Game::ACT_Arrow,0);
 
     Game::allImages.at(0)->rect.x = 190;
     Game::allImages.at(0)->rect.y = 480; //360;
@@ -40,6 +41,9 @@ int main(int argc, char **argv)
         // event handling
         SDL_Event e;
         if ( SDL_PollEvent(&e) ) {
+            for (int i = 0; i < Game::allActors.size() ; ++i) {
+                Game::allActors[i]->onInput(e);
+            }
             if (e.type == SDL_QUIT)
                 break;
             else if ( e.key.keysym.sym == SDLK_ESCAPE)
@@ -57,7 +61,6 @@ int main(int argc, char **argv)
             {
                 SDL_RenderCopy(renderer, Game::allImages[i]->texture, NULL, &Game::allImages[i]->rect);
             }
-
         }
 
         // flip the backbuffer

@@ -3,14 +3,12 @@
 //
 
 #include "../include/util.h"
+#include "../include/Arrow.h"
 
-
-int Game::init() {
-//    Game::allImages = new Image*[255];
-}
 
 //Image **Game::allImages;
 std::vector<Image*> Game::allImages;
+std::vector<Actor*> Game::allActors;
 
 int Game::loadImage(string name, int z, SDL_Renderer &r) {
 
@@ -37,8 +35,7 @@ int Game::loadImage(string name, int z, SDL_Renderer &r) {
 
     //TODO: check if there is an image in z and destroy it before creating a new one
 //    Game::allImages[z] = new Image(name.c_str(), rect, *texture);
-    Image *img = new Image(name.c_str(), rect, *texture);
-    Game::allImages.push_back(img);
+    Game::allImages.push_back(new Image(name.c_str(), rect, *texture));
 
     return 0;
 }
@@ -51,7 +48,7 @@ int Game::loadActor(ActorType act, int n_args, ...){
 
     }
     if(act == ACT_Arrow){
-
+        Game::allActors.push_back(new Arrow());
     }
     return 0;
 

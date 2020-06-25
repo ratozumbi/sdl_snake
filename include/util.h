@@ -10,23 +10,25 @@
 #include "GameObject.h"
 
 #include "../include/Image.h"
-//#include "../include/Actor.h"
+#include "../include/Actor.h"
+#include "Arrow.h"
+
 namespace Game {
 
-    namespace { //"private"
-        enum ActorType {
-            ACT_Arrow,
-            ACT_Actor
-        };
-    }
+
+    enum ActorType {
+        ACT_Arrow,
+        ACT_Actor
+    };
+
 
     //extern Image **allImages[255];
     extern std::vector<Image*> allImages;
+    extern std::vector<Actor*> allActors;
     //Actor *allActors[255];
 
     int loadImage(string, int, SDL_Renderer &);
     int loadActor(ActorType, int , ...);
-    int init();
 
     namespace Util {
 

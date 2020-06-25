@@ -11,8 +11,8 @@ class Actor {
 public:
     bool active = true;
     Actor();
-    void update();
-    void onInput(SDL_Event);
+    virtual void update();
+    virtual void onInput(SDL_Event);
 };
 
 #endif //SDL_SNAKE_ACTOR_H
