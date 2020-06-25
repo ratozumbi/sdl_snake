@@ -4,8 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/ratozumbi/repos/sdl_snake/src/Actor.cpp" "/home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles/sdl_snake.dir/src/Actor.cpp.o"
+  "/home/ratozumbi/repos/sdl_snake/src/Arrow.cpp" "/home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles/sdl_snake.dir/src/Arrow.cpp.o"
   "/home/ratozumbi/repos/sdl_snake/src/GameObject.cpp" "/home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles/sdl_snake.dir/src/GameObject.cpp.o"
-  "/home/ratozumbi/repos/sdl_snake/src/ImageGameObject.cpp" "/home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles/sdl_snake.dir/src/ImageGameObject.cpp.o"
+  "/home/ratozumbi/repos/sdl_snake/src/Image.cpp" "/home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles/sdl_snake.dir/src/Image.cpp.o"
   "/home/ratozumbi/repos/sdl_snake/src/main.cpp" "/home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles/sdl_snake.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

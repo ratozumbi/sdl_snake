@@ -2,7 +2,11 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "../include/ImageGameObject.h"
+#include "../include/Image.h"
+#include "../include/main.h"
+
+using Game::loadImage;
+using Game::allImages;
 
 int main(int argc, char **argv)
 {
@@ -32,7 +36,7 @@ int main(int argc, char **argv)
     // put the location where we want the texture to be drawn into a rectangle
     SDL_Rect texr2; texr2.x = 190; texr2.y = 360; texr2.w = w2; texr2.h = h2;
 
-    ImageGameObject *imgGameObj = new ImageGameObject("pointer",texr2,*texture2);
+    Image *imgGameObj = new Image("pointer", texr2, *texture2);
 
     if (texture == NULL){
         SDL_Log("Can't load image. %s", SDL_GetError());
@@ -59,7 +63,14 @@ int main(int argc, char **argv)
         SDL_RenderClear(renderer);
         // copy the texture to the rendering context
         SDL_RenderCopy(renderer, texture, NULL, &texr);
-        SDL_RenderCopy(renderer, imgGameObj->texture, NULL, &imgGameObj->rect);
+        for (int i = 0; i < 255 ; ++i) {
+            if(allImages[i] != nullptr && allImages[i]->active)
+            {
+                SDL_RenderCopy(renderer, allImages[i]->texture, NULL, &allImages[i]->rect);
+            }
+
+        }
+        //SDL_RenderCopy(renderer, imgGameObj.texture, NULL, &imgGameObj->rect);
         // flip the backbuffer
         // this means that everything that we prepared behind the screens is actually shown
         SDL_RenderPresent(renderer);

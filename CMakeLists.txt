@@ -16,7 +16,8 @@ include_directories(AFTER /include)
 #find_package(SDL2 REQUIRED)
 #include_directories(${SDL2_INCLUDE_DIR})
 
-add_executable(sdl_snake src/main.cpp include/GameObject.h src/GameObject.cpp src/ImageGameObject.cpp include/ImageGameObject.h)
+#TODO: use file(GLOB to add headers and sources
+add_executable(sdl_snake src/main.cpp include/GameObject.h src/GameObject.cpp src/Image.cpp include/Image.h src/Actor.cpp include/Actor.h include/main.h src/Arrow.cpp src/Arrow.h)
 
 target_include_directories(sdl_snake PUBLIC ${SDL2_INCLUDE_DIR} INCLUDE_DIRECTORIES)
 target_link_libraries(sdl_snake ${SDL2_LIBRARY} ${SDL2_IMAGE})

@@ -90,16 +90,31 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/ratozumbi/repos/sdl_snake/include/Actor.h">
+			<Option target="sdl_snake"/>
+		</Unit>
 		<Unit filename="/home/ratozumbi/repos/sdl_snake/include/GameObject.h">
 			<Option target="sdl_snake"/>
 		</Unit>
-		<Unit filename="/home/ratozumbi/repos/sdl_snake/include/ImageGameObject.h">
+		<Unit filename="/home/ratozumbi/repos/sdl_snake/include/Image.h">
+			<Option target="sdl_snake"/>
+		</Unit>
+		<Unit filename="/home/ratozumbi/repos/sdl_snake/include/main.h">
+			<Option target="sdl_snake"/>
+		</Unit>
+		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/Actor.cpp">
+			<Option target="sdl_snake"/>
+		</Unit>
+		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/Arrow.cpp">
+			<Option target="sdl_snake"/>
+		</Unit>
+		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/Arrow.h">
 			<Option target="sdl_snake"/>
 		</Unit>
 		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/GameObject.cpp">
 			<Option target="sdl_snake"/>
 		</Unit>
-		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/ImageGameObject.cpp">
+		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/Image.cpp">
 			<Option target="sdl_snake"/>
 		</Unit>
 		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/main.cpp">

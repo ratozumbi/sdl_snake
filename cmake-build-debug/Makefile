@@ -123,6 +123,60 @@ sdl_snake/fast:
 	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/build
 .PHONY : sdl_snake/fast
 
+src/Actor.o: src/Actor.cpp.o
+
+.PHONY : src/Actor.o
+
+# target to build an object file
+src/Actor.cpp.o:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/Actor.cpp.o
+.PHONY : src/Actor.cpp.o
+
+src/Actor.i: src/Actor.cpp.i
+
+.PHONY : src/Actor.i
+
+# target to preprocess a source file
+src/Actor.cpp.i:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/Actor.cpp.i
+.PHONY : src/Actor.cpp.i
+
+src/Actor.s: src/Actor.cpp.s
+
+.PHONY : src/Actor.s
+
+# target to generate assembly for a file
+src/Actor.cpp.s:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/Actor.cpp.s
+.PHONY : src/Actor.cpp.s
+
+src/Arrow.o: src/Arrow.cpp.o
+
+.PHONY : src/Arrow.o
+
+# target to build an object file
+src/Arrow.cpp.o:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/Arrow.cpp.o
+.PHONY : src/Arrow.cpp.o
+
+src/Arrow.i: src/Arrow.cpp.i
+
+.PHONY : src/Arrow.i
+
+# target to preprocess a source file
+src/Arrow.cpp.i:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/Arrow.cpp.i
+.PHONY : src/Arrow.cpp.i
+
+src/Arrow.s: src/Arrow.cpp.s
+
+.PHONY : src/Arrow.s
+
+# target to generate assembly for a file
+src/Arrow.cpp.s:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/Arrow.cpp.s
+.PHONY : src/Arrow.cpp.s
+
 src/GameObject.o: src/GameObject.cpp.o
 
 .PHONY : src/GameObject.o
@@ -150,32 +204,32 @@ src/GameObject.cpp.s:
 	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/GameObject.cpp.s
 .PHONY : src/GameObject.cpp.s
 
-src/ImageGameObject.o: src/ImageGameObject.cpp.o
+src/Image.o: src/Image.cpp.o
 
-.PHONY : src/ImageGameObject.o
+.PHONY : src/Image.o
 
 # target to build an object file
-src/ImageGameObject.cpp.o:
-	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/ImageGameObject.cpp.o
-.PHONY : src/ImageGameObject.cpp.o
+src/Image.cpp.o:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/Image.cpp.o
+.PHONY : src/Image.cpp.o
 
-src/ImageGameObject.i: src/ImageGameObject.cpp.i
+src/Image.i: src/Image.cpp.i
 
-.PHONY : src/ImageGameObject.i
+.PHONY : src/Image.i
 
 # target to preprocess a source file
-src/ImageGameObject.cpp.i:
-	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/ImageGameObject.cpp.i
-.PHONY : src/ImageGameObject.cpp.i
+src/Image.cpp.i:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/Image.cpp.i
+.PHONY : src/Image.cpp.i
 
-src/ImageGameObject.s: src/ImageGameObject.cpp.s
+src/Image.s: src/Image.cpp.s
 
-.PHONY : src/ImageGameObject.s
+.PHONY : src/Image.s
 
 # target to generate assembly for a file
-src/ImageGameObject.cpp.s:
-	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/ImageGameObject.cpp.s
-.PHONY : src/ImageGameObject.cpp.s
+src/Image.cpp.s:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/Image.cpp.s
+.PHONY : src/Image.cpp.s
 
 src/main.o: src/main.cpp.o
 
@@ -213,12 +267,18 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... sdl_snake"
+	@echo "... src/Actor.o"
+	@echo "... src/Actor.i"
+	@echo "... src/Actor.s"
+	@echo "... src/Arrow.o"
+	@echo "... src/Arrow.i"
+	@echo "... src/Arrow.s"
 	@echo "... src/GameObject.o"
 	@echo "... src/GameObject.i"
 	@echo "... src/GameObject.s"
-	@echo "... src/ImageGameObject.o"
-	@echo "... src/ImageGameObject.i"
-	@echo "... src/ImageGameObject.s"
+	@echo "... src/Image.o"
+	@echo "... src/Image.i"
+	@echo "... src/Image.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

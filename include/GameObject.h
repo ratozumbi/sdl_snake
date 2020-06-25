@@ -13,6 +13,7 @@ using std::string;
 class GameObject
 {
 public:
+    bool active = true;
     string name;
     SDL_Rect rect;
     GameObject (string , SDL_Rect &);

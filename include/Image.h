@@ -1,0 +1,29 @@
+//
+// Created by ratozumbi on 6/23/20.
+//
+
+#ifndef SDL_SNAKE_IMAGE_H
+#define SDL_SNAKE_IMAGE_H
+
+#include "../include/GameObject.h"
+#include "GameObject.h"
+#include <string>
+using std::string;
+#include <SDL_rect.h>
+#include <SDL_system.h>
+
+
+class Image: public GameObject {
+
+public:
+    SDL_Texture *texture;
+    Image (string , SDL_Rect &, SDL_Texture &);
+    Image (SDL_Rect &, SDL_Texture &);
+    Image (SDL_Texture &);
+    Image();
+    Image(string name, SDL_Rect &rect1);
+
+};
+
+
+#endif //SDL_SNAKE_IMAGE_H
