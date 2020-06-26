@@ -8,11 +8,10 @@
 #include "Actor.h"
 #include "GameObject.h"
 
-extern bool isUp = false;
-
 class Arrow:public Actor{
 
 public:
+    bool isUp = false;
     GameObject *pointer;
     Arrow();
     ~Arrow();

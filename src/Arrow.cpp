@@ -42,9 +42,9 @@ void Arrow::onInput(SDL_Event e) {
     }
     if(e.key.keysym.sym == SDLK_RETURN){
         if(isUp){
-
+            Game::currentScene = Game::Scene::SCN_Game;
         } else{
-
+            Game::currentScene = Game::Scene::SCN_ExitGame;
         }
     }
 

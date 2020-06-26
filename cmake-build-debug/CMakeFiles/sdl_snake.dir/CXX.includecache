@@ -48,13 +48,11 @@ GameObject.h
 Arrow.h
 /home/ratozumbi/repos/sdl_snake/include/Arrow.h
 
-/home/ratozumbi/repos/sdl_snake/src/Arrow.cpp
-iostream
--
-../include/Arrow.h
-/home/ratozumbi/repos/sdl_snake/include/Arrow.h
+/home/ratozumbi/repos/sdl_snake/src/util.cpp
 ../include/util.h
 /home/ratozumbi/repos/sdl_snake/include/util.h
+../include/Arrow.h
+/home/ratozumbi/repos/sdl_snake/include/Arrow.h
 
 /usr/include/SDL2/SDL_blendmode.h
 begin_code.h

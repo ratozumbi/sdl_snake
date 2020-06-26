@@ -21,13 +21,20 @@ namespace Game {
         ACT_Actor
     };
 
+    enum class Scene {
+        SCN_Menu,
+        SCN_Game,
+        SCN_ExitGame,
+    };
+
 
     //extern Image **allImages[255];
-    extern std::vector<Image*> allImages;
+    extern Scene currentScene;
+    extern std::vector<std::vector<Image*>> allImages;
     extern std::vector<Actor*> allActors;
     //Actor *allActors[255];
 
-    GameObject *loadImage(string, int, SDL_Renderer &);
+    GameObject *loadImage(string, SDL_Renderer &);
     int loadActor(ActorType, int , ...);
 
     namespace Util {

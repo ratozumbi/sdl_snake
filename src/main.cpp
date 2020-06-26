@@ -27,11 +27,12 @@ int main(int argc, char **argv)
 //    SDL_QueryTexture(texture, NULL, NULL, &w, &h); // get the width and height of the texture
 //    SDL_Rect texr; texr.x = 0; texr.y = 0; texr.w = w; texr.h = h;
 
-
-    Game::loadImage("fundo.png",0,*renderer);
-    auto pointer = Game::loadImage("pointer.png",1,*renderer);
+    Game::loadImage("fundo.png",*renderer);
+    auto pointer = Game::loadImage("pointer.png",*renderer);
     pointer->rect.x = 190;
     pointer->rect.y = 360; //480;
+
+
 
     Game::loadActor(Game::ACT_Arrow,0);
 
@@ -60,6 +61,9 @@ int main(int argc, char **argv)
                     Game::allActors[i]->onInput(e);
                 }
             }
+            if(Game::currentScene == Game::Scene::SCN_ExitGame){
+                break;
+            }
             if (e.type == SDL_QUIT)
                 break;
             else if ( e.key.keysym.sym == SDLK_ESCAPE)
@@ -72,10 +76,10 @@ int main(int argc, char **argv)
         SDL_RenderClear(renderer);
         // copy the texture to the rendering context
 //        SDL_RenderCopy(renderer, texture, NULL, &texr); //background
-        for (int i = 0; i < Game::allImages.size() ; ++i) {
-            if(Game::allImages[i] != NULL && Game::allImages[i]->active)
+        for (int i = 0; i < Game::allImages.at((int)Game::currentScene).size() ; ++i) {
+            if(Game::allImages.at((int)Game::currentScene).at(i) != NULL && Game::allImages.at((int)Game::currentScene).at(i)->active)
             {
-                SDL_RenderCopy(renderer, Game::allImages[i]->texture, NULL, &Game::allImages[i]->rect);
+                SDL_RenderCopy(renderer, Game::allImages.at((int)Game::currentScene).at(i)->texture, NULL, &Game::allImages.at((int)Game::currentScene).at(i)->rect);
             }
         }
 

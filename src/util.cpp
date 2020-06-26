@@ -5,12 +5,14 @@
 #include "../include/util.h"
 #include "../include/Arrow.h"
 
-
 //Image **Game::allImages;
-std::vector<Image*> Game::allImages;
+std::vector<std::vector<Image*>> Game::allImages;
 std::vector<Actor*> Game::allActors;
+Game::Scene Game::currentScene; //TODO: Find a better place to Scene enum
 
-GameObject *Game::loadImage(string name, int z, SDL_Renderer &r) {
+//TODO: Make this enum a class or losen Game to scope wide namespace
+
+GameObject *Game::loadImage(string name, SDL_Renderer &r) {
 
     // load our image2
     int w, h; // texture width & height
@@ -37,7 +39,11 @@ GameObject *Game::loadImage(string name, int z, SDL_Renderer &r) {
 
     //TODO: check if there is an image in z and destroy it before creating a new one
     auto newImage = new Image(name.c_str(), rect, *texture);
-    Game::allImages.push_back(newImage);
+    int scn = (int)Game::currentScene;
+    if (&Game::allImages[scn] == nullptr){
+        Game::allImages.push_back(std::vector<Image*>());
+    }
+    Game::allImages.at(scn).push_back(newImage);
 
     return newImage;
 }
@@ -58,9 +64,11 @@ int Game::loadActor(ActorType act, int n_args, ...){
 
 GameObject *Game::Util::findImage(std::string name){
     GameObject img;
-    for(int i = 0; i< allImages.size();i++){
-        if(allImages.at(i)->name.compare(name) == 0){
-            return allImages.at(i);
+    for(int iScene = 0; iScene < allImages.size(); iScene++){
+        for(int iImage = 0; iImage < allImages.at(iScene).size(); iImage++){
+            if(Game::allImages.at(iScene).at(iImage)->name.compare(name) == 0){
+                return Game::allImages[iScene][iImage];
+            }
         }
-    };
+    }
 }
