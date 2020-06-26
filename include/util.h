@@ -23,7 +23,9 @@ namespace Game {
 
     enum class Scene {
         SCN_Menu,
+        //scenes goes here
         SCN_Game,
+        //end of scenes
         SCN_ExitGame,
     };
 
@@ -34,7 +36,7 @@ namespace Game {
     extern std::vector<Actor*> allActors;
     //Actor *allActors[255];
 
-    GameObject *loadImage(string, SDL_Renderer &);
+    GameObject *loadImage(string, Scene, SDL_Renderer &);
     int loadActor(ActorType, int , ...);
 
     namespace Util {

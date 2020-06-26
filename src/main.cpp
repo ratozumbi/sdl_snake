@@ -22,18 +22,19 @@ int main(int argc, char **argv)
     window = SDL_CreateWindow("Snake", 100, 100, 800, 600, 0);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-//    // //background
-//    SDL_Texture *texture = IMG_LoadTexture(renderer, "../res/fundo.png");
-//    SDL_QueryTexture(texture, NULL, NULL, &w, &h); // get the width and height of the texture
-//    SDL_Rect texr; texr.x = 0; texr.y = 0; texr.w = w; texr.h = h;
-
-    Game::loadImage("fundo.png",*renderer);
-    auto pointer = Game::loadImage("pointer.png",*renderer);
+    // Initialize scenes
+    for (int currScn = (int)Game::Scene::SCN_Menu; currScn != (int)Game::Scene::SCN_ExitGame; currScn++ )
+    {
+        Game::allImages.push_back(std::vector<Image*>());
+    }
+    //load images
+    Game::loadImage("fundo.png", Game::Scene::SCN_Menu,*renderer);
+    auto pointer = Game::loadImage("pointer.png", Game::Scene::SCN_Menu,*renderer);
     pointer->rect.x = 190;
     pointer->rect.y = 360; //480;
+    Game::loadImage("canvas.png", Game::Scene::SCN_Game,*renderer);
 
-
-
+    //load actors
     Game::loadActor(Game::ACT_Arrow,0);
 
     const int targetFPS = 60;

@@ -12,13 +12,10 @@ Game::Scene Game::currentScene; //TODO: Find a better place to Scene enum
 
 //TODO: Make this enum a class or losen Game to scope wide namespace
 
-GameObject *Game::loadImage(string name, SDL_Renderer &r) {
+GameObject *Game::loadImage(string name, Scene scene, SDL_Renderer &r) {
 
-    // load our image2
     int w, h; // texture width & height
-//    char result[100];   // array to hold the result.
-//    strcpy(result,"../res/"); // copy string one into the result.
-//    const char * path = strcat(result,name.c_str()); // append string two to the result.
+    SDL_Rect rect;
 
     std::string fullPath = "../res/" + name;
     SDL_Texture *texture = IMG_LoadTexture(&r, fullPath.c_str());
@@ -30,21 +27,16 @@ GameObject *Game::loadImage(string name, SDL_Renderer &r) {
     }
     SDL_QueryTexture(texture, NULL, NULL, &w, &h); // get the width and height of the texture
     // put the location where we want the texture to be drawn into a rectangle
-    SDL_Rect rect;
+
     rect.x = 0;
     rect.y = 0;
     rect.w = w;
     rect.h = h;
 
 
-    //TODO: check if there is an image in z and destroy it before creating a new one
+    //TODO: check if image exists before creating a new one
     auto newImage = new Image(name.c_str(), rect, *texture);
-    int scn = (int)Game::currentScene;
-    if (&Game::allImages[scn] == nullptr){
-        Game::allImages.push_back(std::vector<Image*>());
-    }
-    Game::allImages.at(scn).push_back(newImage);
-
+    Game::allImages.at((int)scene).push_back(newImage);
     return newImage;
 }
 
