@@ -12,6 +12,13 @@ Game::Scene Game::currentScene; //TODO: Find a better place to Scene enum
 
 //TODO: Make this enum a class or losen Game to scope wide namespace
 
+GameObject *Game::loadImage(string name, Scene scene, SDL_Renderer &r, int x, int y) {
+    auto newImage = Game::loadImage(name,scene,r);
+    newImage->rect.x =x;
+    newImage->rect.y =y;
+    return newImage;
+}
+
 GameObject *Game::loadImage(string name, Scene scene, SDL_Renderer &r) {
 
     int w, h; // texture width & height

@@ -37,6 +37,7 @@ namespace Game {
     //Actor *allActors[255];
 
     GameObject *loadImage(string, Scene, SDL_Renderer &);
+    GameObject *loadImage(string, Scene, SDL_Renderer &, int, int);
     int loadActor(ActorType, int , ...);
 
     namespace Util {

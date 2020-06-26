@@ -29,9 +29,7 @@ int main(int argc, char **argv)
     }
     //load images
     Game::loadImage("fundo.png", Game::Scene::SCN_Menu,*renderer);
-    auto pointer = Game::loadImage("pointer.png", Game::Scene::SCN_Menu,*renderer);
-    pointer->rect.x = 190;
-    pointer->rect.y = 360; //480;
+    Game::loadImage("pointer.png", Game::Scene::SCN_Menu,*renderer, 190,360);
     Game::loadImage("canvas.png", Game::Scene::SCN_Game,*renderer);
 
     //load actors

@@ -11,7 +11,7 @@
 class Arrow:public Actor{
 
 public:
-    bool isUp = false;
+    bool isUp = true;
     GameObject *pointer;
     Arrow();
     ~Arrow();
