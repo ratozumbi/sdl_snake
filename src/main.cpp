@@ -22,18 +22,18 @@ int main(int argc, char **argv)
     window = SDL_CreateWindow("Snake", 100, 100, 800, 600, 0);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-    // //background
-    SDL_Texture *texture = IMG_LoadTexture(renderer, "../res/fundo.png");
-    SDL_QueryTexture(texture, NULL, NULL, &w, &h); // get the width and height of the texture
-    SDL_Rect texr; texr.x = 0; texr.y = 0; texr.w = w; texr.h = h;
+//    // //background
+//    SDL_Texture *texture = IMG_LoadTexture(renderer, "../res/fundo.png");
+//    SDL_QueryTexture(texture, NULL, NULL, &w, &h); // get the width and height of the texture
+//    SDL_Rect texr; texr.x = 0; texr.y = 0; texr.w = w; texr.h = h;
 
 
     Game::loadImage("fundo.png",0,*renderer);
-    Game::loadImage("pointer.png",1,*renderer);
-    Game::loadActor(Game::ACT_Arrow,0);
+    auto pointer = Game::loadImage("pointer.png",1,*renderer);
+    pointer->rect.x = 190;
+    pointer->rect.y = 360; //480;
 
-    Game::allImages.at(0)->rect.x = 190;
-    Game::allImages.at(0)->rect.y = 480; //360;
+    Game::loadActor(Game::ACT_Arrow,0);
 
     const int targetFPS = 60;
     const int frameDelay = 1000/ targetFPS;
@@ -71,7 +71,7 @@ int main(int argc, char **argv)
         // clear the screen
         SDL_RenderClear(renderer);
         // copy the texture to the rendering context
-        SDL_RenderCopy(renderer, texture, NULL, &texr); //background
+//        SDL_RenderCopy(renderer, texture, NULL, &texr); //background
         for (int i = 0; i < Game::allImages.size() ; ++i) {
             if(Game::allImages[i] != NULL && Game::allImages[i]->active)
             {
@@ -90,7 +90,7 @@ int main(int argc, char **argv)
 
     }
 
-    SDL_DestroyTexture(texture);
+//    SDL_DestroyTexture(texture);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
 

@@ -10,9 +10,8 @@ Image::Image (string name, SDL_Rect &rect1, SDL_Texture &texture): GameObject(na
 
 }
 
-Image::Image(string name, SDL_Rect &rect1) {
-    this->name = name;
-    this->rect = rect1;
-}
-
 Image::Image() { }
+
+Image::~Image() {
+    SDL_free(texture);
+}

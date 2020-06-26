@@ -27,7 +27,7 @@ namespace Game {
     extern std::vector<Actor*> allActors;
     //Actor *allActors[255];
 
-    int loadImage(string, int, SDL_Renderer &);
+    GameObject *loadImage(string, int, SDL_Renderer &);
     int loadActor(ActorType, int , ...);
 
     namespace Util {

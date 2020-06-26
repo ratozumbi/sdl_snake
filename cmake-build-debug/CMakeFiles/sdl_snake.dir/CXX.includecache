@@ -13,6 +13,8 @@ SDL_events.h
 /home/ratozumbi/repos/sdl_snake/include/Arrow.h
 Actor.h
 /home/ratozumbi/repos/sdl_snake/include/Actor.h
+GameObject.h
+/home/ratozumbi/repos/sdl_snake/include/GameObject.h
 
 /home/ratozumbi/repos/sdl_snake/include/GameObject.h
 SDL2/SDL.h

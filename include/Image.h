@@ -19,10 +19,8 @@ public:
 
     SDL_Texture *texture;
     Image (string , SDL_Rect &, SDL_Texture &);
-    Image (SDL_Rect &, SDL_Texture &);
-    Image (SDL_Texture &);
     Image();
-    Image(string name, SDL_Rect &rect1);
+    ~Image();
 
 };
 

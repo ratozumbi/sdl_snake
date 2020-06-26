@@ -7,13 +7,17 @@
 #include "../include/util.h"
 //using Game::loadImage
 
+GameObject *pointer;
 Arrow::Arrow(){
+     pointer = Game::Util::findImage("pointer.png");
+};
 
+Arrow::~Arrow(){
+    delete pointer;
 };
 
 void Arrow::update() {
     Actor::update();
-    auto pointer = Game::Util::findImage("pointer.png");
 
     static int increment = 1;
 
@@ -29,10 +33,20 @@ void Arrow::onInput(SDL_Event e) {
     Actor::onInput(e);
 ;
     if(e.key.keysym.sym == SDLK_UP){
-        Game::allImages[0]->rect.y = 360;
+        isUp = true;
+        pointer->rect.y = 360;
     }
     if(e.key.keysym.sym == SDLK_DOWN){
-        Game::allImages[0]->rect.y = 480;
+        isUp = false;
+        pointer->rect.y = 480;
     }
+    if(e.key.keysym.sym == SDLK_RETURN){
+        if(isUp){
+
+        } else{
+
+        }
+    }
+
 
 }
