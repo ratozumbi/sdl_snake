@@ -7,7 +7,6 @@
 
 Image::Image (string name, SDL_Rect &rect1, SDL_Texture &texture): GameObject(name, rect1){
     this->texture = &texture;
-
 }
 
 Image::Image():GameObject() { }

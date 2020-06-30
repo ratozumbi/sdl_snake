@@ -10,7 +10,6 @@
 #include "GameObject.h"
 #include "Actor.h"
 #include "Image.h"
-#include "Types.h"
 
 class Scene{
 
@@ -20,6 +19,7 @@ public:
 
     Image *loadImage(string, SDL_Renderer &);
     Image *loadImage(string, SDL_Renderer &, int, int);
+    Image *loadImage(string, SDL_Renderer &, int, int, bool);
 
     template <class T> void loadActor(){
         T *newActor = new T();

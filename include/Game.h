@@ -11,8 +11,6 @@
 #include "../include/Image.h"
 #include "../include/Arrow.h"
 #include "Scene.h"
-#include "Types.h"
-
 
 namespace Game {
     extern std::vector<Scene> scenes;

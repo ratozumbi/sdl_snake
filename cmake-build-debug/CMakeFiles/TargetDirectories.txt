@@ -1,3 +1,0 @@
-/home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles/sdl_snake.dir

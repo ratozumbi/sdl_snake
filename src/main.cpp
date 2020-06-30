@@ -24,19 +24,20 @@ int main(int argc, char **argv)
 
     // Initialize scenes
     //TODO: encapsulate scene creation (create loadScene)
-//    auto menu = Scene("menu");
     Game::scenes.push_back(Scene("menu"));
-//    Game::currentScene = &Game::scenes.at(0);
     Game::scenes.push_back(Scene("game"));
 
     //load images
-    Game::scenes.at(0).loadImage("fundo.png", *renderer);
-    Game::scenes.at(0).loadImage("pointer.png", *renderer, 190, 360);
+    Game::scenes.at(Util::findScene("menu")).loadImage("fundo.png", *renderer);
+    Game::scenes.at(Util::findScene("menu")).loadImage("pointer.png", *renderer, 190, 360);
 
+    Game::scenes.at(Util::findScene("game")).loadImage("canvas.png", *renderer);
+    Game::scenes.at(Util::findScene("game")).loadImage("snake_head.png", *renderer,10,10);
+    Game::scenes.at(Util::findScene("game")).loadImage("snake_body.png", *renderer,10, 50);
+    Game::scenes.at(Util::findScene("game")).loadImage("snake_tail.png", *renderer, 10, 80);
 
     //load actors
-    Game::scenes.at(0).loadActor<Arrow>();
-//    Game::currentScene->actors.push_back(Arrow());
+    Game::scenes.at(Util::findScene("menu")).loadActor<Arrow>();
 
     const int targetFPS = 60;
     const int frameDelay = 1000/ targetFPS;

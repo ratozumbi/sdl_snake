@@ -10,7 +10,6 @@
 #include <string>
 using std::string;
 #include <SDL_rect.h>
-#include <SDL_system.h>
 
 
 class Image: public GameObject {

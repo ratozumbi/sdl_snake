@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/SDL_test1.dir/src/main.cpp.o  -o SDL_test1  /usr/lib/x86_64-linux-gnu/libSDL2-2.0.so 

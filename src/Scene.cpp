@@ -59,6 +59,14 @@ Image *Scene::loadImage(string name, SDL_Renderer &r, int x, int y) {
     return newImage;
 }
 
+Image *Scene::loadImage(string name, SDL_Renderer &r, int x, int y, bool active) {
+    auto newImage = loadImage(name,r);
+    newImage->active = active;
+    newImage->rect.x =x;
+    newImage->rect.y =y;
+    return newImage;
+}
+
 int Scene::GetActorsSize() {
     return actors.size();
 }
