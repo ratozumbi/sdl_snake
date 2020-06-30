@@ -10,7 +10,7 @@ std::vector<Scene> Game::scenes;
 
 unsigned int Util::findScene(std::string name){
     for (unsigned int iScene = 0; iScene < Game::scenes.size(); iScene++){
-        if(Game::scenes.at(iScene).name.compare(name)){
+        if(Game::scenes.at(iScene).name.compare(name) == 0){
             return iScene;
 //            return &Game::scenes.at(iScene);
         }
