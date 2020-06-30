@@ -3,15 +3,15 @@
 //
 
 #include "../include/Image.h"
+#include "../include/Scene.h"
 
 Image::Image (string name, SDL_Rect &rect1, SDL_Texture &texture): GameObject(name, rect1){
-
     this->texture = &texture;
 
 }
 
-Image::Image() { }
+Image::Image():GameObject() { }
 
 Image::~Image() {
-    SDL_free(texture);
+    SDL_free(this->texture);
 }

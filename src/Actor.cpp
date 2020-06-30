@@ -10,10 +10,15 @@ Actor::Actor() {
 
 }
 
-void Actor::update(){
-
+int Actor::update(){
+    if(!initialized){
+        initialized = true;
+        start();
+    }
+    if(!initialized) return 1;
+    return 0;
 }
 
-void Actor::onInput(SDL_Event event){
+int Actor::onInput(SDL_Event event){
 
 }

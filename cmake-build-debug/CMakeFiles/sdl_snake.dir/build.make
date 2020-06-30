@@ -122,18 +122,31 @@ CMakeFiles/sdl_snake.dir/src/Arrow.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sdl_snake.dir/src/Arrow.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ratozumbi/repos/sdl_snake/src/Arrow.cpp -o CMakeFiles/sdl_snake.dir/src/Arrow.cpp.s
 
-CMakeFiles/sdl_snake.dir/src/util.cpp.o: CMakeFiles/sdl_snake.dir/flags.make
-CMakeFiles/sdl_snake.dir/src/util.cpp.o: ../src/util.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/sdl_snake.dir/src/util.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/sdl_snake.dir/src/util.cpp.o -c /home/ratozumbi/repos/sdl_snake/src/util.cpp
+CMakeFiles/sdl_snake.dir/src/Scene.cpp.o: CMakeFiles/sdl_snake.dir/flags.make
+CMakeFiles/sdl_snake.dir/src/Scene.cpp.o: ../src/Scene.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/sdl_snake.dir/src/Scene.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/sdl_snake.dir/src/Scene.cpp.o -c /home/ratozumbi/repos/sdl_snake/src/Scene.cpp
 
-CMakeFiles/sdl_snake.dir/src/util.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sdl_snake.dir/src/util.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ratozumbi/repos/sdl_snake/src/util.cpp > CMakeFiles/sdl_snake.dir/src/util.cpp.i
+CMakeFiles/sdl_snake.dir/src/Scene.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sdl_snake.dir/src/Scene.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ratozumbi/repos/sdl_snake/src/Scene.cpp > CMakeFiles/sdl_snake.dir/src/Scene.cpp.i
 
-CMakeFiles/sdl_snake.dir/src/util.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sdl_snake.dir/src/util.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ratozumbi/repos/sdl_snake/src/util.cpp -o CMakeFiles/sdl_snake.dir/src/util.cpp.s
+CMakeFiles/sdl_snake.dir/src/Scene.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sdl_snake.dir/src/Scene.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ratozumbi/repos/sdl_snake/src/Scene.cpp -o CMakeFiles/sdl_snake.dir/src/Scene.cpp.s
+
+CMakeFiles/sdl_snake.dir/src/Game.cpp.o: CMakeFiles/sdl_snake.dir/flags.make
+CMakeFiles/sdl_snake.dir/src/Game.cpp.o: ../src/Game.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/sdl_snake.dir/src/Game.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/sdl_snake.dir/src/Game.cpp.o -c /home/ratozumbi/repos/sdl_snake/src/Game.cpp
+
+CMakeFiles/sdl_snake.dir/src/Game.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sdl_snake.dir/src/Game.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ratozumbi/repos/sdl_snake/src/Game.cpp > CMakeFiles/sdl_snake.dir/src/Game.cpp.i
+
+CMakeFiles/sdl_snake.dir/src/Game.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sdl_snake.dir/src/Game.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ratozumbi/repos/sdl_snake/src/Game.cpp -o CMakeFiles/sdl_snake.dir/src/Game.cpp.s
 
 # Object files for target sdl_snake
 sdl_snake_OBJECTS = \
@@ -142,7 +155,8 @@ sdl_snake_OBJECTS = \
 "CMakeFiles/sdl_snake.dir/src/Image.cpp.o" \
 "CMakeFiles/sdl_snake.dir/src/Actor.cpp.o" \
 "CMakeFiles/sdl_snake.dir/src/Arrow.cpp.o" \
-"CMakeFiles/sdl_snake.dir/src/util.cpp.o"
+"CMakeFiles/sdl_snake.dir/src/Scene.cpp.o" \
+"CMakeFiles/sdl_snake.dir/src/Game.cpp.o"
 
 # External object files for target sdl_snake
 sdl_snake_EXTERNAL_OBJECTS =
@@ -152,12 +166,13 @@ sdl_snake: CMakeFiles/sdl_snake.dir/src/GameObject.cpp.o
 sdl_snake: CMakeFiles/sdl_snake.dir/src/Image.cpp.o
 sdl_snake: CMakeFiles/sdl_snake.dir/src/Actor.cpp.o
 sdl_snake: CMakeFiles/sdl_snake.dir/src/Arrow.cpp.o
-sdl_snake: CMakeFiles/sdl_snake.dir/src/util.cpp.o
+sdl_snake: CMakeFiles/sdl_snake.dir/src/Scene.cpp.o
+sdl_snake: CMakeFiles/sdl_snake.dir/src/Game.cpp.o
 sdl_snake: CMakeFiles/sdl_snake.dir/build.make
 sdl_snake: /usr/lib/x86_64-linux-gnu/libSDL2-2.0.so
 sdl_snake: /usr/lib/x86_64-linux-gnu/libSDL2_image-2.0.so.0
 sdl_snake: CMakeFiles/sdl_snake.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable sdl_snake"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ratozumbi/repos/sdl_snake/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable sdl_snake"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/sdl_snake.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

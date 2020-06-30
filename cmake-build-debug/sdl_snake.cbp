@@ -94,13 +94,19 @@
 		<Unit filename="/home/ratozumbi/repos/sdl_snake/include/Arrow.h">
 			<Option target="sdl_snake"/>
 		</Unit>
+		<Unit filename="/home/ratozumbi/repos/sdl_snake/include/Game.h">
+			<Option target="sdl_snake"/>
+		</Unit>
 		<Unit filename="/home/ratozumbi/repos/sdl_snake/include/GameObject.h">
 			<Option target="sdl_snake"/>
 		</Unit>
 		<Unit filename="/home/ratozumbi/repos/sdl_snake/include/Image.h">
 			<Option target="sdl_snake"/>
 		</Unit>
-		<Unit filename="/home/ratozumbi/repos/sdl_snake/include/util.h">
+		<Unit filename="/home/ratozumbi/repos/sdl_snake/include/Scene.h">
+			<Option target="sdl_snake"/>
+		</Unit>
+		<Unit filename="/home/ratozumbi/repos/sdl_snake/include/Types.h">
 			<Option target="sdl_snake"/>
 		</Unit>
 		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/Actor.cpp">
@@ -109,16 +115,19 @@
 		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/Arrow.cpp">
 			<Option target="sdl_snake"/>
 		</Unit>
+		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/Game.cpp">
+			<Option target="sdl_snake"/>
+		</Unit>
 		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/GameObject.cpp">
 			<Option target="sdl_snake"/>
 		</Unit>
 		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/Image.cpp">
 			<Option target="sdl_snake"/>
 		</Unit>
-		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/main.cpp">
+		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/Scene.cpp">
 			<Option target="sdl_snake"/>
 		</Unit>
-		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/util.cpp">
+		<Unit filename="/home/ratozumbi/repos/sdl_snake/src/main.cpp">
 			<Option target="sdl_snake"/>
 		</Unit>
 		<Unit filename="/home/ratozumbi/repos/sdl_snake/CMakeLists.txt">

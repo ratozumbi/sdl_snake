@@ -17,7 +17,7 @@ set(SDL2_IMAGE /usr/lib/x86_64-linux-gnu/libSDL2_image-2.0.so.0) #libSDL2_image-
 #include_directories(${SDL2_INCLUDE_DIR})
 
 #TODO: use file(GLOB to add headers and sources
-add_executable(sdl_snake src/main.cpp include/GameObject.h src/GameObject.cpp src/Image.cpp include/Image.h src/Actor.cpp include/Actor.h src/Arrow.cpp include/Arrow.h include/util.h src/util.cpp)
+add_executable(sdl_snake src/main.cpp include/GameObject.h src/GameObject.cpp src/Image.cpp include/Image.h src/Actor.cpp include/Actor.h src/Arrow.cpp include/Arrow.h src/Scene.cpp include/Scene.h include/Game.h src/Game.cpp include/Types.h)
 
 target_include_directories(sdl_snake PUBLIC ${SDL2_INCLUDE_DIR} INCLUDE_DIRECTORIES)
 target_link_libraries(sdl_snake ${SDL2_LIBRARY} ${SDL2_IMAGE})

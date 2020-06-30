@@ -177,6 +177,33 @@ src/Arrow.cpp.s:
 	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/Arrow.cpp.s
 .PHONY : src/Arrow.cpp.s
 
+src/Game.o: src/Game.cpp.o
+
+.PHONY : src/Game.o
+
+# target to build an object file
+src/Game.cpp.o:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/Game.cpp.o
+.PHONY : src/Game.cpp.o
+
+src/Game.i: src/Game.cpp.i
+
+.PHONY : src/Game.i
+
+# target to preprocess a source file
+src/Game.cpp.i:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/Game.cpp.i
+.PHONY : src/Game.cpp.i
+
+src/Game.s: src/Game.cpp.s
+
+.PHONY : src/Game.s
+
+# target to generate assembly for a file
+src/Game.cpp.s:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/Game.cpp.s
+.PHONY : src/Game.cpp.s
+
 src/GameObject.o: src/GameObject.cpp.o
 
 .PHONY : src/GameObject.o
@@ -231,6 +258,33 @@ src/Image.cpp.s:
 	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/Image.cpp.s
 .PHONY : src/Image.cpp.s
 
+src/Scene.o: src/Scene.cpp.o
+
+.PHONY : src/Scene.o
+
+# target to build an object file
+src/Scene.cpp.o:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/Scene.cpp.o
+.PHONY : src/Scene.cpp.o
+
+src/Scene.i: src/Scene.cpp.i
+
+.PHONY : src/Scene.i
+
+# target to preprocess a source file
+src/Scene.cpp.i:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/Scene.cpp.i
+.PHONY : src/Scene.cpp.i
+
+src/Scene.s: src/Scene.cpp.s
+
+.PHONY : src/Scene.s
+
+# target to generate assembly for a file
+src/Scene.cpp.s:
+	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/Scene.cpp.s
+.PHONY : src/Scene.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -258,33 +312,6 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/util.o: src/util.cpp.o
-
-.PHONY : src/util.o
-
-# target to build an object file
-src/util.cpp.o:
-	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/util.cpp.o
-.PHONY : src/util.cpp.o
-
-src/util.i: src/util.cpp.i
-
-.PHONY : src/util.i
-
-# target to preprocess a source file
-src/util.cpp.i:
-	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/util.cpp.i
-.PHONY : src/util.cpp.i
-
-src/util.s: src/util.cpp.s
-
-.PHONY : src/util.s
-
-# target to generate assembly for a file
-src/util.cpp.s:
-	$(MAKE) -f CMakeFiles/sdl_snake.dir/build.make CMakeFiles/sdl_snake.dir/src/util.cpp.s
-.PHONY : src/util.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -300,18 +327,21 @@ help:
 	@echo "... src/Arrow.o"
 	@echo "... src/Arrow.i"
 	@echo "... src/Arrow.s"
+	@echo "... src/Game.o"
+	@echo "... src/Game.i"
+	@echo "... src/Game.s"
 	@echo "... src/GameObject.o"
 	@echo "... src/GameObject.i"
 	@echo "... src/GameObject.s"
 	@echo "... src/Image.o"
 	@echo "... src/Image.i"
 	@echo "... src/Image.s"
+	@echo "... src/Scene.o"
+	@echo "... src/Scene.i"
+	@echo "... src/Scene.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/util.o"
-	@echo "... src/util.i"
-	@echo "... src/util.s"
 .PHONY : help
 
 

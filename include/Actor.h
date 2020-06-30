@@ -6,13 +6,18 @@
 #define SDL_SNAKE_ACTOR_H
 
 #include <SDL_events.h>
+#include "Types.h"
 
 class Actor {
 public:
     bool active = true;
     Actor();
-    virtual void update();
-    virtual void onInput(SDL_Event);
+    virtual void start() {};
+    virtual int update();
+    virtual int onInput(SDL_Event);
+
+protected:
+    bool initialized = false;
 };
 
 #endif //SDL_SNAKE_ACTOR_H

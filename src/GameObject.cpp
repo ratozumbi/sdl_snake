@@ -21,3 +21,7 @@ GameObject::GameObject() {
     rect.w =2;
     rect.h =2;
 }
+
+GameObject::~GameObject() {
+
+}

@@ -4,19 +4,24 @@
 
 #include <iostream>
 #include "../include/Arrow.h"
-#include "../include/util.h"
+#include "../include/Game.h"
 //using Game::loadImage
 
-GameObject *pointer;
-Arrow::Arrow(){
-     pointer = Game::Util::findImage("pointer.png");
+Image *pointer;
+Arrow::Arrow():Actor(){
+
 };
 
 Arrow::~Arrow(){
-    delete pointer;
+//    delete pointer;
 };
 
-void Arrow::update() {
+void Arrow::start() {
+    Actor::start();
+    pointer = Util::findImage("pointer.png");
+}
+
+int Arrow::update() {
     Actor::update();
 
     static int increment = 1;
@@ -26,12 +31,12 @@ void Arrow::update() {
     }
 
     pointer->rect.x = pointer->rect.x +increment;
-
+    return 0;
 }
 
-void Arrow::onInput(SDL_Event e) {
+int Arrow::onInput(SDL_Event e) {
     Actor::onInput(e);
-;
+
     if(e.key.keysym.sym == SDLK_UP){
         isUp = true;
         pointer->rect.y = 360;
@@ -42,11 +47,11 @@ void Arrow::onInput(SDL_Event e) {
     }
     if(e.key.keysym.sym == SDLK_RETURN){
         if(isUp){
-            Game::currentScene = Game::Scene::SCN_Game;
+            Game::currentScene = Util::findScene("game");
         } else{
-            Game::currentScene = Game::Scene::SCN_ExitGame;
+            return -1;
         }
     }
 
-
+    return 0;
 }

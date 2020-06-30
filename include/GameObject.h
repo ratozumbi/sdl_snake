@@ -15,12 +15,11 @@ class GameObject
 public:
     bool active = true;
     string name;
-    SDL_Rect rect;
+    SDL_Rect rect;//TODO: Refactor rect to Image
     GameObject (string , SDL_Rect &);
     GameObject (SDL_Rect &);
     GameObject ();
-
-
+    ~GameObject ();
 };
 
 #endif //SDL_SNAKE_GAMEOBJECT_H

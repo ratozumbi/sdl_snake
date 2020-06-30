@@ -3,9 +3,9 @@
 #include <SDL2/SDL_image.h>
 
 #include "../include/Image.h"
-#include "../include/util.h"
+#include "../include/Game.h"
+#include "../include/Scene.h"
 
-//using Game::allImages;
 
 int main(int argc, char **argv)
 {
@@ -23,17 +23,20 @@ int main(int argc, char **argv)
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     // Initialize scenes
-    for (int currScn = (int)Game::Scene::SCN_Menu; currScn != (int)Game::Scene::SCN_ExitGame; currScn++ )
-    {
-        Game::allImages.push_back(std::vector<Image*>());
-    }
+    //TODO: encapsulate scene creation (create loadScene)
+//    auto menu = Scene("menu");
+    Game::scenes.push_back(Scene("menu"));
+//    Game::currentScene = &Game::scenes.at(0);
+    Game::scenes.push_back(Scene("game"));
+
     //load images
-    Game::loadImage("fundo.png", Game::Scene::SCN_Menu,*renderer);
-    Game::loadImage("pointer.png", Game::Scene::SCN_Menu,*renderer, 190,360);
-    Game::loadImage("canvas.png", Game::Scene::SCN_Game,*renderer);
+    Game::scenes.at(0).loadImage("fundo.png", *renderer);
+    Game::scenes.at(0).loadImage("pointer.png", *renderer, 190, 360);
+
 
     //load actors
-    Game::loadActor(Game::ACT_Arrow,0);
+    Game::scenes.at(0).loadActor<Arrow>();
+//    Game::currentScene->actors.push_back(Arrow());
 
     const int targetFPS = 60;
     const int frameDelay = 1000/ targetFPS;
@@ -41,32 +44,32 @@ int main(int argc, char **argv)
     int frameTime;
 
     // main loop
-    while (1) {
-
+    bool playing = true;
+    while (playing) {
+        //FPS control
         frameStart = SDL_GetTicks();
 
-        SDL_Event e;
-        //game update
-        for (int i = 0; i < Game::allActors.size() ; ++i) {
-            if (Game::allActors[i]->active) {
-                Game::allActors[i]->update();
-            }
-        }
-
         // event handling
-        if ( SDL_PollEvent(&e) ) {
-            for (int i = 0; i < Game::allActors.size() ; ++i) {
-                if(Game::allActors[i]->active){
-                    Game::allActors[i]->onInput(e);
-                }
-            }
-            if(Game::currentScene == Game::Scene::SCN_ExitGame){
-                break;
-            }
+        SDL_Event e;
+        bool hasEvent = SDL_PollEvent(&e);
+        if (hasEvent) {
             if (e.type == SDL_QUIT)
                 break;
             else if ( e.key.keysym.sym == SDLK_ESCAPE)
                 break;
+        }
+
+        //game update and event resolution
+        for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize() ; ++i) {
+            if (Game::scenes.at(Game::currentScene).GetActor(i).active) {
+                Game::scenes.at(Game::currentScene).GetActor(i).update();
+                if(hasEvent){
+                    if(Game::scenes.at(Game::currentScene).GetActor(i).onInput(e) == -1){
+                        playing = false;
+                    }
+                }
+            }
+
         }
 
         //set base color for renderer
@@ -74,11 +77,10 @@ int main(int argc, char **argv)
         // clear the screen
         SDL_RenderClear(renderer);
         // copy the texture to the rendering context
-//        SDL_RenderCopy(renderer, texture, NULL, &texr); //background
-        for (int i = 0; i < Game::allImages.at((int)Game::currentScene).size() ; ++i) {
-            if(Game::allImages.at((int)Game::currentScene).at(i) != NULL && Game::allImages.at((int)Game::currentScene).at(i)->active)
+        for (int currImg = 0; currImg < Game::scenes.at(Game::currentScene).GetImagesSize() ; ++currImg) {
+            if(Game::scenes.at(Game::currentScene).GetImage(currImg) != NULL && Game::scenes.at(Game::currentScene).GetImage(currImg)->active)
             {
-                SDL_RenderCopy(renderer, Game::allImages.at((int)Game::currentScene).at(i)->texture, NULL, &Game::allImages.at((int)Game::currentScene).at(i)->rect);
+                SDL_RenderCopy(renderer, Game::scenes.at(Game::currentScene).GetImage(currImg)->texture, NULL, &Game::scenes.at(Game::currentScene).GetImage(currImg)->rect);
             }
         }
 
@@ -90,15 +92,11 @@ int main(int argc, char **argv)
         if(frameDelay > frameTime){
             SDL_Delay(frameDelay - frameTime);
         }
-
     }
 
-//    SDL_DestroyTexture(texture);
+//    SDL_DestroyTexture(texture); TODO: free textures
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
 
-
-
-//    SDL_Delay(10000);
     return 0;
 }

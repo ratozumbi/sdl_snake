@@ -6,17 +6,18 @@
 #define SDL_SNAKE_ARROW_H
 
 #include "Actor.h"
-#include "GameObject.h"
+#include "Image.h"
 
-class Arrow:public Actor{
+class Arrow : public Actor{
 
 public:
     bool isUp = true;
-    GameObject *pointer;
+    Image *pointer;
     Arrow();
     ~Arrow();
-    void update();
-    void onInput(SDL_Event);
+    void start();
+    int update();
+    int onInput(SDL_Event);
 };
 
 #endif //SDL_SNAKE_ARROW_H
