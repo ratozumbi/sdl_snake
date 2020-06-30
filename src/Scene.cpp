@@ -67,7 +67,7 @@ int Scene::GetImagesSize() {
     return images.size();
 }
 
-Actor Scene::GetActor(int position) {
+Actor* Scene::GetActor(int position) {
     return actors.at(position);
 }
 

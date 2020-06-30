@@ -8,13 +8,14 @@
 unsigned int Game::currentScene;
 std::vector<Scene> Game::scenes;
 
-int Util::findScene(std::string name){
-    for (int iScene = 0; iScene < Game::scenes.size(); iScene++){
+unsigned int Util::findScene(std::string name){
+    for (unsigned int iScene = 0; iScene < Game::scenes.size(); iScene++){
         if(Game::scenes.at(iScene).name.compare(name)){
             return iScene;
 //            return &Game::scenes.at(iScene);
         }
     }
+    //TODO: throw not found
 }
 
 Image *Util::findImage(std::string name){
@@ -26,4 +27,5 @@ Image *Util::findImage(std::string name){
             }
         }
     }
+    //TODO: throw not found
 }

@@ -22,17 +22,17 @@ public:
     Image *loadImage(string, SDL_Renderer &, int, int);
 
     template <class T> void loadActor(){
-        T* newActor = new T();
+        T *newActor = new T();
         newActor->start();
 
-        actors.push_back(*newActor);
+        actors.push_back(newActor);
     }
 
     int GetImagesSize();
     int GetActorsSize();
 
     Image *GetImage(int);
-    Actor GetActor(int);
+    Actor *GetActor(int);
 
     Scene();
     Scene(std::string);
@@ -40,7 +40,7 @@ public:
 
 private:
     std::vector<Image*> images;
-    std::vector<Actor> actors;
+    std::vector<Actor*> actors;
 
 };
 

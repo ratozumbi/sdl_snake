@@ -61,10 +61,10 @@ int main(int argc, char **argv)
 
         //game update and event resolution
         for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize() ; ++i) {
-            if (Game::scenes.at(Game::currentScene).GetActor(i).active) {
-                Game::scenes.at(Game::currentScene).GetActor(i).update();
+            if (Game::scenes.at(Game::currentScene).GetActor(i)->active) {
+                Game::scenes.at(Game::currentScene).GetActor(i)->update();
                 if(hasEvent){
-                    if(Game::scenes.at(Game::currentScene).GetActor(i).onInput(e) == -1){
+                    if(Game::scenes.at(Game::currentScene).GetActor(i)->onInput(e) == -1){
                         playing = false;
                     }
                 }

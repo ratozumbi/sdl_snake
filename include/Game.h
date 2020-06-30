@@ -19,7 +19,7 @@ namespace Game {
     extern unsigned int currentScene;
 }
 namespace Util {
-    int findScene(std::string );
+    unsigned int findScene(std::string );
     Image *findImage(std::string );
 }
 

@@ -80,6 +80,12 @@ iostream
 ../include/Game.h
 /home/ratozumbi/repos/sdl_snake/include/Game.h
 
+/home/ratozumbi/repos/sdl_snake/src/Image.cpp
+../include/Image.h
+/home/ratozumbi/repos/sdl_snake/include/Image.h
+../include/Scene.h
+/home/ratozumbi/repos/sdl_snake/include/Scene.h
+
 /home/ratozumbi/repos/sdl_snake/src/Scene.cpp
 ../include/Scene.h
 /home/ratozumbi/repos/sdl_snake/include/Scene.h
