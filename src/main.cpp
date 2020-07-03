@@ -1,6 +1,7 @@
+//#define SDL_MAIN_HANDLED //windows hack
 #include <iostream>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#include <SDL.h>
+#include <SDL_image.h>
 
 #include "../include/Image.h"
 #include "../include/Game.h"
@@ -9,9 +10,7 @@
 
 int main(int argc, char **argv)
 {
-
-    int w, h; // texture width & height
-
+//    SDL_SetMainReady();
     SDL_Window *window;
     SDL_Renderer *renderer;
 

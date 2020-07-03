@@ -29,7 +29,7 @@ Image *Scene::loadImage(string name, SDL_Renderer &r) {
     int w, h; // texture width & height
     SDL_Rect rect;
 
-    std::string fullPath = "../res/" + name;
+    auto fullPath = std::string("C:\\dev\\sdl_snake\\res\\") + name;
     SDL_Texture *texture = IMG_LoadTexture(&r, fullPath.c_str());
 
 

@@ -15,10 +15,11 @@ unsigned int Util::findScene(std::string name){
         }
     }
     //TODO: throw not found
+	return 666;
 }
 
 Image *Util::findImage(std::string name){
-    for(int iScene = 0; iScene < Game::scenes.size(); iScene++){
+    for(unsigned int iScene = 0; iScene < Game::scenes.size(); iScene++){
         int imgs = Game::scenes.at(iScene).GetImagesSize();
         for(int iImage = 0; iImage < imgs; iImage++){
             if(Game::scenes.at(iScene).GetImage(iImage)->name.compare(name) == 0){
@@ -27,4 +28,5 @@ Image *Util::findImage(std::string name){
         }
     }
     //TODO: throw not found
+	return NULL;
 }

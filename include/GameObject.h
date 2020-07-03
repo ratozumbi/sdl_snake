@@ -5,8 +5,8 @@
 #ifndef SDL_SNAKE_GAMEOBJECT_H
 #define SDL_SNAKE_GAMEOBJECT_H
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#include <SDL.h>
+#include <SDL_image.h>
 #include <string>
 using std::string;
 
