@@ -85,10 +85,11 @@ Image *Scene::GetImage(int position) {
 //    TODO: throw not found
 }
 Image *Scene::GetImage(string name) {
-    for(int i = 0; i < images.size(); i++){
+    for(unsigned int i = 0; i < images.size(); i++){
         if(images[i]->name.compare(name) == 0){
            return images[i];
         }
     }
 //    TODO: throw not found
+    return NULL;
 }

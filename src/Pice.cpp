@@ -24,18 +24,7 @@ int Pice::update(){
 int Pice::onInput(SDL_Event e){
     Actor::onInput(e);
 
-//    if(e.type == SDL_MOUSEBUTTONDOWN){
-//        if(e.button.x >= pice->rect.x &&
-//           e.button.x <= pice->rect.x + pice->rect.w &&
-//           e.button.y >= pice->rect.y &&
-//           e.button.y <= pice->rect.y + pice->rect.h)
-//        {
-//            clicked = true;
-//        }
-//    }
-
-    //TODO: have a separate thread for inputs
-    if(e.type == SDL_MOUSEMOTION){
+    if(clicked && e.type == SDL_MOUSEMOTION){
         if(e.motion.state == SDL_BUTTON_LMASK){
             if(e.button.x >= pice->rect.x &&
                e.button.x <= pice->rect.x + pice->rect.w &&
