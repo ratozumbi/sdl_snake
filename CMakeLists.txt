@@ -14,13 +14,11 @@ set(SDL2_TEST_LIBRARY "C:/dev/sdl_snake/SDL2/x86/SDL2test.lib")
 set(SDL2_IMAGE "C:/dev/sdl_snake/SDL2/x86/SDL2_image.lib")
 
 file(GLOB game_source
-		"C:/dev/sdl_snake/SDL2/SDL2-2.0.12/include"
-		"SDL2/SDL2-2.0.12/include"
         "include/*.h"
         "src/*.cpp"
         )
 
-add_executable(sdl_snake ${game_source})
+add_executable(sdl_snake ${game_source} src/Pice.cpp include/Pice.h)
 
 target_include_directories(sdl_snake PUBLIC ${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} INCLUDE_DIRECTORIES)
-target_link_libraries(sdl_snake  ${SDL2_LIBRARY} ${SDL2_MAIN_LIBRARY} ${SDL2_TEST_LIBRARY} ${SDL2_IMAGE} ${SDL2_LIBRARY_DLL} ${SDL2_IMAGE_LIBRARY_DLL} ${SDL2_IMAGE_LIBRARY1_DLL} ${SDL2_IMAGE_LIBRARY2_DLL} ${SDL2_IMAGE_LIBRARY3_DLL} ${SDL2_IMAGE_LIBRARY4_DLL} ${SDL2_IMAGE_LIBRARY5_DLL})
+target_link_libraries(sdl_snake  ${SDL2_LIBRARY} ${SDL2_MAIN_LIBRARY} ${SDL2_TEST_LIBRARY} ${SDL2_IMAGE})

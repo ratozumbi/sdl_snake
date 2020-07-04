@@ -32,6 +32,7 @@ public:
     int GetActorsSize();
 
     Image *GetImage(int);
+    Image *GetImage(string);
     Actor *GetActor(int);
 
     Scene();

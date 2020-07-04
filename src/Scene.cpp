@@ -29,7 +29,7 @@ Image *Scene::loadImage(string name, SDL_Renderer &r) {
     int w, h; // texture width & height
     SDL_Rect rect;
 
-    auto fullPath = std::string("C:\\dev\\sdl_snake\\res\\") + name;
+    auto fullPath = std::string("..\\res\\") + name;
     SDL_Texture *texture = IMG_LoadTexture(&r, fullPath.c_str());
 
 
@@ -77,8 +77,18 @@ int Scene::GetImagesSize() {
 
 Actor* Scene::GetActor(int position) {
     return actors.at(position);
+//    TODO: throw not found
 }
 
 Image *Scene::GetImage(int position) {
     return images.at(position);
+//    TODO: throw not found
+}
+Image *Scene::GetImage(string name) {
+    for(int i = 0; i < images.size(); i++){
+        if(images[i]->name.compare(name) == 0){
+           return images[i];
+        }
+    }
+//    TODO: throw not found
 }

@@ -3,10 +3,56 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
+#include <thread>
+#include <future>
+
 #include "../include/Image.h"
 #include "../include/Game.h"
 #include "../include/Scene.h"
+#include "../include/Pice.h"
 
+void input(){
+    std::cout<<"works";
+    while(true){
+        // event handling
+        SDL_Event e;
+        bool hasEvent = SDL_PollEvent(&e);
+
+        if (hasEvent) {
+            if (e.type == SDL_QUIT)
+                try{
+                    std::terminate();
+                }
+                catch (std::exception e) {
+                    std::cout << e.what();
+                }
+            else if ( e.key.keysym.sym == SDLK_ESCAPE)
+                try{
+                    std::terminate();
+                }
+                catch (std::exception e) {
+                    std::cout << e.what();
+                }
+        }
+
+        //game update and event resolution
+        //TODO: create a separate thread for inputs
+        for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize() ; ++i) {
+            if (Game::scenes.at(Game::currentScene).GetActor(i)->active) {
+                if(hasEvent){
+                    if(Game::scenes.at(Game::currentScene).GetActor(i)->onInput(e) == -1){
+                        try{
+                            std::terminate();
+                        }
+                        catch (std::exception e) {
+                            std::cout << e.what();
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 int main(int argc, char **argv)
 {
@@ -30,18 +76,24 @@ int main(int argc, char **argv)
     Game::scenes.at(Util::findScene("menu")).loadImage("fundo.png", *renderer);
     Game::scenes.at(Util::findScene("menu")).loadImage("pointer.png", *renderer, 190, 360);
 
-    Game::scenes.at(Util::findScene("game")).loadImage("canvas.png", *renderer);
-    Game::scenes.at(Util::findScene("game")).loadImage("snake_head.png", *renderer,10,10);
-    Game::scenes.at(Util::findScene("game")).loadImage("snake_body.png", *renderer,10, 50);
-    Game::scenes.at(Util::findScene("game")).loadImage("snake_tail.png", *renderer, 10, 80);
+    Game::scenes.at(Util::findScene("game")).loadImage("Backdrop13.jpg", *renderer);
+    Game::scenes.at(Util::findScene("game")).loadImage("Color-1.png", *renderer,50,10);
+    Game::scenes.at(Util::findScene("game")).loadImage("Color-2.png", *renderer,10,40);
+    Game::scenes.at(Util::findScene("game")).loadImage("Color-3.png", *renderer,10,80);
+    Game::scenes.at(Util::findScene("game")).loadImage("Color-4.png", *renderer,10,120);
+    Game::scenes.at(Util::findScene("game")).loadImage("Color-5.png", *renderer,10,150);
 
     //load actors
     Game::scenes.at(Util::findScene("menu")).loadActor<Arrow>();
+    Game::scenes.at(Util::findScene("game")).loadActor<Pice>();
 
     const int targetFPS = 60;
     const int frameDelay = 1000/ targetFPS;
     Uint32 frameStart;
     int frameTime;
+
+    std::thread inputs (input);
+    inputs.detach();
 
     // main loop
     bool playing = true;
@@ -52,6 +104,7 @@ int main(int argc, char **argv)
         // event handling
         SDL_Event e;
         bool hasEvent = SDL_PollEvent(&e);
+
         if (hasEvent) {
             if (e.type == SDL_QUIT)
                 break;
@@ -60,16 +113,17 @@ int main(int argc, char **argv)
         }
 
         //game update and event resolution
+        //TODO: create a separate thread for inputs
         for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize() ; ++i) {
             if (Game::scenes.at(Game::currentScene).GetActor(i)->active) {
                 Game::scenes.at(Game::currentScene).GetActor(i)->update();
-                if(hasEvent){
-                    if(Game::scenes.at(Game::currentScene).GetActor(i)->onInput(e) == -1){
-                        playing = false;
-                    }
-                }
-            }
 
+//                if(hasEvent){
+//                    if(Game::scenes.at(Game::currentScene).GetActor(i)->onInput(e) == -1){
+//                        playing = false;
+//                    }
+//                }
+            }
         }
 
         //set base color for renderer
@@ -95,6 +149,7 @@ int main(int argc, char **argv)
     }
 
 //    SDL_DestroyTexture(texture); TODO: free textures
+    inputs.join();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
 
