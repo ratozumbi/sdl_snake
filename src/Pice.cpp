@@ -12,8 +12,20 @@ Pice::Pice():Actor() {
 };
 
 void Pice::start() {
+//    Actor::start();
+//    if(pice == NULL){
+//        pice = Game::scenes.at(Game::currentScene).GetImage("Color-1.png");
+//    }
+};
+
+void Pice::start(std::string name) {
     Actor::start();
-    pice = Game::scenes.at(Game::currentScene).GetImage("Color-1.png");
+    pice = Game::scenes.at(1).GetImage(name);
+};
+
+void Pice::start(Image* img) {
+    Actor::start();
+    pice = img;
 };
 
 int Pice::update(){

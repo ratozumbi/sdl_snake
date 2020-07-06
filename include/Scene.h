@@ -10,6 +10,7 @@
 #include "GameObject.h"
 #include "Actor.h"
 #include "Image.h"
+#include "Pice.h"
 
 class Scene{
 
@@ -21,9 +22,29 @@ public:
     Image *loadImage(string, SDL_Renderer &, int, int);
     Image *loadImage(string, SDL_Renderer &, int, int, bool);
 
+    void loadActor(Pice *act, std::string name){
+        act->start(name);
+
+        actors.push_back(act);
+    }
+
+    void loadActor(Pice *act, Image* img){
+        act->start(img);
+
+        actors.push_back(act);
+    }
+
+    //TODO: use templates to load actors
     template <class T> void loadActor(){
         T *newActor = new T();
         newActor->start();
+
+        actors.push_back(newActor);
+    }
+
+    template <class T> void loadActor(std::string name){
+        T *newActor = new T();
+        newActor->start(name);
 
         actors.push_back(newActor);
     }

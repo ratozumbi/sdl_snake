@@ -30,7 +30,14 @@ Image *Scene::loadImage(string name, SDL_Renderer &r) {
     SDL_Rect rect;
 
     auto fullPath = std::string("..\\res\\") + name;
-    SDL_Texture *texture = IMG_LoadTexture(&r, fullPath.c_str());
+    auto findImage = Scene::GetImage(name);
+    SDL_Texture *texture;
+    if(findImage == NULL){
+        texture = IMG_LoadTexture(&r, fullPath.c_str());
+    } else{
+        texture = findImage->texture;
+    }
+
 
 
     if (texture == NULL) {

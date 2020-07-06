@@ -18,6 +18,9 @@ unsigned int Util::findScene(std::string name){
 	return 666;
 }
 
+/// Finds an image in any scene
+/// \param name The name of the image to search
+/// \return returns an Image* or NULL if not found
 Image *Util::findImage(std::string name){
     for(unsigned int iScene = 0; iScene < Game::scenes.size(); iScene++){
         int imgs = Game::scenes.at(iScene).GetImagesSize();
@@ -27,6 +30,5 @@ Image *Util::findImage(std::string name){
             }
         }
     }
-    //TODO: throw not found
 	return NULL;
 }

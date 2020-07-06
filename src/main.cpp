@@ -1,4 +1,4 @@
-//#define SDL_MAIN_HANDLED //windows hack
+#define SDL_MAIN_HANDLED //windows hack
 #include <iostream>
 #include <SDL.h>
 #include <SDL_image.h>
@@ -11,6 +11,10 @@
 #include "../include/Scene.h"
 #include "../include/Pice.h"
 
+void abort(){
+    std::cout <<"ABORT";
+}
+//inputs where not smooth in the main thread
 void input(){
     std::cout<<"works" << std::endl;
     bool running = true;
@@ -22,11 +26,14 @@ void input(){
         if (hasEvent) {
             if (e.type == SDL_QUIT){
                 running = false;
+                std::terminate(); //TODO: think a better way to end the program
             }
-            else if ( e.key.keysym.sym == SDLK_ESCAPE)
-            {
-                running = false;
-            }
+            //TODO: #BUG 1 find ghost esc key. Maybe the solution in on Pice's mouse
+//            else if ( e.key.keysym.sym == SDLK_ESCAPE)
+//            {
+//                running = false;
+//                std::terminate(); //TODO: think a better way to end the program
+//            }
         }
 
         //game event resolution
@@ -46,7 +53,7 @@ void input(){
 }
 
 int main(int argc, char **argv) {
-//    SDL_SetMainReady();
+    SDL_SetMainReady();
     SDL_Window *window;
     SDL_Renderer *renderer;
 
@@ -67,7 +74,7 @@ int main(int argc, char **argv) {
     Game::scenes.at(Util::findScene("menu")).loadImage("pointer.png", *renderer, 190, 360);
 
     Game::scenes.at(Util::findScene("game")).loadImage("Backdrop13.jpg", *renderer);
-    Game::scenes.at(Util::findScene("game")).loadImage("Color-1.png", *renderer, 50, 10);
+    auto img = Game::scenes.at(Util::findScene("game")).loadImage("Color-1.png", *renderer, 10, 10);
     Game::scenes.at(Util::findScene("game")).loadImage("Color-2.png", *renderer, 10, 40);
     Game::scenes.at(Util::findScene("game")).loadImage("Color-3.png", *renderer, 10, 80);
     Game::scenes.at(Util::findScene("game")).loadImage("Color-4.png", *renderer, 10, 120);
@@ -75,13 +82,19 @@ int main(int argc, char **argv) {
 
     //load actors
     Game::scenes.at(Util::findScene("menu")).loadActor<Arrow>();
-    Game::scenes.at(Util::findScene("game")).loadActor<Pice>();
+    Game::scenes.at(Util::findScene("game")).loadActor(new Pice(),img);
+    Game::scenes.at(Util::findScene("game")).loadActor(new Pice(),"Color-2.png");
+    Game::scenes.at(Util::findScene("game")).loadActor(new Pice(),"Color-3.png");
+    Game::scenes.at(Util::findScene("game")).loadActor(new Pice(),"Color-4.png");
+    Game::scenes.at(Util::findScene("game")).loadActor(new Pice(),"Color-5.png");
 
+    //FPS control
     const int targetFPS = 60;
     const int frameDelay = 1000 / targetFPS;
     Uint32 frameStart;
     int frameTime;
 
+    //inputs where not smooth in the main thread
     std::thread inputs(input);
     inputs.detach();
 
@@ -92,8 +105,7 @@ int main(int argc, char **argv) {
         frameStart = SDL_GetTicks();
 
         // event handling
-        SDL_Event e;
-        bool hasEvent = SDL_PollEvent(&e);
+        SDL_PumpEvents();//required to poll events in another thread
 
         //game update
         for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize(); ++i) {
@@ -101,12 +113,12 @@ int main(int argc, char **argv) {
                 Game::scenes.at(Game::currentScene).GetActor(i)->update();
             }
         }
-        if (hasEvent) {
-            if (e.type == SDL_QUIT)
-                break;
-            else if (e.key.keysym.sym == SDLK_ESCAPE)
-                break;
-        }
+//        if (hasEvent) {
+//            if (e.type == SDL_QUIT)
+//                break;
+//            else if (e.key.keysym.sym == SDLK_ESCAPE)
+//                break;
+//        }
 
         //set base color for renderer
         SDL_SetRenderDrawColor(renderer, 128, 0, 0, 0);
