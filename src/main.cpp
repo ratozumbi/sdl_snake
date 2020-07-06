@@ -9,7 +9,7 @@
 #include "../include/Image.h"
 #include "../include/Game.h"
 #include "../include/Scene.h"
-#include "../include/Pice.h"
+#include "../include/Board.h"
 
 void exitGame(){
     std::cerr<< "END GAME";
@@ -60,7 +60,8 @@ void input(){
 int main(int argc, char **argv) {
     SDL_SetMainReady();
     std::set_terminate(exitGame);
-
+    std::string ccolors[5] =  {"Color-1.png","Color-2.png","Color-3.png","Color-4.png","Color-5.png"};
+    std::vector<std::string> v {"Color-11.png","Color-22.png","Color-3.png","Color-4.png","Color-5.png"};
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         SDL_Log("Can't init %s", SDL_GetError());
         return 1;
@@ -77,6 +78,7 @@ int main(int argc, char **argv) {
     //load images
     Game::scenes.at(Util::findScene("menu")).loadImage("fundo.png", *Engine::renderer);
     Game::scenes.at(Util::findScene("menu")).loadImage("pointer.png", *Engine::renderer, 190, 360);
+    Game::scenes.at(Util::findScene("menu")).loadImage("pointer.png", *Engine::renderer, 0, 0);
 
     Game::scenes.at(Util::findScene("game")).loadImage("Backdrop13.jpg", *Engine::renderer);
 //    auto img = Game::scenes.at(Util::findScene("game")).loadImage("Color-1.png", *Engine::renderer, 10, 10);
@@ -87,11 +89,17 @@ int main(int argc, char **argv) {
 
     //load actors
     Game::scenes.at(Util::findScene("menu")).loadActor<Arrow>();
+    Game::scenes.at(Util::findScene("menu")).loadActor<Arrow>();
+
+//    auto b = new Board();
+////    b->start();
+//    Game::scenes.at(Util::findScene("game")).actors.push_back(b);
+//    Game::scenes.at(Util::findScene("game")).loadActor<Board>();
 
 //    Game::scenes.at(Util::findScene("game")).loadActor<Pice>();
-    Game::scenes.at(Util::findScene("game")).loadActor<Pice>("Color-1.png",10,10);
-    Game::scenes.at(Util::findScene("game")).loadActor<Pice>("Color-2.png",100,100);
-    Game::scenes.at(Util::findScene("game")).loadActor<Pice>("Color-2.png",200,200);
+//    Game::scenes.at(Util::findScene("game")).loadActor<Pice>("Color-1.png",10,10);
+//    Game::scenes.at(Util::findScene("game")).loadActor<Pice>("Color-2.png",100,100);
+//    Game::scenes.at(Util::findScene("game")).loadActor<Pice>("Color-2.png",200,200);
 //    Game::scenes.at(Util::findScene("game")).loadActor(new Pice(),img);
 //    Game::scenes.at(Util::findScene("game")).loadActor(new Pice(),"Color-2.png");
 //    Game::scenes.at(Util::findScene("game")).loadActor(new Pice(),"Color-3.png");

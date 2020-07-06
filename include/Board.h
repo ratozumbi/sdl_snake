@@ -13,7 +13,8 @@
 
 class Board: public Actor {
 public:
-    Pice* pices[BOARD_H][BOARD_W];
+    string colors[5];
+    Pice pices[BOARD_H][BOARD_W]; //TODO: destroy this
     Board();
     ~Board();
     void start();

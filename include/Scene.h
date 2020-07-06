@@ -45,17 +45,19 @@ public:
         return newActor;
     }
 
-    template <class T> void loadActor(std::string name){
+    template <class T> T loadActor(std::string name){
         auto *newActor = new T();
         newActor->start(name);
 
         actors.push_back(newActor);
+        return *newActor;
     }
-    template <class T> void loadActor(std::string name, int x, int y){
+    template <class T> T loadActor(std::string name, int x, int y){
         auto *newActor = new T();
         newActor->start(name,x,y);
 
         actors.push_back(newActor);
+        return *newActor;
     }
 
 //    template <class T> void loadActor(...){
@@ -81,7 +83,7 @@ public:
     Scene(std::string);
     ~Scene();
 
-private:
+//private:
     std::vector<Image*> images;
     std::vector<Actor*> actors;
 

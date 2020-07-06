@@ -11,6 +11,10 @@ Pice::Pice():Actor() {
     active = true;
 };
 
+Pice::~Pice() {
+    delete((void*)pice);
+};
+
 void Pice::start() {
     Actor::start();
     if(pice == NULL){
@@ -45,21 +49,6 @@ int Pice::update(){
 
 int Pice::onInput(SDL_Event e){
     Actor::onInput(e);
-    bool insideRect = (e.button.x >= pice->rect.x &&
-                       e.button.x <= pice->rect.x + pice->rect.w &&
-                       e.button.y >= pice->rect.y &&
-                       e.button.y <= pice->rect.y + pice->rect.h);
 
-    if(e.type == SDL_MOUSEMOTION){
-        if(insideRect) {
-            if(e.motion.state == SDL_BUTTON_LMASK){
-                pice->rect.x += e.motion.xrel;
-                pice->rect.y += e.motion.yrel;
-            }
-            if(e.motion.state == SDL_BUTTON_RMASK){
-
-            }
-        }
-    }
     return 0;
 }

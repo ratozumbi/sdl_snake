@@ -18,6 +18,7 @@ public:
     bool clicked;
     Image *pice;
     Pice();
+    ~Pice();
     void start();
     void start(std::string);
     void start(std::string, int , int);
