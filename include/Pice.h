@@ -8,6 +8,10 @@
 #include "../include/Actor.h"
 #include "Image.h"
 
+enum class PiceType{
+    P_BLACK
+};
+
 class Pice: public Actor {
 
 public:
@@ -16,6 +20,7 @@ public:
     Pice();
     void start();
     void start(std::string);
+    void start(std::string, int , int);
     void start(Image *);
     int update();
     int onInput(SDL_Event);

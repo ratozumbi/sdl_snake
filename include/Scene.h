@@ -17,37 +17,58 @@ class Scene{
 public:
     std::string name;
 
-
+    Image *loadImage(string);
     Image *loadImage(string, SDL_Renderer &);
     Image *loadImage(string, SDL_Renderer &, int, int);
     Image *loadImage(string, SDL_Renderer &, int, int, bool);
 
-    void loadActor(Pice *act, std::string name){
-        act->start(name);
+//    //TODO: use this
+//    void loadActor(Pice *act, std::string name){
+//        act->start(name);
+//
+//        actors.push_back(act);
+//    }
+//
+//    //TODO: use this
+//    void loadActor(Pice *act, Image* img){
+//        act->start(img);
+//
+//        actors.push_back(act);
+//    }
 
-        actors.push_back(act);
-    }
-
-    void loadActor(Pice *act, Image* img){
-        act->start(img);
-
-        actors.push_back(act);
-    }
-
-    //TODO: use templates to load actors
-    template <class T> void loadActor(){
-        T *newActor = new T();
+    //TODO: use templates and vardic to load actors
+    template <class T> auto loadActor(){
+        auto *newActor = new T();
         newActor->start();
 
         actors.push_back(newActor);
+        return newActor;
     }
 
     template <class T> void loadActor(std::string name){
-        T *newActor = new T();
+        auto *newActor = new T();
         newActor->start(name);
 
         actors.push_back(newActor);
     }
+    template <class T> void loadActor(std::string name, int x, int y){
+        auto *newActor = new T();
+        newActor->start(name,x,y);
+
+        actors.push_back(newActor);
+    }
+
+//    template <class T> void loadActor(...){
+//        va_list vl;
+//        auto *newActor = new T();
+//        if(typeid(T) == typeid(Pice)){
+//            va_start(vl,1);
+//            newActor->start(va_arg(vl,std::string));
+//        }
+//
+//        actors.push_back(newActor);
+//        va_end(vl);
+//    }
 
     int GetImagesSize();
     int GetActorsSize();

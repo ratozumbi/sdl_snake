@@ -52,11 +52,12 @@ Image *Scene::loadImage(string name, SDL_Renderer &r) {
     rect.w = w;
     rect.h = h;
 
-
-    //TODO: check if image exists before creating a new one
-    auto newImage = new Image(name.c_str(), rect, *texture);
+    auto newImage = new Image(name, rect, *texture);
     images.push_back(newImage);
     return newImage;
+}
+Image *Scene::loadImage(string name) {
+    return loadImage(name, *Engine::renderer);
 }
 
 Image *Scene::loadImage(string name, SDL_Renderer &r, int x, int y) {

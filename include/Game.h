@@ -12,6 +12,11 @@
 #include "../include/Arrow.h"
 #include "Scene.h"
 
+namespace Engine {
+    extern SDL_Window *window;
+    extern SDL_Renderer *renderer;
+}
+
 namespace Game {
     extern std::vector<Scene> scenes;
     extern unsigned int currentScene;

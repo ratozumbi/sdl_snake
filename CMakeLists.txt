@@ -1,7 +1,7 @@
 # This cmake file should be the same as this command
 # g++ -I /usr/include/SDL2 ./include/*.h ./src/*.cpp -lSDL2 -lSDL2_image -std=c++11 -o game_file_name
 cmake_minimum_required(VERSION 3.12)
-project(game)
+project(sdl_snake)
 
 set(CMAKE_CXX_STANDARD 14)
 # set(SDL2_INCLUDE_DIR /usr/include/SDL2)
@@ -18,7 +18,7 @@ file(GLOB game_source
         "src/*.cpp"
         )
 
-add_executable(sdl_snake ${game_source} src/Pice.cpp include/Pice.h)
+add_executable(sdl_snake ${game_source})
 
 target_include_directories(sdl_snake PUBLIC ${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} INCLUDE_DIRECTORIES)
-target_link_libraries(sdl_snake  ${SDL2_LIBRARY} ${SDL2_MAIN_LIBRARY} ${SDL2_TEST_LIBRARY} ${SDL2_IMAGE})
+target_link_libraries(sdl_snake ${SDL2_LIBRARY} ${SDL2_MAIN_LIBRARY} ${SDL2_TEST_LIBRARY} ${SDL2_IMAGE})

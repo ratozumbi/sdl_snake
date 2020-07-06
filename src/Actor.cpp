@@ -20,6 +20,11 @@ int Actor::update(){
 }
 
 int Actor::onInput(SDL_Event event){
-	return 0;
+    if(!initialized){
+        initialized = true;
+        start();
+    }
+    if(!initialized) return 1;
+    return 0;
 
 }
