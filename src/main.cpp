@@ -78,19 +78,16 @@ int main(int argc, char **argv) {
     Game::scenes.at(Util::findScene("menu")).loadImage("pointer.png", *Engine::renderer, 190, 360);
 
     Game::scenes.at(Util::findScene("game")).loadImage("Backdrop13.jpg", *Engine::renderer);
-    auto img = Game::scenes.at(Util::findScene("game")).loadImage("Color-1.png", *Engine::renderer, 10, 10);
-    Game::scenes.at(Util::findScene("game")).loadImage("Color-2.png", *Engine::renderer, 10, 40);
-    Game::scenes.at(Util::findScene("game")).loadImage("Color-3.png", *Engine::renderer, 10, 80);
-    Game::scenes.at(Util::findScene("game")).loadImage("Color-4.png", *Engine::renderer, 10, 120);
-    Game::scenes.at(Util::findScene("game")).loadImage("Color-5.png", *Engine::renderer, 10, 150);
+//    auto img = Game::scenes.at(Util::findScene("game")).loadImage("Color-1.png", *Engine::renderer, 10, 10);
+//    Game::scenes.at(Util::findScene("game")).loadImage("Color-2.png", *Engine::renderer, 10, 40);
+//    Game::scenes.at(Util::findScene("game")).loadImage("Color-3.png", *Engine::renderer, 10, 80);
+//    Game::scenes.at(Util::findScene("game")).loadImage("Color-4.png", *Engine::renderer, 10, 120);
+//    Game::scenes.at(Util::findScene("game")).loadImage("Color-5.png", *Engine::renderer, 10, 150);
 
     //load actors
     Game::scenes.at(Util::findScene("menu")).loadActor<Arrow>();
-    Game::scenes.at(Util::findScene("game")).loadActor(new Pice(),img);
-    Game::scenes.at(Util::findScene("game")).loadActor(new Pice(),"Color-2.png");
-    Game::scenes.at(Util::findScene("game")).loadActor(new Pice(),"Color-3.png");
-    Game::scenes.at(Util::findScene("game")).loadActor(new Pice(),"Color-4.png");
-    Game::scenes.at(Util::findScene("game")).loadActor(new Pice(),"Color-5.png");
+
+    Game::scenes.at(Util::findScene("game")).loadActor<Pice>("Color-1.png");
 
     //FPS control
     const int targetFPS = 60;

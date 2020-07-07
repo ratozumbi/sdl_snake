@@ -18,32 +18,21 @@ public:
     std::string name;
 
 
-    Image *loadImage(string, SDL_Renderer &);
-    Image *loadImage(string, SDL_Renderer &, int, int);
-    Image *loadImage(string, SDL_Renderer &, int, int, bool);
+    Image *loadImage(string);
+    Image *loadImage(string, int, int);
+    Image *loadImage(string, int, int, bool);
 
-    void loadActor(Pice *act, std::string name){
-        act->start(name);
-
-        actors.push_back(act);
-    }
-
-    void loadActor(Pice *act, Image* img){
-        act->start(img);
-
-        actors.push_back(act);
-    }
-
-    //TODO: use templates to load actors
+    /// Loads an actor
+    /// \tparam T The class type derived from Actor
     template <class T> void loadActor(){
         actors.push_back(new T());
     }
 
-    template <class T> void loadActor(std::string name){
-        T *newActor = new T();
-        newActor->start(name);
-
-        actors.push_back(newActor);
+    /// Loads an actor
+    /// \tparam T The class type derived from Actor
+    /// \param str Any string parameter to be passed to the constructor
+    template <class T> void loadActor(std::string str){
+        actors.push_back(new T(str));
     }
 
     int GetImagesSize();

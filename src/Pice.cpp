@@ -2,6 +2,7 @@
 // Created by Rato Zumbi on 03/07/2020.
 //
 
+#include <iostream>
 #include "../include/Game.h"
 #include "../include/Pice.h"
 
@@ -11,17 +12,13 @@ Pice::Pice():Actor() {
 
 };
 
-void Pice::start() {
-//    Actor::start();
-//    if(pice == NULL){
-//        pice = Game::scenes.at(Game::currentScene).GetImage("Color-1.png");
-//    }
+Pice::Pice(std::string imgName): Actor() {
+    pice = Game::scenes.at(Util::findScene("game")).loadImage(imgName, *Engine::renderer, 10, 10);//Game::scenes.at(1).GetImage(imgName);
 };
 
-void Pice::start(std::string name) {
-    Actor::start();
-    pice = Game::scenes.at(1).GetImage(name);
+void Pice::start() {
 };
+
 
 void Pice::start(Image* img) {
     Actor::start();

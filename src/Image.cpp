@@ -12,5 +12,6 @@ Image::Image (string name, SDL_Rect &rect1, SDL_Texture &texture): GameObject(na
 Image::Image():GameObject() { }
 
 Image::~Image() {
-    SDL_free(this->texture);
+    if(texture)
+        SDL_DestroyTexture(texture);
 }
