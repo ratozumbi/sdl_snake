@@ -10,6 +10,7 @@
 #include "../include/Game.h"
 #include "../include/Scene.h"
 #include "../include/Pice.h"
+#include "../include/Board.h"
 
 void exitGame(){
     std::cerr<< "END GAME";
@@ -78,16 +79,16 @@ int main(int argc, char **argv) {
     Game::scenes.at(Util::findScene("menu")).loadImage("pointer.png", 190, 360);
 
     Game::scenes.at(Util::findScene("game")).loadImage("Backdrop13.jpg");
-    Game::scenes.at(Util::findScene("game")).loadImage("Color-1.png", 10, 10);
-    Game::scenes.at(Util::findScene("game")).loadImage("Color-2.png", 10, 70);
-    Game::scenes.at(Util::findScene("game")).loadImage("Color-3.png", 10, 140);
-    Game::scenes.at(Util::findScene("game")).loadImage("Color-4.png", 10, 210);
-    Game::scenes.at(Util::findScene("game")).loadImage("Color-5.png", 10, 280);
+    Game::scenes.at(Util::findScene("game")).loadImage("Color-1.png", 10, 10, false);
+    Game::scenes.at(Util::findScene("game")).loadImage("Color-2.png", 10, 70, false);
+    Game::scenes.at(Util::findScene("game")).loadImage("Color-3.png", 10, 140, false);
+    Game::scenes.at(Util::findScene("game")).loadImage("Color-4.png", 10, 210, false);
+    Game::scenes.at(Util::findScene("game")).loadImage("Color-5.png", 10, 280, false);
 
     //load actors
     Game::scenes.at(Util::findScene("menu")).loadActor<Arrow>();
 
-    Game::scenes.at(Util::findScene("menu")).loadActor<Arrow>();
+    Game::scenes.at(Util::findScene("game")).loadActor<Board>();
 //    Arrow *b = dynamic_cast<Arrow*>(a);//(Game::scenes.at(Util::findScene("menu")).GetActor(0));
 //    if (b) {
 //        if (b->pointer) {

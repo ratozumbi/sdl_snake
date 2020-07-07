@@ -9,8 +9,11 @@ Board::Board():Actor() {
     char * colors[]= {"Color-1.png","Color-2.png","Color-3.png","Color-4.png","Color-5.png"};
     for(int wInter = 0; wInter < BOARD_W; wInter ++){
         for(int hInter = 0; hInter < BOARD_W; hInter ++){
-            Game::scenes.at(Util::findScene("game")).loadActor<Pice>(colors[0]);
-//            pices[hInter][wInter] = Game::scenes.at(Util::findScene("game"))
+            auto a = Game::scenes.at(Util::findScene("game")).loadActor<Pice>(colors[0]);
+            pices[hInter][wInter] = dynamic_cast<Pice*>(a);
+            pices[hInter][wInter]->pice->rect.x = wInter * 70;
+            pices[hInter][wInter]->pice->rect.y = hInter * 70;
+            pices[hInter][wInter]->pice->active = true;
         }
     }
 };
