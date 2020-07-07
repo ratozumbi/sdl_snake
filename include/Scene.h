@@ -36,10 +36,7 @@ public:
 
     //TODO: use templates to load actors
     template <class T> void loadActor(){
-        T *newActor = new T();
-        newActor->start();
-
-        actors.push_back(newActor);
+        actors.push_back(new T());
     }
 
     template <class T> void loadActor(std::string name){

@@ -32,13 +32,13 @@ Image *Scene::loadImage(string name, SDL_Renderer &r) {
     auto fullPath = std::string("..\\res\\") + name;
     auto findImage = Scene::GetImage(name);
     SDL_Texture *texture;
+
+    //don't load textures already loaded
     if(findImage == NULL){
         texture = IMG_LoadTexture(&r, fullPath.c_str());
     } else{
         texture = findImage->texture;
     }
-
-
 
     if (texture == NULL) {
         SDL_Log("Can't load image. %s", SDL_GetError());
