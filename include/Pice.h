@@ -17,7 +17,6 @@ public:
     Pice(std::string);
     void start();
     void start(std::string);
-    void start(Image *);
     int update();
     int onInput(SDL_Event);
 

@@ -74,20 +74,28 @@ int main(int argc, char **argv) {
     Game::scenes.push_back(Scene("game"));
 
     //load images
-    Game::scenes.at(Util::findScene("menu")).loadImage("fundo.png", *Engine::renderer);
-    Game::scenes.at(Util::findScene("menu")).loadImage("pointer.png", *Engine::renderer, 190, 360);
+    Game::scenes.at(Util::findScene("menu")).loadImage("fundo.png");
+    Game::scenes.at(Util::findScene("menu")).loadImage("pointer.png", 190, 360);
 
-    Game::scenes.at(Util::findScene("game")).loadImage("Backdrop13.jpg", *Engine::renderer);
-//    auto img = Game::scenes.at(Util::findScene("game")).loadImage("Color-1.png", *Engine::renderer, 10, 10);
-//    Game::scenes.at(Util::findScene("game")).loadImage("Color-2.png", *Engine::renderer, 10, 40);
-//    Game::scenes.at(Util::findScene("game")).loadImage("Color-3.png", *Engine::renderer, 10, 80);
-//    Game::scenes.at(Util::findScene("game")).loadImage("Color-4.png", *Engine::renderer, 10, 120);
-//    Game::scenes.at(Util::findScene("game")).loadImage("Color-5.png", *Engine::renderer, 10, 150);
+    Game::scenes.at(Util::findScene("game")).loadImage("Backdrop13.jpg");
+    Game::scenes.at(Util::findScene("game")).loadImage("Color-1.png", 10, 10);
+    Game::scenes.at(Util::findScene("game")).loadImage("Color-2.png", 10, 70);
+    Game::scenes.at(Util::findScene("game")).loadImage("Color-3.png", 10, 140);
+    Game::scenes.at(Util::findScene("game")).loadImage("Color-4.png", 10, 210);
+    Game::scenes.at(Util::findScene("game")).loadImage("Color-5.png", 10, 280);
 
     //load actors
     Game::scenes.at(Util::findScene("menu")).loadActor<Arrow>();
 
-    Game::scenes.at(Util::findScene("game")).loadActor<Pice>("Color-1.png");
+    Game::scenes.at(Util::findScene("menu")).loadActor<Arrow>();
+//    Arrow *b = dynamic_cast<Arrow*>(a);//(Game::scenes.at(Util::findScene("menu")).GetActor(0));
+//    if (b) {
+//        if (b->pointer) {
+//            b->pointer->rect.y = 0;
+//        }
+//    }
+//    Arrow a = Actor();
+//    Game::scenes.at(Util::findScene("game")).loadActor<Pice>("Color-1.png");
 
     //FPS control
     const int targetFPS = 60;

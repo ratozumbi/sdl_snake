@@ -7,10 +7,10 @@
 
 #include "../include/Game.h"
 
-std::string name;
-
-std::vector<Image*> images;
-std::vector<Actor*> actors;
+//std::string name;
+//
+//std::vector<Image*> images;
+//std::vector<Actor*> actors;
 
 Scene::Scene(){
 

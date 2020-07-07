@@ -4,11 +4,9 @@
 
 #include <iostream>
 #include "../include/Arrow.h"
-//using Game::loadImage
 
-Image *pointer;
 Arrow::Arrow():Actor(){
-
+    pointer = Util::findImage("pointer.png");
 };
 
 Arrow::~Arrow(){
@@ -16,8 +14,7 @@ Arrow::~Arrow(){
 };
 
 void Arrow::start() {
-    Actor::start();
-    pointer = Util::findImage("pointer.png");
+//    Actor::start();
 }
 
 int Arrow::update() {

@@ -6,23 +6,15 @@
 #include "../include/Game.h"
 #include "../include/Pice.h"
 
-Image* pice;
-bool clicked = false;
 Pice::Pice():Actor() {
 
 };
 
 Pice::Pice(std::string imgName): Actor() {
-    pice = Game::scenes.at(Util::findScene("game")).loadImage(imgName, *Engine::renderer, 10, 10);//Game::scenes.at(1).GetImage(imgName);
+    pice = Game::scenes.at(Util::findScene("game")).loadImage(imgName, 10, 10);
 };
 
 void Pice::start() {
-};
-
-
-void Pice::start(Image* img) {
-    Actor::start();
-    pice = img;
 };
 
 int Pice::update(){
