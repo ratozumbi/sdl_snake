@@ -11,9 +11,15 @@
 #include "../include/Scene.h"
 #include "../include/Pice.h"
 
-void abort(){
-    std::cout <<"ABORT";
+void exitGame(){
+    std::cerr<< "END GAME";
+
+//    SDL_DestroyTexture(texture); TODO: free images and actors
+    SDL_DestroyRenderer(Engine::renderer);
+    SDL_DestroyWindow(Engine::window);
+    std::exit(0);
 }
+
 //inputs where not smooth in the main thread
 void input(){
     std::cout<<"works" << std::endl;
@@ -26,13 +32,13 @@ void input(){
         if (hasEvent) {
             if (e.type == SDL_QUIT){
                 running = false;
-                std::terminate(); //TODO: think a better way to end the program
+                exitGame();
             }
             //TODO: #BUG 1 find ghost esc key. Maybe the solution in on Pice's mouse
 //            else if ( e.key.keysym.sym == SDLK_ESCAPE)
 //            {
 //                running = false;
-//                std::terminate(); //TODO: think a better way to end the program
+//                exitGame();
 //            }
         }
 
@@ -42,7 +48,7 @@ void input(){
                 if(hasEvent){
                     if(Game::scenes.at(Game::currentScene).GetActor(i)->onInput(e) == -1){
                         running = false;
-                        std::terminate(); //TODO: think a better way to end the program
+                        exitGame();
                     }
                 }
             }
@@ -54,15 +60,13 @@ void input(){
 
 int main(int argc, char **argv) {
     SDL_SetMainReady();
-    SDL_Window *window;
-    SDL_Renderer *renderer;
 
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         SDL_Log("Can't init %s", SDL_GetError());
         return 1;
     }
-    window = SDL_CreateWindow("Snake", 100, 100, 1024, 768, 0);
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    Engine::window = SDL_CreateWindow("Snake", 100, 100, 1024, 768, 0);
+    Engine::renderer = SDL_CreateRenderer(Engine::window, -1, SDL_RENDERER_ACCELERATED);
 
     // Initialize scenes
     //TODO: encapsulate scene creation (create loadScene)
@@ -70,15 +74,15 @@ int main(int argc, char **argv) {
     Game::scenes.push_back(Scene("game"));
 
     //load images
-    Game::scenes.at(Util::findScene("menu")).loadImage("fundo.png", *renderer);
-    Game::scenes.at(Util::findScene("menu")).loadImage("pointer.png", *renderer, 190, 360);
+    Game::scenes.at(Util::findScene("menu")).loadImage("fundo.png", *Engine::renderer);
+    Game::scenes.at(Util::findScene("menu")).loadImage("pointer.png", *Engine::renderer, 190, 360);
 
-    Game::scenes.at(Util::findScene("game")).loadImage("Backdrop13.jpg", *renderer);
-    auto img = Game::scenes.at(Util::findScene("game")).loadImage("Color-1.png", *renderer, 10, 10);
-    Game::scenes.at(Util::findScene("game")).loadImage("Color-2.png", *renderer, 10, 40);
-    Game::scenes.at(Util::findScene("game")).loadImage("Color-3.png", *renderer, 10, 80);
-    Game::scenes.at(Util::findScene("game")).loadImage("Color-4.png", *renderer, 10, 120);
-    Game::scenes.at(Util::findScene("game")).loadImage("Color-5.png", *renderer, 10, 150);
+    Game::scenes.at(Util::findScene("game")).loadImage("Backdrop13.jpg", *Engine::renderer);
+    auto img = Game::scenes.at(Util::findScene("game")).loadImage("Color-1.png", *Engine::renderer, 10, 10);
+    Game::scenes.at(Util::findScene("game")).loadImage("Color-2.png", *Engine::renderer, 10, 40);
+    Game::scenes.at(Util::findScene("game")).loadImage("Color-3.png", *Engine::renderer, 10, 80);
+    Game::scenes.at(Util::findScene("game")).loadImage("Color-4.png", *Engine::renderer, 10, 120);
+    Game::scenes.at(Util::findScene("game")).loadImage("Color-5.png", *Engine::renderer, 10, 150);
 
     //load actors
     Game::scenes.at(Util::findScene("menu")).loadActor<Arrow>();
@@ -121,20 +125,20 @@ int main(int argc, char **argv) {
 //        }
 
         //set base color for renderer
-        SDL_SetRenderDrawColor(renderer, 128, 0, 0, 0);
+        SDL_SetRenderDrawColor(Engine::renderer, 128, 0, 0, 0);
         // clear the screen
-        SDL_RenderClear(renderer);
+        SDL_RenderClear(Engine::renderer);
         // copy the texture to the rendering context
         for (int currImg = 0; currImg < Game::scenes.at(Game::currentScene).GetImagesSize(); ++currImg) {
             if (Game::scenes.at(Game::currentScene).GetImage(currImg) != NULL &&
                 Game::scenes.at(Game::currentScene).GetImage(currImg)->active) {
-                SDL_RenderCopy(renderer, Game::scenes.at(Game::currentScene).GetImage(currImg)->texture, NULL,
+                SDL_RenderCopy(Engine::renderer, Game::scenes.at(Game::currentScene).GetImage(currImg)->texture, NULL,
                                &Game::scenes.at(Game::currentScene).GetImage(currImg)->rect);
             }
         }
 
         //render the renderer
-        SDL_RenderPresent(renderer);
+        SDL_RenderPresent(Engine::renderer);
 
         //60 FPS cap
         frameTime = SDL_GetTicks() - frameStart;
@@ -142,10 +146,6 @@ int main(int argc, char **argv) {
             SDL_Delay(frameDelay - frameTime);
         }
     }
-
-//    SDL_DestroyTexture(texture); TODO: free textures
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
 
     return 0;
 }

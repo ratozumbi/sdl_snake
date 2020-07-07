@@ -7,6 +7,8 @@
 
 unsigned int Game::currentScene;
 std::vector<Scene> Game::scenes;
+SDL_Window *Engine::window;
+SDL_Renderer *Engine::renderer;
 
 unsigned int Util::findScene(std::string name){
     for (unsigned int iScene = 0; iScene < Game::scenes.size(); iScene++){

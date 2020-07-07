@@ -7,6 +7,7 @@
 
 #include "Actor.h"
 #include "Image.h"
+#include "../include/Game.h"
 
 class Arrow : public Actor{
 

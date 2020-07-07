@@ -4,7 +4,6 @@
 
 #include <iostream>
 #include "../include/Arrow.h"
-#include "../include/Game.h"
 //using Game::loadImage
 
 Image *pointer;
