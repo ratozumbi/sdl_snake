@@ -22,14 +22,14 @@ void Pice::start() {
     }
 };
 
-void Pice::start(std::string name) {
+void Pice::start(char * name) {
     Actor::start();
-    pice = Game::scenes.at(1).loadImage(name);//Game::scenes.at(1).GetImage(name);
+//    pice = Game::scenes.at(1).loadImage(name);//Game::scenes.at(1).GetImage(name);
 };
 
-void Pice::start(std::string name, int x, int y) {
+void Pice::start(char * name, int x, int y) {
     Actor::start();
-    pice = Game::scenes.at(1).loadImage(name, *Engine::renderer, x,y);//Game::scenes.at(1).GetImage(name);
+//    pice = Game::scenes.at(1).loadImage(name, *Engine::renderer, x,y);//Game::scenes.at(1).GetImage(name);
 };
 
 void Pice::start(Image* img) {

@@ -8,15 +8,14 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <string>
-using std::string;
 
 class GameObject
 {
 public:
     bool active = true;
-    string name;
+    char* name;
     SDL_Rect rect;//TODO: Refactor rect to Image
-    GameObject (string , SDL_Rect &);
+    GameObject (char* , SDL_Rect &);
     GameObject (SDL_Rect &);
     GameObject ();
     ~GameObject ();

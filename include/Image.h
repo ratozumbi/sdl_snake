@@ -8,7 +8,6 @@
 #include "../include/GameObject.h"
 #include "GameObject.h"
 #include <string>
-using std::string;
 #include <SDL_rect.h>
 
 
@@ -17,7 +16,7 @@ class Image: public GameObject {
 public:
 
     SDL_Texture *texture;
-    Image (string , SDL_Rect &, SDL_Texture &);
+    Image (char * , SDL_Rect &, SDL_Texture &);
     Image();
     ~Image();
 

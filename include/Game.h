@@ -22,8 +22,8 @@ namespace Game {
     extern unsigned int currentScene;
 }
 namespace Util {
-    unsigned int findScene(std::string );
-    Image *findImage(std::string );
+    unsigned int findScene(char * );
+    Image *findImage(char * );
 }
 
 #endif //SDL_SNAKE_GAME_H

@@ -4,7 +4,7 @@
 
 #include "../include/GameObject.h"
 
-GameObject::GameObject(string name, SDL_Rect &rect1) {
+GameObject::GameObject(char* name, SDL_Rect &rect1) {
     this->name = name;
     this->rect = rect1;
 }

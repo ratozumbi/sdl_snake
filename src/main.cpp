@@ -9,7 +9,6 @@
 #include "../include/Image.h"
 #include "../include/Game.h"
 #include "../include/Scene.h"
-#include "../include/Board.h"
 
 void exitGame(){
     std::cerr<< "END GAME";
@@ -60,8 +59,7 @@ void input(){
 int main(int argc, char **argv) {
     SDL_SetMainReady();
     std::set_terminate(exitGame);
-    std::string ccolors[5] =  {"Color-1.png","Color-2.png","Color-3.png","Color-4.png","Color-5.png"};
-    std::vector<std::string> v {"Color-11.png","Color-22.png","Color-3.png","Color-4.png","Color-5.png"};
+
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         SDL_Log("Can't init %s", SDL_GetError());
         return 1;
@@ -81,7 +79,7 @@ int main(int argc, char **argv) {
     Game::scenes.at(Util::findScene("menu")).loadImage("pointer.png", *Engine::renderer, 0, 0);
 
     Game::scenes.at(Util::findScene("game")).loadImage("Backdrop13.jpg", *Engine::renderer);
-//    auto img = Game::scenes.at(Util::findScene("game")).loadImage("Color-1.png", *Engine::renderer, 10, 10);
+    auto img = Game::scenes.at(Util::findScene("game")).loadImage("Color-1.png", *Engine::renderer, 10, 10);
 //    Game::scenes.at(Util::findScene("game")).loadImage("Color-2.png", *Engine::renderer, 10, 40);
 //    Game::scenes.at(Util::findScene("game")).loadImage("Color-3.png", *Engine::renderer, 10, 80);
 //    Game::scenes.at(Util::findScene("game")).loadImage("Color-4.png", *Engine::renderer, 10, 120);

@@ -15,12 +15,12 @@
 class Scene{
 
 public:
-    std::string name;
+    char* name;
 
-    Image *loadImage(string);
-    Image *loadImage(string, SDL_Renderer &);
-    Image *loadImage(string, SDL_Renderer &, int, int);
-    Image *loadImage(string, SDL_Renderer &, int, int, bool);
+    Image *loadImage(char *);
+    Image *loadImage(char *, SDL_Renderer &);
+    Image *loadImage(char *, SDL_Renderer &, int, int);
+    Image *loadImage(char *, SDL_Renderer &, int, int, bool);
 
 //    //TODO: use this
 //    void loadActor(Pice *act, std::string name){
@@ -39,20 +39,20 @@ public:
     //TODO: use templates and vardic to load actors
     template <class T> auto loadActor(){
         auto *newActor = new T();
-        newActor->start();
+//        newActor->start();
 
         actors.push_back(newActor);
         return newActor;
     }
 
-    template <class T> T loadActor(std::string name){
+    template <class T> T loadActor(char *){
         auto *newActor = new T();
         newActor->start(name);
 
         actors.push_back(newActor);
         return *newActor;
     }
-    template <class T> T loadActor(std::string name, int x, int y){
+    template <class T> T loadActor(char * name, int x, int y){
         auto *newActor = new T();
         newActor->start(name,x,y);
 
@@ -76,11 +76,11 @@ public:
     int GetActorsSize();
 
     Image *GetImage(int);
-    Image *GetImage(string);
+    Image *GetImage(char *);
     Actor *GetActor(int);
 
     Scene();
-    Scene(std::string);
+    Scene(char *);
     ~Scene();
 
 //private:

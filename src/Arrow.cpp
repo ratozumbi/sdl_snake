@@ -18,14 +18,17 @@ Arrow::~Arrow(){
 
 void Arrow::start() {
     Actor::start();
-    pointer = Util::findImage("pointer.png");
+    char* images[] = {{"pointer.png"}, {"Color-1.png"}, {"bbbbbbbbb"}};
+
+    pointer = Game::scenes.at(0).loadImage(images[1]);
+    std::cout <<"start";
 }
 
 int Arrow::update() {
     Actor::update();
 
     static int increment = 1;
-
+    std::cout <<"update";
     if(pointer->rect.x <= 150 || pointer->rect.x >= 190){
         increment *= -1;
     }

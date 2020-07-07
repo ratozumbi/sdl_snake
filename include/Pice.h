@@ -20,8 +20,8 @@ public:
     Pice();
     ~Pice();
     void start();
-    void start(std::string);
-    void start(std::string, int , int);
+    void start(char *);
+    void start(char *, int , int);
     void start(Image *);
     int update();
     int onInput(SDL_Event);
