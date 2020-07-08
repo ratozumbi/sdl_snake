@@ -10,8 +10,12 @@ Pice::Pice():Actor() {
 
 };
 
+Pice::~Pice() {
+    Game::scenes.at(1).deleteImage(piceImg);
+};
+
 Pice::Pice(std::string imgName): Actor() {
-    pice = Game::scenes.at(Util::findScene("game")).loadImage(imgName, 10, 10);
+    piceImg = Game::scenes.at(Util::findScene("game")).loadImage(imgName);
 };
 
 void Pice::start() {
@@ -24,17 +28,38 @@ int Pice::update(){
 
 int Pice::onInput(SDL_Event e){
     Actor::onInput(e);
+    bool insideBounds = (e.button.x >= piceImg->rect.x &&
+                         e.button.x <= piceImg->rect.x + piceImg->rect.w &&
+                         e.button.y >= piceImg->rect.y &&
+                         e.button.y <= piceImg->rect.y + piceImg->rect.h);
 
-    if(clicked && e.type == SDL_MOUSEMOTION){
+    if(insideBounds && e.type == SDL_MOUSEBUTTONUP){
+        if(e.button.button == SDL_BUTTON_RIGHT){
+            setDestroy();
+        }
+    }
+
+    if(insideBounds && e.type == SDL_MOUSEMOTION){
         if(e.motion.state == SDL_BUTTON_LMASK){
-            if(e.button.x >= pice->rect.x &&
-               e.button.x <= pice->rect.x + pice->rect.w &&
-               e.button.y >= pice->rect.y &&
-               e.button.y <= pice->rect.y + pice->rect.h) {
-                pice->rect.x += e.motion.xrel;
-                pice->rect.y += e.motion.yrel;
-            }
+            piceImg->rect.x += e.motion.xrel;
+            piceImg->rect.y += e.motion.yrel;
         }
     }
     return 0;
+}
+
+void Pice::setDestroy() {
+    if(!markToDestroy)
+        active = false;
+        Actor::setDestroy();
+}
+
+//TODO: move this to Actor
+bool Pice::getDestroy() {
+    return markToDestroy;
+}
+
+void Pice::moveDown() {
+//    markToDestroy = false;
+    piceImg->rect.y = piceImg->rect.y + piceImg->rect.h;
 }

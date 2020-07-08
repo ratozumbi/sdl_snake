@@ -2,6 +2,7 @@
 // Created by ratozumbi on 6/26/20.
 //
 
+#include <algorithm>
 #include "../include/Scene.h"
 #include "../include/Arrow.h"
 
@@ -30,7 +31,7 @@ Image *Scene::loadImage(string name) {
     SDL_Rect rect;
 
     auto fullPath = std::string("..\\res\\") + name;
-    auto findImage = Scene::GetImage(name);
+    auto findImage = Scene::getImage(name);
     SDL_Texture *texture;
 
     //don't load textures already loaded
@@ -80,8 +81,31 @@ int Scene::GetImagesSize() {
     return images.size();
 }
 
-Actor* Scene::GetActor(int position) {
+Actor* Scene::getActor(int position) {
     return actors.at(position);
+//    TODO: throw not found
+}
+
+void Scene::deleteActor(Actor *act) {
+
+    std::vector<Actor*>::iterator it =
+            std::find_if(actors.begin(), actors.end(), [&,act](Actor* e) { return (int)e == (int)act; });
+    if (it != actors.end()) {
+        int indx = std::distance(actors.begin(),it);
+        delete (actors.at(indx));
+        actors.erase(it);
+    }
+//    TODO: throw not found
+}
+
+void Scene::deleteImage(Image *img) {
+    std::vector<Image*>::iterator it =
+            std::find_if(images.begin(), images.end(), [&,img](Image* e) { return (int)e == (int)img; });
+    if (it != images.end()) {
+        int indx = std::distance(images.begin(),it);
+        delete (images.at(indx));
+        images.erase(it);
+    }
 //    TODO: throw not found
 }
 
@@ -89,7 +113,7 @@ Image *Scene::GetImage(int position) {
     return images.at(position);
 //    TODO: throw not found
 }
-Image *Scene::GetImage(string name) {
+Image *Scene::getImage(string name) {
     for(unsigned int i = 0; i < images.size(); i++){
         if(images[i]->name.compare(name) == 0){
            return images[i];

@@ -9,17 +9,21 @@
 #include "Image.h"
 
 class Pice: public Actor {
-
+    friend class Board;
 public:
     bool clicked;
-    Image *pice;
+    Image *piceImg;
     Pice();
+    ~Pice();
     Pice(std::string);
     void start();
     void start(std::string);
     int update();
     int onInput(SDL_Event);
+    void setDestroy();
+    bool getDestroy();
 
+    void moveDown();
 };
 
 

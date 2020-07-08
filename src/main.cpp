@@ -45,9 +45,9 @@ void input(){
 
         //game event resolution
         for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize() ; ++i) {
-            if (Game::scenes.at(Game::currentScene).GetActor(i)->active) {
+            if (Game::scenes.at(Game::currentScene).getActor(i)->active) {
                 if(hasEvent){
-                    if(Game::scenes.at(Game::currentScene).GetActor(i)->onInput(e) == -1){
+                    if(Game::scenes.at(Game::currentScene).getActor(i)->onInput(e) == -1){
                         running = false;
                         exitGame();
                     }
@@ -89,7 +89,7 @@ int main(int argc, char **argv) {
     Game::scenes.at(Util::findScene("menu")).loadActor<Arrow>();
 
     Game::scenes.at(Util::findScene("game")).loadActor<Board>();
-//    Arrow *b = dynamic_cast<Arrow*>(a);//(Game::scenes.at(Util::findScene("menu")).GetActor(0));
+//    Arrow *b = dynamic_cast<Arrow*>(a);//(Game::scenes.at(Util::findScene("menu")).getActor(0));
 //    if (b) {
 //        if (b->pointer) {
 //            b->pointer->rect.y = 0;
@@ -119,8 +119,8 @@ int main(int argc, char **argv) {
 
         //game update
         for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize(); ++i) {
-            if (Game::scenes.at(Game::currentScene).GetActor(i)->active) {
-                Game::scenes.at(Game::currentScene).GetActor(i)->update();
+            if (Game::scenes.at(Game::currentScene).getActor(i)->active) {
+                Game::scenes.at(Game::currentScene).getActor(i)->update();
             }
         }
 //        if (hasEvent) {

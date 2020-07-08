@@ -11,12 +11,15 @@ class Actor {
 public:
     bool active = true;
     Actor();
+    virtual ~Actor() {};
     virtual void start() {};
     virtual int update();
     virtual int onInput(SDL_Event);
+    virtual void setDestroy();
 
 protected:
     bool initialized = false;
+    bool markToDestroy = false;
 };
 
 #endif //SDL_SNAKE_ACTOR_H

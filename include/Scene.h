@@ -45,8 +45,10 @@ public:
     int GetActorsSize();
 
     Image *GetImage(int);
-    Image *GetImage(string);
-    Actor *GetActor(int);
+    Image *getImage(string);
+    Actor *getActor(int);
+    void deleteActor(Actor *);
+    void deleteImage(Image *);
 
     Scene();
     Scene(std::string);
