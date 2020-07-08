@@ -3,6 +3,7 @@
 //
 
 #include <algorithm>
+#include <iostream>
 #include "../include/Scene.h"
 #include "../include/Arrow.h"
 
@@ -86,10 +87,41 @@ Actor* Scene::getActor(int position) {
 //    TODO: throw not found
 }
 
+//TODO: inputUpdate for scene
+int Scene::update() {
+
+    int retCode = 0;
+    for (unsigned int i = 0; i < actors.size(); ++i) {
+        if (actors.at(i)->active) {
+            retCode =actors.at(i)->update();
+        }
+        if(actors.at(i)->getDestroy() && actors.at(i)->active == false){
+            deleteActor(actors.at(i));
+        }
+    }
+//    int i = 0;
+//    for( std::vector<Actor*>::iterator it = actors.begin(); it != actors.end(); it = actors.begin() +1){
+//        if(actors.at(i)->getDestroy()){
+//            deleteActor(actors.at(i));
+//        }
+//    }
+    return retCode;
+}
+
+void Scene::deleteActor() {
+    delete (actors.at(0));
+    actors.erase(actors.begin());
+}
+
+void Scene::deleteActor(int iAct) {
+    delete (actors.at(iAct));
+    actors.erase(actors.begin() + iAct);
+}
+
 void Scene::deleteActor(Actor *act) {
 
     std::vector<Actor*>::iterator it =
-            std::find_if(actors.begin(), actors.end(), [&,act](Actor* e) { return (int)e == (int)act; });
+            std::find_if(actors.begin(), actors.end(), [&,act](Actor* e) { return e == act; });
     if (it != actors.end()) {
         int indx = std::distance(actors.begin(),it);
         delete (actors.at(indx));

@@ -16,6 +16,7 @@ public:
     virtual int update();
     virtual int onInput(SDL_Event);
     virtual void setDestroy();
+    virtual bool getDestroy();
 
 protected:
     bool initialized = false;

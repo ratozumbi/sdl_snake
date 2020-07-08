@@ -35,18 +35,19 @@ void input(){
                 running = false;
                 exitGame();
             }
-            //TODO: #BUG 1 find ghost esc key. Maybe the solution in on Pice's mouse
-//            else if ( e.key.keysym.sym == SDLK_ESCAPE)
-//            {
-//                running = false;
-//                exitGame();
-//            }
-        }
+            //TODO: #BUG 1 esc key freezes the game
+            else if ( e.key.keysym.sym == SDLK_F1)
+            {
+                running = false;
+                exitGame();
+            }
+            else if ( e.key.keysym.sym == SDLK_1)
+            {
+                Game::scenes.at(1).deleteActor(1);
+            }
 
-        //game event resolution
-        for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize() ; ++i) {
-            if (Game::scenes.at(Game::currentScene).getActor(i)->active) {
-                if(hasEvent){
+            for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize() ; ++i) {
+                if (Game::scenes.at(Game::currentScene).getActor(i)->active) {
                     if(Game::scenes.at(Game::currentScene).getActor(i)->onInput(e) == -1){
                         running = false;
                         exitGame();
@@ -54,6 +55,16 @@ void input(){
                 }
             }
         }
+
+//        //game event resolution
+//        for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize() ; ++i) {
+//            if (Game::scenes.at(Game::currentScene).getActor(i)->active) {
+//                if(Game::scenes.at(Game::currentScene).getActor(i)->onInput(e) == -1){
+//                    running = false;
+//                    exitGame();
+//                }
+//            }
+//        }
     }
 
     std::cout<<"off";
@@ -118,17 +129,10 @@ int main(int argc, char **argv) {
         SDL_PumpEvents();//required to poll events in another thread
 
         //game update
+        //TODO: use vector iterator to make it more readable
         for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize(); ++i) {
-            if (Game::scenes.at(Game::currentScene).getActor(i)->active) {
-                Game::scenes.at(Game::currentScene).getActor(i)->update();
-            }
+            Game::scenes.at(Game::currentScene).update();
         }
-//        if (hasEvent) {
-//            if (e.type == SDL_QUIT)
-//                break;
-//            else if (e.key.keysym.sym == SDLK_ESCAPE)
-//                break;
-//        }
 
         //set base color for renderer
         SDL_SetRenderDrawColor(Engine::renderer, 128, 0, 0, 0);

@@ -36,10 +36,13 @@ int Board::update(){
         for (int hInter = 0; hInter < BOARD_H; hInter++) {
             //check if any piceImg needs to be destroyed
             if(pices[hInter][wInter] && pices[hInter][wInter]->getDestroy()){
-                Game::scenes.at(1).deleteActor(pices[wInter][hInter]);
-                pices[hInter][wInter] = nullptr;
+//                Game::scenes[1].deleteActor(pices[wInter][hInter]);
+                pices[hInter][wInter]->active = false;
+                pices[hInter][wInter] = nullptr;//dont worry, scene scene will delete this guy
+                delete(pices[hInter][wInter]);
                 for (int hInterMove = hInter-1; hInterMove >= 0; hInterMove--) {
-                    pices[hInterMove][wInter]->moveDown();
+                    if(pices[hInterMove][wInter])
+                        pices[hInterMove][wInter]->moveDown();
                 }
             }
         }

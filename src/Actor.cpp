@@ -24,6 +24,10 @@ int Actor::onInput(SDL_Event event){
 }
 
 void Actor::setDestroy(){
-    std::cout << "SET TO DESTROY" << std::endl;
+    std::cout << "SET TO DESTROY" << std::endl; //TODO: remove debug log
     markToDestroy = true;
+}
+//TODO: move this to Actor
+bool Actor::getDestroy() {
+    return markToDestroy;
 }

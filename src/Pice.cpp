@@ -49,14 +49,11 @@ int Pice::onInput(SDL_Event e){
 }
 
 void Pice::setDestroy() {
-    if(!markToDestroy)
-        active = false;
-        Actor::setDestroy();
+    Actor::setDestroy();
 }
 
-//TODO: move this to Actor
 bool Pice::getDestroy() {
-    return markToDestroy;
+    return Actor::getDestroy();
 }
 
 void Pice::moveDown() {

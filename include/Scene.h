@@ -48,7 +48,11 @@ public:
     Image *getImage(string);
     Actor *getActor(int);
     void deleteActor(Actor *);
+    void deleteActor(int);
+    void deleteActor();
     void deleteImage(Image *);
+
+    int update();
 
     Scene();
     Scene(std::string);
