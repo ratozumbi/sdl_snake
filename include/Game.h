@@ -5,6 +5,8 @@
 #ifndef SDL_SNAKE_GAME_H
 #define SDL_SNAKE_GAME_H
 
+#define u_int unsigned int
+
 #include <vector>
 #include "GameObject.h"
 

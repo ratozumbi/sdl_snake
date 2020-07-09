@@ -14,13 +14,15 @@
 class Board : public Actor{
 
 public:
-    bool isUp = true;
     Board();
     ~Board();
     Pice *pices[BOARD_H][BOARD_W];
     void start();
     int update();
     int onInput(SDL_Event);
+
+    void genNew(int h, int w);
+    void swapUp(unsigned int h, unsigned int w, bool _firstCall);
 };
 
 
