@@ -21,7 +21,7 @@ Board::Board():Actor() {
 };
 
 void Board::genNew(int hInter, int wInter){
-    pices[hInter][wInter] = Game::scenes.at(Util::findScene("game")).loadActor<Pice>(getRandomColor());
+    pices[hInter][wInter] = Game::scenes.at(Util::findScene("game")).loadActor<Pice>((int)(rand() % Pice::PiceType::_LAST));
     pices[hInter][wInter]->piceImg->rect.x = (wInter * 70) + 200;//TODO: make positions scalable
     pices[hInter][wInter]->piceImg->rect.y = (hInter * 70) + 100;
     pices[hInter][wInter]->piceImg->active = true;

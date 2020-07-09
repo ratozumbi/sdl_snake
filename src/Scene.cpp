@@ -89,7 +89,6 @@ Actor* Scene::getActor(int position) {
 
 //TODO: inputUpdate for scene
 int Scene::update() {
-
     int retCode = 0;
     for (unsigned int i = 0; i < actors.size(); ++i) {
         if (actors.at(i)->active) {
@@ -99,12 +98,6 @@ int Scene::update() {
             deleteActor(actors.at(i));
         }
     }
-//    int i = 0;
-//    for( std::vector<Actor*>::iterator it = actors.begin(); it != actors.end(); it = actors.begin() +1){
-//        if(actors.at(i)->getDestroy()){
-//            deleteActor(actors.at(i));
-//        }
-//    }
     return retCode;
 }
 

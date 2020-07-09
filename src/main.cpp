@@ -22,6 +22,7 @@ void exitGame(){
 }
 
 //inputs where not smooth in the main thread
+//TODO: double check if this is needed
 void input(){
     std::cout<<"works" << std::endl;
     bool running = true;

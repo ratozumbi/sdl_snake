@@ -6,6 +6,10 @@
 #include "../include/Game.h"
 #include "../include/Pice.h"
 
+const char * Pice::getRandomColor(){
+    return colors[rand() % 5];
+}
+
 Pice::Pice():Actor() {
 
 };
@@ -14,8 +18,9 @@ Pice::~Pice() {
     Game::scenes.at(1).deleteImage(piceImg);
 };
 
-Pice::Pice(std::string imgName): Actor() {
-    piceImg = Game::scenes.at(Util::findScene("game")).loadImage(imgName);
+Pice::Pice(int type): Actor() {
+    type = type;
+    piceImg = Game::scenes.at(Util::findScene("game")).loadImage(colors[type]);
 };
 
 void Pice::start() {
@@ -57,6 +62,5 @@ bool Pice::getDestroy() {
 }
 
 void Pice::moveDown() {
-//    markToDestroy = false;
     piceImg->rect.y = piceImg->rect.y + piceImg->rect.h;
 }

@@ -9,10 +9,24 @@
 #include "Image.h"
 
 class Pice: public Actor {
-    friend class Board;
+
+//TODO: change to class enum (https://stackoverflow.com/questions/2102582/how-can-i-count-the-items-in-an-enum)
+    enum PiceType{
+        black,
+        white,
+        pink,
+        blue,
+        orange,
+        _LAST
+    };
+
+
+    friend class Board;//TODO: remove?
 public:
     bool clicked;
     Image *piceImg;
+//    Pice(PiceType type);
+    Pice(int type);
     Pice();
     ~Pice();
     Pice(std::string);
@@ -24,6 +38,12 @@ public:
     bool getDestroy();
 
     void moveDown();
+
+    const char *getRandomColor();
+    const char * colors[5] ={"Color-1.png","Color-2.png","Color-3.png","Color-4.png","Color-5.png"};
+
+    PiceType type;
+
 };
 
 

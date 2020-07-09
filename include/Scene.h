@@ -41,6 +41,19 @@ public:
         return ret;
     }
 
+    /// Loads an actor
+    /// \tparam T The class type derived from Actor
+    /// \param i Any int parameter to be passed to the constructor
+    /// \return Pointer to the new Actor
+    template <class T> T* loadActor(int i){
+        auto ret = new T(i);
+        actors.push_back(ret);
+        return ret;
+    }
+
+    //TODO: think a better way to pass parameters to constructors so the system is more scalable
+
+
     int GetImagesSize();
     int GetActorsSize();
 
