@@ -90,10 +90,10 @@ int Board::checkInRange(uint32_t h , uint32_t w){
 
                     //We could add more points for more squares here
 //                    if(countH == checkRange+1){
-//                        //TODO: clean this
 //                        pices[h][w]->setDestroy();
 //                        pices[h + 1][w]->setDestroy();
 //                        pices[h + 2][w]->setDestroy();
+//                        pices[h + 3][w]->setDestroy();
 //                        score += 4;
 //                    }
                 }
@@ -127,12 +127,19 @@ int Board::update(){
 
     for(u_int wInter = 0; wInter < BOARD_W; wInter ++) {
         for (u_int hInter = 0; hInter < BOARD_H; hInter++) {
-            //check if any pice needs to be destroyed and move to smash
-            if(pices[hInter][wInter]->getDestroy()){
-                swapUp(hInter,wInter);
+            //dont mess with moving parts
+            if(!pices[hInter][wInter]->isMoving){
+                //check if any pice needs to be destroyed and move to smash
+                if(pices[hInter][wInter]->getDestroy()){
+                    swapUp(hInter,wInter);
+                }
+                //check neighbors
+                initialScore += checkInRange(hInter,wInter);
             }
-            //check neighbors
-            initialScore += checkInRange(hInter,wInter);
+            else
+            {
+                continue;
+            }
         }
     }
 

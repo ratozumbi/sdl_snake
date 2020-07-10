@@ -28,6 +28,40 @@ void Pice::start() {
 
 int Pice::update(){
     Actor::update();
+    static uint32_t timer = 0;
+    if(movedownCount !=0 && isMoving == false){
+        moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
+    }
+    if(isMoving){
+
+        if(timer == 0){
+            timer = SDL_GetTicks();
+        }
+
+        if(SDL_GetTicks() >= timer + 1 ){
+            timer =SDL_GetTicks();
+            int speedX = 1;
+            int speedY = 1;
+            speedX = targetX < piceImg->rect.x ? speedX * -1: targetX == piceImg->rect.x? 0:speedX;
+            speedY = targetY < piceImg->rect.y ? speedY * -1: targetY == piceImg->rect.y? 0:speedY;
+            piceImg->rect.x += speedX;
+            piceImg->rect.y += speedY;
+
+            if(piceImg->rect.x == targetX && piceImg->rect.y == targetY )
+            {
+                movedownCount--;
+                if(movedownCount != 0){
+                    moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
+                } else{
+                    targetX = 0;
+                    targetY = 0;
+                    isMoving = false;
+                }
+                timer = 0;
+            }
+        }
+    }
+
     return 0;
 };
 
@@ -40,6 +74,7 @@ int Pice::onInput(SDL_Event e){
 
     if(insideBounds && e.type == SDL_MOUSEBUTTONUP){
         if(e.button.button == SDL_BUTTON_RIGHT){
+            std::cout <<">>>>>>>>>>>>>>>>>>>>>>>>>>>> DELTE DEBUG MESSAGE Pice" << std::endl;
             setDestroy();
         }
     }
@@ -60,7 +95,14 @@ void Pice::setDestroy() {
 bool Pice::getDestroy() {
     return Actor::getDestroy();
 }
+void Pice::moveTo(int x, int y) {
+    isMoving = true;
+    targetX = x;
+    targetY = y;
+}
 
 void Pice::moveDown() {
-    piceImg->rect.y = piceImg->rect.y + piceImg->rect.h;
+    movedownCount ++;
+//    moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
+//    piceImg->rect.y = piceImg->rect.y + piceImg->rect.h;
 }

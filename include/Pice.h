@@ -36,6 +36,12 @@ public:
 
     PiceType type;
 
+    //TODO: separate this to a component GameObject Movable
+    void moveTo(int x, int y);
+    int targetX = 0;
+    int targetY = 0;
+    bool isMoving = false;
+    int movedownCount = 0;
 };
 
 
