@@ -11,22 +11,14 @@
 class Pice: public Actor {
 
 //TODO: change to class enum (https://stackoverflow.com/questions/2102582/how-can-i-count-the-items-in-an-enum)
-    enum PiceType{
-        black,
-        white,
-        pink,
-        blue,
-        orange,
-        _LAST
-    };
 
 
     friend class Board;//TODO: remove?
 public:
     bool clicked;
     Image *piceImg;
-//    Pice(PiceType type);
-    Pice(int type);
+    Pice(PiceType type);
+//    Pice(int type);
     Pice();
     ~Pice();
     Pice(std::string);

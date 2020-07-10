@@ -6,12 +6,6 @@
 #include "../include/Board.h"
 #include "../include/Game.h"
 
-char * getRandomColor(){
-    char * colors[]= {"Color-1.png","Color-2.png","Color-3.png","Color-4.png","Color-5.png"};
-    return colors[rand() % 5];
-}
-
-
 Board::Board():Actor() {
     for(int wInter = 0; wInter < BOARD_W; wInter ++){
         for(int hInter = 0; hInter < BOARD_W; hInter ++){
@@ -20,8 +14,11 @@ Board::Board():Actor() {
     }
 };
 
-void Board::genNew(int hInter, int wInter){
-    pices[hInter][wInter] = Game::scenes.at(Util::findScene("game")).loadActor<Pice>((int)(rand() % Pice::PiceType::_LAST));
+void Board::genNew(uint32_t hInter, uint32_t wInter){
+    int typeRand = (int)(rand() % (int)PiceType::_LAST);
+    PiceType type = PiceTypeToEnum[typeRand];
+    pices[hInter][wInter] = Game::scenes.at(Util::findScene("game")).loadActor<Pice>(type);
+    pices[hInter][wInter]->type = type; //TODO: check why object is losing type
     pices[hInter][wInter]->piceImg->rect.x = (wInter * 70) + 200;//TODO: make positions scalable
     pices[hInter][wInter]->piceImg->rect.y = (hInter * 70) + 100;
     pices[hInter][wInter]->piceImg->active = true;
@@ -65,17 +62,86 @@ void Board::swapUp(unsigned int h, unsigned int w, bool _firstCall = true){
     }
 }
 
+//TODO: swap W and H
+/// Check if sequence is activated
+/// \param h The pice H in board
+/// \param w The pice W in board
+/// \return The socore
+int Board::checkInRange(uint32_t h , uint32_t w){
+
+    int countH = 0;
+    int countW = 0;
+
+    int score = 0;
+
+    if(pices[h][w]){
+        for (int i = 0; i < checkRange; i++){
+            //H
+            if(h +checkRange-i < BOARD_H && pices[h +checkRange-i][w]){ //TODO: remove second clasule?
+                if(pices[h][w]->type == pices[h +checkRange-i][w]->type){
+                    countH++;
+                    if(countH == checkRange -1){
+                        //TODO: clean this
+                        pices[h][w]->setDestroy();
+                        pices[h + 1][w]->setDestroy();
+                        pices[h + 2][w]->setDestroy();
+                        score += 3;
+                    }
+
+                    //We could add more points for more squares here
+//                    if(countH == checkRange+1){
+//                        //TODO: clean this
+//                        pices[h][w]->setDestroy();
+//                        pices[h + 1][w]->setDestroy();
+//                        pices[h + 2][w]->setDestroy();
+//                        score += 4;
+//                    }
+                }
+            }
+
+            //W
+            if(w +checkRange-i < BOARD_W && pices[h][w+checkRange-i]){
+                if(pices[h][w]->type == pices[h][w+checkRange-i]->type){
+                    countW++;
+                    if(countW == checkRange-1 ){
+                        pices[h][w]->setDestroy();
+                        pices[h][w + 1]->setDestroy();
+                        pices[h][w + 2]->setDestroy();
+                        score += 3;
+                    }
+                }
+            }
+        }
+        countW =0;
+        countH =0;
+    }
+
+    return score;
+}
+
 int Board::update(){
     Actor::update();
 
+    static int totalScore = 0;
+    int initialScore = totalScore;
+
     for(u_int wInter = 0; wInter < BOARD_W; wInter ++) {
         for (u_int hInter = 0; hInter < BOARD_H; hInter++) {
-            //check if any pice needs to be destroyed and move to fall
+            //check if any pice needs to be destroyed and move to smash
             if(pices[hInter][wInter]->getDestroy()){
                 swapUp(hInter,wInter);
             }
+            //check neighbors
+            initialScore += checkInRange(hInter,wInter);
         }
     }
+
+    if(totalScore < initialScore){
+        std::cout << "TOTAL SCORE: " << totalScore << "\n"
+        << " NOW SCORED: " << initialScore - totalScore << std::endl;
+        totalScore += initialScore;
+    }
+
 
     return 0;
 };

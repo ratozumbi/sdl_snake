@@ -21,8 +21,12 @@ public:
     int update();
     int onInput(SDL_Event);
 
-    void genNew(int h, int w);
+    int checkInRange(uint32_t , uint32_t);
+    void genNew(uint32_t h, uint32_t w);
     void swapUp(unsigned int h, unsigned int w, bool _firstCall);
+
+private:
+    const int checkRange = 3;
 };
 
 

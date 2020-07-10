@@ -51,6 +51,17 @@ public:
         return ret;
     }
 
+    /// Loads an actor
+    /// \tparam T The class type derived from Actor
+    /// \param i Any PiceType parameter to be passed to the constructor
+    /// \return Pointer to the new Actor
+    //TODO: this is getting rediculous
+    template <class T> T* loadActor(PiceType type){
+        auto ret = new T(type);
+        actors.push_back(ret);
+        return ret;
+    }
+
     //TODO: think a better way to pass parameters to constructors so the system is more scalable
 
 

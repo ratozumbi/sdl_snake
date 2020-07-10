@@ -6,6 +6,7 @@
 #define SDL_SNAKE_ACTOR_H
 
 #include <SDL_events.h>
+#include "../include/Types.h"
 
 class Actor {
 public:

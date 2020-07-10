@@ -18,9 +18,9 @@ Pice::~Pice() {
     Game::scenes.at(1).deleteImage(piceImg);
 };
 
-Pice::Pice(int type): Actor() {
+Pice::Pice(PiceType type): Actor() {
     type = type;
-    piceImg = Game::scenes.at(Util::findScene("game")).loadImage(colors[type]);
+    piceImg = Game::scenes.at(Util::findScene("game")).loadImage(colors[(int)type]);
 };
 
 void Pice::start() {

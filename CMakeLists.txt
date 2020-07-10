@@ -18,7 +18,7 @@ file(GLOB game_source
         "src/*.cpp"
         )
 
-add_executable(sdl_snake ${game_source} src/Pice.cpp include/Pice.h src/Board.cpp include/Board.h)
+add_executable(sdl_snake ${game_source} src/Pice.cpp include/Pice.h src/Board.cpp include/Board.h include/Types.h)
 
 target_include_directories(sdl_snake PUBLIC ${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} INCLUDE_DIRECTORIES)
 target_link_libraries(sdl_snake  ${SDL2_LIBRARY} ${SDL2_MAIN_LIBRARY} ${SDL2_TEST_LIBRARY} ${SDL2_IMAGE})
