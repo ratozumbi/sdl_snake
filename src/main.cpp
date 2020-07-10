@@ -56,16 +56,6 @@ void input(){
                 }
             }
         }
-
-//        //game event resolution
-//        for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize() ; ++i) {
-//            if (Game::scenes.at(Game::currentScene).getActor(i)->active) {
-//                if(Game::scenes.at(Game::currentScene).getActor(i)->onInput(e) == -1){
-//                    running = false;
-//                    exitGame();
-//                }
-//            }
-//        }
     }
 
     std::cout<<"off";
@@ -110,11 +100,6 @@ int main(int argc, char **argv) {
 //    Arrow a = Actor();
 //    Game::scenes.at(Util::findScene("game")).loadActor<Pice>("Color-1.png");
 
-    //FPS control
-    const int targetFPS = 60;
-    const int frameDelay = 1000 / targetFPS;
-    Uint32 frameStart;
-    int frameTime;
 
     //inputs where not smooth in the main thread
     std::thread inputs(input);
@@ -124,16 +109,17 @@ int main(int argc, char **argv) {
     bool playing = true;
     while (playing) {
         //FPS control
-        frameStart = SDL_GetTicks();
+        Uint32 frameStart = SDL_GetTicks();
+        int frameTime;
 
         // event handling
         SDL_PumpEvents();//required to poll events in another thread
 
         //game update
         //TODO: use vector iterator to make it more readable
-        for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize(); ++i) {
+//        for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize(); ++i) {
             Game::scenes.at(Game::currentScene).update();
-        }
+//        }
 
         //set base color for renderer
         SDL_SetRenderDrawColor(Engine::renderer, 128, 0, 0, 0);
@@ -153,8 +139,8 @@ int main(int argc, char **argv) {
 
         //60 FPS cap
         frameTime = SDL_GetTicks() - frameStart;
-        if (frameDelay > frameTime) {
-            SDL_Delay(frameDelay - frameTime);
+        if (Engine::frameDelay > frameTime) {
+            SDL_Delay(Engine::frameDelay - frameTime);
         }
     }
 

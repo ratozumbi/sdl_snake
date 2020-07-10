@@ -17,6 +17,8 @@
 namespace Engine {
     extern SDL_Window *window;
     extern SDL_Renderer *renderer;
+    const int targetFPS = 60;
+    const int frameDelay = 1000 / targetFPS;
 }
 namespace Game {
     extern std::vector<Scene> scenes;

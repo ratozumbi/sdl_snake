@@ -128,18 +128,18 @@ int Board::update(){
     for(u_int wInter = 0; wInter < BOARD_W; wInter ++) {
         for (u_int hInter = 0; hInter < BOARD_H; hInter++) {
             //dont mess with moving parts
-            if(!pices[hInter][wInter]->isMoving){
+//            if(!pices[hInter][wInter]->isMoving){
                 //check if any pice needs to be destroyed and move to smash
                 if(pices[hInter][wInter]->getDestroy()){
                     swapUp(hInter,wInter);
                 }
                 //check neighbors
                 initialScore += checkInRange(hInter,wInter);
-            }
-            else
-            {
-                continue;
-            }
+//            }
+//            else
+//            {
+//                continue;
+//            }
         }
     }
 
