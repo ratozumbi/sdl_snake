@@ -131,9 +131,9 @@ int main(int argc, char **argv) {
 
         //game update
         //TODO: use vector iterator to make it more readable
-        for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize(); ++i) {
+//        for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize(); ++i) {
             Game::scenes.at(Game::currentScene).update();
-        }
+//        }
 
         //set base color for renderer
         SDL_SetRenderDrawColor(Engine::renderer, 128, 0, 0, 0);
