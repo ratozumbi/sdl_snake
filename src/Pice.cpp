@@ -95,8 +95,8 @@ void Pice::moveTo(int x, int y) {
     targetY = y;
 }
 
-void Pice::moveDown() {
-    movedownCount ++;
+void Pice::moveDown(int squares) {
+    movedownCount += squares;
 //    moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
 //    piceImg->rect.y = piceImg->rect.y + piceImg->rect.h;
 }

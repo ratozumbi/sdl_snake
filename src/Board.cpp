@@ -14,7 +14,7 @@ Board::Board():Actor() {
     }
 };
 
-void Board::genNew(uint32_t h, uint32_t w){
+void Board::genNew(uint32_t h, uint32_t w, int y){
     int typeRand = (int)(rand() % (int)PiceType::_LAST);
 
     //make sure to not spawn equal pices nearby
@@ -39,14 +39,21 @@ void Board::genNew(uint32_t h, uint32_t w){
     PiceType type = PiceTypeToEnum[typeRand];
     pices[h][w] = Game::scenes.at(Util::findScene("game")).loadActor<Pice>(type);
     pices[h][w]->type = type; //TODO: check why object is losing type
-    pices[h][w]->piceImg->rect.x = (w * 70) + 200;//TODO: make positions scalable
-    pices[h][w]->piceImg->rect.y = (h * 70) + 100;
+    pices[h][w]->piceImg->rect.x = (w * PICEHW) + 200;//TODO: make positions scalable
+    if(y!=-1){
+        //preciso saber quantos foram destruidos
+        pices[h][w]->piceImg->rect.y = ((((BOARD_H -y)-1) * PICEHW) * y==BOARD_H?1:-1) + 100;
+        pices[h][w]->moveDown(y+1);
+    }else
+    {
+        pices[h][w]->piceImg->rect.y = (h * 70) + 100;
+    }
     pices[h][w]->piceImg->active = true;
 }
 
 Board::~Board(){
     for(uint32_t wInter = 0; wInter < BOARD_W; wInter ++) {
-        for (uint32_t hInter = 0; hInter < BOARD_H; hInter++) {
+            for (uint32_t hInter = 0; hInter < BOARD_H; hInter++) {
             pices[hInter][wInter]->setDestroy();
             pices[hInter][wInter]->active = false;
         }
@@ -55,32 +62,6 @@ Board::~Board(){
 
 void Board::start() {
 };
-
-/// Swap specified pice for the one on top recursivly. If none is on top, a new pice is created in the position
-/// \param h height of the pice on the board
-/// \param w width of the pice on the board
-/// \param _firstCall don't touch this
-void Board::smash(unsigned int h, unsigned int w, bool _firstCall = true){
-    if(h >= BOARD_H || w>= BOARD_W){
-        std::cout <<"error! pice to swap is out of range"<< std::endl;
-        return;
-    }
-    if(_firstCall)
-    {
-        if(!pices[h][w]->getDestroy()){
-            std::cout <<"error! cant smash on pice not marked to destroy"<< std::endl;
-            return;
-        }
-        pices[h][w]->active = false;
-    }
-    if(h == 0){
-        genNew(0,w);
-    } else{
-        pices[h][w] = pices[h-1][w];
-        pices[h][w]->moveDown();
-        smash(h - 1, w, false);
-    }
-}
 
 //TODO: swap W and H
 /// Check if sequence is activated
@@ -147,6 +128,33 @@ int Board::checkInRange(uint32_t h , uint32_t w, bool destoryOnCheck = true){
     }
 
     return score;
+}
+
+/// Swap specified pice for the one on top recursivly. If none is on top, a new pice is created in the position
+/// \param h height of the pice on the board
+/// \param w width of the pice on the board
+/// \param _firstCall don't touch this
+int Board::smash(unsigned int h, unsigned int w, bool _firstCall = true, int _countMoveDown){
+    if(h >= BOARD_H || w>= BOARD_W){
+        std::cout <<"error! pice to smash is out of range"<< std::endl;
+        return -1;
+    }
+    if(_firstCall)
+    {
+        if(!pices[h][w]->getDestroy()){
+            std::cout <<"error! cant smash on pice not marked to destroy"<< std::endl;
+            return -1;
+        }
+        pices[h][w]->active = false;
+    }
+    if(h == 0){
+        genNew(0,w,_countMoveDown);
+        return _countMoveDown;
+    } else{
+        pices[h][w] = pices[h-1][w];
+//        pices[h][w]->moveDown(h);
+        smash(h - 1, w, false, ++_countMoveDown);
+    }
 }
 
 int Board::update(){

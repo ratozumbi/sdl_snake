@@ -29,7 +29,7 @@ public:
     void setDestroy();
     bool getDestroy();
 
-    void moveDown();
+    void moveDown(int squares = 1);
 
     const char *getRandomColor();
     const char * colors[5] ={"Color-1.png","Color-2.png","Color-3.png","Color-4.png","Color-5.png"};
