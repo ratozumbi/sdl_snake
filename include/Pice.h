@@ -42,6 +42,8 @@ public:
     int targetY = 0;
     bool isMoving = false;
     int movedownCount = 0;
+
+    void spin();
 };
 
 

@@ -17,6 +17,7 @@ class Image: public GameObject {
 public:
 
     SDL_Texture *texture;
+    int angle;
     Image (string , SDL_Rect &, SDL_Texture &);
     Image();
     ~Image();

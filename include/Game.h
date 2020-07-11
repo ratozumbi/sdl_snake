@@ -5,7 +5,6 @@
 #ifndef SDL_SNAKE_GAME_H
 #define SDL_SNAKE_GAME_H
 
-#define u_int unsigned int //TODO: change all to u_int
 
 #include <vector>
 #include "GameObject.h"
@@ -17,7 +16,7 @@
 namespace Engine {
     extern SDL_Window *window;
     extern SDL_Renderer *renderer;
-    const int targetFPS = 60;
+    const int targetFPS = 90;
     const int frameDelay = 1000 / targetFPS;
 }
 namespace Game {

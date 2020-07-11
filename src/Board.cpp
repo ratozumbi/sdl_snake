@@ -24,13 +24,13 @@ void Board::genNew(uint32_t h, uint32_t w){
             typeRand = (int) (rand() % (int) PiceType::_LAST);
         }
     }
-    if (h > 0 && w <= 0) {
+    if (h > 0 && w == 0) {
         while (pices[h - 1][w]->type == PiceTypeToEnum[typeRand]) {
             typeRand = (int) (rand() % (int) PiceType::_LAST);
         }
     }
 
-    if (w > 0 && h<=0) {
+    if (w > 0 && h==0) {
         while (pices[h][w - 1]->type == PiceTypeToEnum[typeRand]) {
             typeRand = (int) (rand() % (int) PiceType::_LAST);
         }
@@ -45,8 +45,8 @@ void Board::genNew(uint32_t h, uint32_t w){
 }
 
 Board::~Board(){
-    for(u_int wInter = 0; wInter < BOARD_W; wInter ++) {
-        for (u_int hInter = 0; hInter < BOARD_H; hInter++) {
+    for(uint32_t wInter = 0; wInter < BOARD_W; wInter ++) {
+        for (uint32_t hInter = 0; hInter < BOARD_H; hInter++) {
             pices[hInter][wInter]->setDestroy();
             pices[hInter][wInter]->active = false;
         }
@@ -60,7 +60,7 @@ void Board::start() {
 /// \param h height of the pice on the board
 /// \param w width of the pice on the board
 /// \param _firstCall don't touch this
-void Board::swapUp(unsigned int h, unsigned int w, bool _firstCall = true){
+void Board::smash(unsigned int h, unsigned int w, bool _firstCall = true){
     if(h >= BOARD_H || w>= BOARD_W){
         std::cout <<"error! pice to swap is out of range"<< std::endl;
         return;
@@ -68,7 +68,7 @@ void Board::swapUp(unsigned int h, unsigned int w, bool _firstCall = true){
     if(_firstCall)
     {
         if(!pices[h][w]->getDestroy()){
-            std::cout <<"error! swap on pice not marked to destroy"<< std::endl;
+            std::cout <<"error! cant smash on pice not marked to destroy"<< std::endl;
             return;
         }
         pices[h][w]->active = false;
@@ -78,7 +78,7 @@ void Board::swapUp(unsigned int h, unsigned int w, bool _firstCall = true){
     } else{
         pices[h][w] = pices[h-1][w];
         pices[h][w]->moveDown();
-        swapUp(h-1,w,false);
+        smash(h - 1, w, false);
     }
 }
 
@@ -97,7 +97,7 @@ int Board::checkInRange(uint32_t h , uint32_t w, bool destoryOnCheck = true){
     if(pices[h][w]){
         for (int i = 0; i < checkRange; i++){
             //H
-            if(h +checkRange-i < BOARD_H /*&& pices[h +checkRange-i][w]*/){ //TODO: remove second clasule?
+            if(h +checkRange-i < BOARD_H && !pices[h +checkRange-i][w]->isMoving){ //TODO: remove second clasule?
                 if(pices[h][w]->type == pices[h +checkRange-i][w]->type){
                     countH++;
                     if(countH == checkRange -1){
@@ -106,6 +106,9 @@ int Board::checkInRange(uint32_t h , uint32_t w, bool destoryOnCheck = true){
                             pices[h][w]->setDestroy();
                             pices[h + 1][w]->setDestroy();
                             pices[h + 2][w]->setDestroy();
+                            smash(h,  w);
+                            smash(h + 1,  w);
+                            smash(h + 2,  w);
                         }
                         score += 3;
                     }
@@ -122,7 +125,7 @@ int Board::checkInRange(uint32_t h , uint32_t w, bool destoryOnCheck = true){
             }
 
             //W
-            if(w +checkRange-i < BOARD_W /*&& pices[h][w+checkRange-i]*/){
+            if(w +checkRange-i < BOARD_W && !pices[h][w+checkRange-i]->isMoving){
                 if(pices[h][w]->type == pices[h][w+checkRange-i]->type){
                     countW++;
                     if(countW == checkRange-1 ){
@@ -130,6 +133,9 @@ int Board::checkInRange(uint32_t h , uint32_t w, bool destoryOnCheck = true){
                             pices[h][w]->setDestroy();
                             pices[h][w + 1]->setDestroy();
                             pices[h][w + 2]->setDestroy();
+                            smash(h,  w);
+                            smash(h,  w+1);
+                            smash(h,  w+2);
                         }
                         score += 3;
                     }
@@ -149,13 +155,13 @@ int Board::update(){
     static int totalScore = 0;
     int initialScore = totalScore;
 
-    for(u_int wInter = 0; wInter < BOARD_W; wInter ++) {
-        for (u_int hInter = 0; hInter < BOARD_H; hInter++) {
+    for(uint32_t  wInter = 0; wInter < BOARD_W; wInter ++) {
+        for (uint32_t  hInter = 0; hInter < BOARD_H; hInter++) {
             //dont mess with moving parts
             if(!pices[hInter][wInter]->isMoving){
                 //check if any pice needs to be destroyed and move to smash
                 if(pices[hInter][wInter]->getDestroy()){
-                    swapUp(hInter,wInter);
+                    smash(hInter, wInter);
                 }
                 else{
                     //check neighbors

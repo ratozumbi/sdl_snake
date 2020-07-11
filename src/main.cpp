@@ -129,8 +129,10 @@ int main(int argc, char **argv) {
         for (int currImg = 0; currImg < Game::scenes.at(Game::currentScene).GetImagesSize(); ++currImg) {
             if (Game::scenes.at(Game::currentScene).GetImage(currImg) != NULL &&
                 Game::scenes.at(Game::currentScene).GetImage(currImg)->active) {
-                SDL_RenderCopy(Engine::renderer, Game::scenes.at(Game::currentScene).GetImage(currImg)->texture, NULL,
-                               &Game::scenes.at(Game::currentScene).GetImage(currImg)->rect);
+                SDL_RenderCopyEx(Engine::renderer, Game::scenes.at(Game::currentScene).GetImage(currImg)->texture, NULL,
+                               &Game::scenes.at(Game::currentScene).GetImage(currImg)->rect,
+                                 Game::scenes.at(Game::currentScene).GetImage(currImg)->angle,
+                                 NULL,SDL_FLIP_NONE);
             }
         }
 

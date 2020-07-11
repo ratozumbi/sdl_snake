@@ -28,38 +28,32 @@ void Pice::start() {
 
 int Pice::update(){
     Actor::update();
-    static uint32_t timer = 0;
     if(movedownCount !=0 && isMoving == false){
         moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
     }
     if(isMoving){
 
-        if(timer == 0){
-            timer = SDL_GetTicks();
-        }
+        int speedX = 1;
+        int speedY = 1;
+        speedX = targetX < piceImg->rect.x ? speedX * -1: targetX == piceImg->rect.x? 0:speedX;
+        speedY = targetY < piceImg->rect.y ? speedY * -1: targetY == piceImg->rect.y? 0:speedY;
+        piceImg->rect.x += speedX;
+        piceImg->rect.y += speedY;
 
-        if(SDL_GetTicks() >= timer + 1 ){
-            timer =SDL_GetTicks();
-            int speedX = 1;
-            int speedY = 1;
-            speedX = targetX < piceImg->rect.x ? speedX * -1: targetX == piceImg->rect.x? 0:speedX;
-            speedY = targetY < piceImg->rect.y ? speedY * -1: targetY == piceImg->rect.y? 0:speedY;
-            piceImg->rect.x += speedX;
-            piceImg->rect.y += speedY;
-
-            if(piceImg->rect.x == targetX && piceImg->rect.y == targetY )
-            {
-                movedownCount--;
-                if(movedownCount != 0){
-                    moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
-                } else{
-                    targetX = 0;
-                    targetY = 0;
-                    isMoving = false;
-                }
-                timer = 0;
+        if(piceImg->rect.x == targetX && piceImg->rect.y == targetY )
+        {
+            movedownCount--;
+            if(movedownCount != 0){
+                moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
+            } else{
+                targetX = 0;
+                targetY = 0;
+                isMoving = false;
+                if(markToDestroy) active = false;
             }
+
         }
+
     }
 
     return 0;
@@ -105,4 +99,8 @@ void Pice::moveDown() {
     movedownCount ++;
 //    moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
 //    piceImg->rect.y = piceImg->rect.y + piceImg->rect.h;
+}
+
+void Pice::spin(){
+//    piceImg->rect.
 }
