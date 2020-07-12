@@ -91,12 +91,13 @@ Actor* Scene::getActor(int position) {
 int Scene::update() {
     int retCode = 0;
     for (unsigned int i = 0; i < actors.size(); ++i) {
-        if (actors.at(i)->active) {
-            retCode =actors.at(i)->update();
-        }
         if(actors.at(i)->getDestroy() && actors.at(i)->active == false){
             deleteActor(actors.at(i));
         }
+        if (actors.at(i)->active) {
+            retCode =actors.at(i)->update();
+        }
+
     }
     return retCode;
 }

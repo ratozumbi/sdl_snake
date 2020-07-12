@@ -55,7 +55,7 @@ int Pice::update(){
         piceImg->angle+=2;
         if(piceImg->angle > 180){
             isSpining = 2;
-            //active = false;
+            active = false;
 
         }
     }

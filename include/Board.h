@@ -27,6 +27,17 @@ public:
     void smash(unsigned int h, unsigned int w, bool _firstCall = false);
 
 private:
+    enum class BoardStates{
+        idle = 0,
+        white,
+        pink,
+        blue,
+        orange,
+        _LAST
+    };
+    const BoardStates BoardStateToEnum[5] = {BoardStates::idle, BoardStates::white, BoardStates::pink, BoardStates::blue, BoardStates::orange};
+    BoardStates boardState;
+
     const int checkRange = 3;
 };
 

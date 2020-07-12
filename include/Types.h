@@ -13,7 +13,6 @@ enum class PiceType{
     orange,
     _LAST
 };
-
 const PiceType PiceTypeToEnum[5] = {PiceType::black,PiceType::white,PiceType::pink,PiceType::blue,PiceType::orange};
 
 #endif //GAME_TYPES_H

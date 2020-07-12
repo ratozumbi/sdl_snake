@@ -142,7 +142,7 @@ void Board::smash(unsigned int h, unsigned int w, bool _firstCall){
             std::cout <<"error! cant smash on pice not marked to destroy"<< std::endl;
             return;
         }
-        pices[h][w]->active = false;
+//        pices[h][w]->active = false;
     }
     if(h != 0){
         pices[h][w] = pices[h-1][w];
@@ -151,8 +151,11 @@ void Board::smash(unsigned int h, unsigned int w, bool _firstCall){
     }
     else
     {
+//        pices[h][w]->active = false;
         genNew(h,w,0);
         pices[h][w]->moveDown(1);
+        //update actor list on this line <<<<
+
 //        pices[h][w]->moveDown(h);
     }
 
