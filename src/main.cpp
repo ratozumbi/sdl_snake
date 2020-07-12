@@ -77,8 +77,8 @@ int main(int argc, char **argv) {
     Game::scenes.push_back(Scene("game"));
 
     //load images
-    Game::scenes.at(Util::findScene("menu")).loadImage("fundo.png");
-    Game::scenes.at(Util::findScene("menu")).loadImage("pointer.png", 190, 360);
+    Game::scenes.at(Util::findScene("menu")).loadImage("menu.jpeg");
+    Game::scenes.at(Util::findScene("menu")).loadImage("pointer.png", 300, 425);
 
     Game::scenes.at(Util::findScene("game")).loadImage("Backdrop13.jpg");
     Game::scenes.at(Util::findScene("game")).loadImage("Color-1.png", 10, 10, false);

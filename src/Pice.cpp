@@ -32,7 +32,6 @@ int Pice::update(){
         moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
     }
     if(isMoving){
-
         int speedX = 1;
         int speedY = 1;
         speedX = targetX < piceImg->rect.x ? speedX * -1: targetX == piceImg->rect.x? 0:speedX;
@@ -49,11 +48,16 @@ int Pice::update(){
                 targetX = 0;
                 targetY = 0;
                 isMoving = false;
-                if(markToDestroy) active = false;
             }
+        }
+    }
+    if(!isMoving && isSpining == 1){
+        piceImg->angle+=2;
+        if(piceImg->angle > 180){
+            isSpining = 2;
+            //active = false;
 
         }
-
     }
 
     return 0;
@@ -84,6 +88,7 @@ int Pice::onInput(SDL_Event e){
 
 void Pice::setDestroy() {
     Actor::setDestroy();
+    spin();
 }
 
 bool Pice::getDestroy() {
@@ -102,5 +107,10 @@ void Pice::moveDown(int squares) {
 }
 
 void Pice::spin(){
+    isSpining = 1;
 //    piceImg->rect.
+}
+
+bool Pice::isAnimating() {
+    return isMoving || isSpining ==1;
 }

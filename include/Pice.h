@@ -13,7 +13,7 @@ class Pice: public Actor {
 //TODO: change to class enum (https://stackoverflow.com/questions/2102582/how-can-i-count-the-items-in-an-enum)
 
 
-    friend class Board;//TODO: remove?
+    friend class Board;
 public:
     bool clicked;
     Image *piceImg;
@@ -40,10 +40,13 @@ public:
     void moveTo(int x, int y);
     int targetX = 0;
     int targetY = 0;
-    bool isMoving = false;
     int movedownCount = 0;
 
+    bool isAnimating();
     void spin();
+private:
+    bool isMoving = false;
+    int isSpining = 0;
 };
 
 
