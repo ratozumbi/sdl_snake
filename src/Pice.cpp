@@ -28,10 +28,10 @@ void Pice::start() {
 
 int Pice::update(){
     Actor::update();
-    if(movedownCount !=0 && isMoving == false){
+    if(movedownCount !=0 && isMoving != 1){
         moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
     }
-    if(isMoving){
+    if(isMoving == 1){
         int speedX = 1;
         int speedY = 1;
         speedX = targetX < piceImg->rect.x ? speedX * -1: targetX == piceImg->rect.x? 0:speedX;
@@ -47,16 +47,14 @@ int Pice::update(){
             } else{
                 targetX = 0;
                 targetY = 0;
-                isMoving = false;
+                isMoving = 2;
             }
         }
     }
-    if(!isMoving && isSpining == 1){
+    if(isMoving != 1 && isSpining == 1){
         piceImg->angle+=2;
         if(piceImg->angle > 180){
             isSpining = 2;
-            active = false;
-
         }
     }
 
@@ -72,7 +70,6 @@ int Pice::onInput(SDL_Event e){
 
     if(insideBounds && e.type == SDL_MOUSEBUTTONUP){
         if(e.button.button == SDL_BUTTON_RIGHT){
-            std::cout <<">>>>>>>>>>>>>>>>>>>>>>>>>>>> DELTE DEBUG MESSAGE Pice" << std::endl;
             setDestroy();
         }
     }
@@ -95,13 +92,15 @@ bool Pice::getDestroy() {
     return Actor::getDestroy();
 }
 void Pice::moveTo(int x, int y) {
-    isMoving = true;
+    isMoving = 1;
     targetX = x;
     targetY = y;
 }
 
 void Pice::moveDown(int squares) {
+    if(movedownCount == 0)moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
     movedownCount += squares;
+
 //    moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
 //    piceImg->rect.y = piceImg->rect.y + piceImg->rect.h;
 }
@@ -112,5 +111,5 @@ void Pice::spin(){
 }
 
 bool Pice::isAnimating() {
-    return isMoving || isSpining ==1;
+    return isMoving == 1 || isSpining ==1;
 }

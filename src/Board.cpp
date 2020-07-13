@@ -47,8 +47,7 @@ void Board::genNew(uint32_t h, uint32_t w, int y){
         y++;
         pices[h][w]->piceImg->rect.y = ((y * PICE_DIMENSION)*-1) + 100;//((y-1 * PICE_DIMENSION) * y==0?1:-1) + 100;
 //        pices[h][w]->moveDown(y);
-    }else
-    {
+    }else    {
         pices[h][w]->piceImg->rect.y = (h * PICE_DIMENSION) + 100;
     }
     pices[h][w]->piceImg->active = true;
@@ -66,14 +65,10 @@ Board::~Board(){
 void Board::start() {
 };
 
-//TODO: swap W and H
 /// Check if sequence is activated
-/// \param h The pice H in board
-/// \param w The pice W in board
 /// \return The socore
-int Board::checkInRange(uint32_t h , uint32_t w, bool destoryOnCheck = true){
+int Board::checkInRange(){
 
-    int countH = 0;
     int count_chain = 0;
 
     PiceType piceType = PiceType::_LAST;
@@ -86,27 +81,27 @@ int Board::checkInRange(uint32_t h , uint32_t w, bool destoryOnCheck = true){
     //W
     for (int iH = 0; iH < BOARD_H; iH++) {
         for (int iW = 0; iW < BOARD_W; iW++) {
-            if (!pices[iH][iW]->isAnimating()) {
-                if(piceType == pices[iH][iW]->type){
-                    if(count_chain == 0) count_chain++;
-                    count_chain++;
-                    if(chain){
-                        score+=1;
-                        pices[iH][iW]->setDestroy();
-                    }
-                } else{
-                    count_chain=0;
-                    chain = false;
+            if(piceType == pices[iH][iW]->type && !pices[iH][iW]->isAnimating()){
+                if(count_chain == 0) count_chain++;
+                count_chain++;
+                if(chain){
+                    score+=1;
+                    pices[iH][iW]->setDestroy();
                 }
+            } else{
+                count_chain=0;
+                chain = false;
+            }
 
-                if(count_chain == checkRange){
-                    chain = true;
-                    for (int i = 0; i < checkRange; i++){
-                        pices[iH][iW-i]->setDestroy();
-                        score +=checkRange;
-                    }
+            if(count_chain == checkRange && !pices[iH][iW]->isAnimating()){
+                chain = true;
+                for (int i = 0; i < checkRange; i++){
+//                    smash(iH, iW-1);
+                    pices[iH][iW-i]->setDestroy();
+                    score +=checkRange;
                 }
             }
+
             piceType = pices[iH][iW]->type;
         }
         piceType = PiceType::_LAST;
@@ -120,28 +115,28 @@ int Board::checkInRange(uint32_t h , uint32_t w, bool destoryOnCheck = true){
     //H
     for (int iW = 0; iW < BOARD_W; iW++) {
         for (int iH = 0; iH < BOARD_H; iH++) {
-            if (!pices[iH][iW]->isAnimating()) {
-                if(piceType == pices[iH][iW]->type){
-                    if(count_chain == 0) count_chain++;
-                    count_chain++;
-                    if(chain){
-                        score+=1;
-                        pices[iH][iW]->setDestroy();
-                    }
-                } else{
-                    count_chain=0;
-                    chain = false;
+            if(piceType == pices[iH][iW]->type && !pices[iH][iW]->isAnimating()){
+                if(count_chain == 0) count_chain++;
+                count_chain++;
+                if(chain){
+                    score+=1;
+                    pices[iH][iW]->setDestroy();
                 }
+            } else{
+                count_chain=0;
+                chain = false;
+            }
 
-                if(count_chain == checkRange){
-                    chain = true;
-                    //destroy on the chain from beginning
-                    for (int i = 0; i < checkRange; i++){
-                        pices[iH-i][iW]->setDestroy();
-                        score +=checkRange;
-                    }
+            if(count_chain == checkRange && !pices[iH][iW]->isAnimating()){
+                chain = true;
+                //destroy on the chain from beginning
+                for (int i = 0; i < checkRange; i++){
+//                    smash(iH-i,iW);
+                    pices[iH-i][iW]->setDestroy();
+                    score +=checkRange;
                 }
             }
+
             piceType = pices[iH][iW]->type;
         }
         piceType = PiceType::_LAST;
@@ -152,7 +147,7 @@ int Board::checkInRange(uint32_t h , uint32_t w, bool destoryOnCheck = true){
     return score;
 }
 
-/// Swap specified pice for the one on top recursivly. If none is on top, a new pice is created in the position
+/// Swap specified pice for the one on top recursivly. If none is on top, a new pice is created
 /// \param h height of the pice on the board
 /// \param w width of the pice on the board
 /// \param _firstCall internal controller
@@ -167,7 +162,7 @@ void Board::smash(unsigned int h, unsigned int w, bool _firstCall){
             std::cout <<"error! cant smash on pice not marked to destroy"<< std::endl;
             return;
         }
-//        pices[h][w]->active = false;
+        pices[h][w]->active = false;
     }
     if(h != 0){
         pices[h][w] = pices[h-1][w];
@@ -194,35 +189,28 @@ int Board::update(){
     int initialScore = totalScore;
 
     int countDestroyH =0;
+    bool anyMoving = false;
 
     for(uint32_t  wInter = 0; wInter < BOARD_W; wInter ++) {
         for (uint32_t  hInter = 0; hInter < BOARD_H; hInter++) {
             //dont mess with moving parts
-            if(pices[hInter][wInter]->isSpining == 2){
-                if(pices[hInter][wInter]->getDestroy()) {
+            if(pices[hInter][wInter]->isAnimating()){
+                anyMoving = true;
+            }
+        }
+    }
+
+    if(!anyMoving){
+        for(uint32_t  wInter = 0; wInter < BOARD_W; wInter ++) {
+            for (uint32_t hInter = 0; hInter < BOARD_H; hInter++) {
+                if(pices[hInter][wInter]->isSpining == 2){
                     smash(hInter,wInter);
                     countDestroyH ++;
                 }
-                if(!pices[hInter][wInter]->isAnimating()){
-                    initialScore += checkInRange(hInter,wInter);
-                }
-                //check if any pice needs to be destroyed and move to smash
-//                if(pices[hInter][wInter]->getDestroy()){
-//                    countDestroyH[wInter]++;
-//                    smash(hInter, wInter);
-//                }
-//                else{
-//                    //check neighbors
-//                    initialScore += checkInRange(hInter,wInter);
-//                }
             }
         }
-//        for(int i = 0; i< countDestroyH; i++){
-//            genNew(i,wInter,i);
-//        }
+        initialScore += checkInRange();
     }
-
-    initialScore += checkInRange(0,0);
 
     if(totalScore < initialScore){
         std::cout << "TOTAL SCORE: " << totalScore << "\n"

@@ -45,7 +45,7 @@ public:
     bool isAnimating();
     void spin();
 private:
-    bool isMoving = false;
+    int isMoving = 0;
     int isSpining = 0;
 };
 

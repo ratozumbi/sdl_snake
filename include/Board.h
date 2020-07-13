@@ -22,9 +22,9 @@ public:
     int update();
     int onInput(SDL_Event);
 
-    int checkInRange(uint32_t , uint32_t, bool);
+    int checkInRange();
     void genNew(uint32_t h, uint32_t w,int y=-1);
-    void smash(unsigned int h, unsigned int w, bool _firstCall = false);
+    void smash(unsigned int h, unsigned int w, bool _firstCall = true);
 
 private:
     enum class BoardStates{
