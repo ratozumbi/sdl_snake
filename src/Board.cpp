@@ -65,6 +65,7 @@ Board::~Board(){
 void Board::start() {
 };
 
+
 /// Check if sequence is activated
 /// \return The socore
 int Board::checkInRange(){
@@ -76,6 +77,14 @@ int Board::checkInRange(){
 
     int score = 0;
 
+    struct struct_found{
+        int h;
+        int w;
+        int chain_size;
+        int direction = -1; //1 to go up || 2 to go right
+    };
+    std::vector<struct_found> found;
+
     //TODO: optimise these for loops
 
     //W
@@ -86,10 +95,12 @@ int Board::checkInRange(){
                 count_chain++;
             } else{
                 if(chain){
-                    for (int i = 0; i < count_chain; i++){
-                        pices[iH][iW-i -1]->setDestroy();//-1 because this is not the pice we want
-                        score ++;
-                    }
+                    struct_found f;
+                    f.h = iH;
+                    f.w = iW -1;
+                    f.chain_size = count_chain;
+                    f.direction = 2;
+                    found.push_back(f);
                 }
                 count_chain=0;
                 chain = false;
@@ -117,10 +128,12 @@ int Board::checkInRange(){
                 count_chain++;
             } else{
                 if(chain){
-                    for (int i = 0; i < count_chain; i++){
-                        pices[iH-i-1][iW]->setDestroy();//-1 because this is not the pice we want
-                        score ++;
-                    }
+                    struct_found f;
+                    f.h = iH-1;
+                    f.w = iW;
+                    f.chain_size = count_chain;
+                    f.direction = 1;
+                    found.push_back(f);
                 }
                 count_chain=0;
                 chain = false;
@@ -136,6 +149,23 @@ int Board::checkInRange(){
         piceType = PiceType::_LAST;
         chain = false;
         count_chain = 0;
+    }
+
+    while(found.begin() != found.end()){
+        struct_found currF= found.back();
+        if(currF.direction == 1){
+            for (int i = 0; i < currF.chain_size; i++){
+                pices[currF.h-i][currF.w]->setDestroy();//-1 because this is not the pice we want
+                score ++;
+            }
+        } else if(currF.direction == 2){
+            for (int i = 0; i < currF.chain_size; i++){
+                pices[currF.h][currF.w -i]->setDestroy();//-1 because this is not the pice we want
+                score ++;
+            }
+        }
+
+        found.pop_back();
     }
 
     return score;
@@ -165,12 +195,8 @@ void Board::smash(unsigned int h, unsigned int w, bool _firstCall){
     }
     else
     {
-//        pices[h][w]->active = false;
-        genNew(h,w,0);//TODO: y should be the amount of pices destroyed
+        genNew(h,w,0);//TODO: y should be the amount of pices destroyed on this H
         pices[h][w]->moveDown(1);
-        //update actor list on this line <<<<
-
-//        pices[h][w]->moveDown(h);
     }
 
 
