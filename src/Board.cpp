@@ -88,6 +88,7 @@ int Board::checkInRange(uint32_t h , uint32_t w, bool destoryOnCheck = true){
         for (int iW = 0; iW < BOARD_W; iW++) {
             if (!pices[iH][iW]->isAnimating()) {
                 if(piceType == pices[iH][iW]->type){
+                    if(count_chain == 0) count_chain++;
                     count_chain++;
                     if(chain){
                         score+=1;
@@ -98,7 +99,7 @@ int Board::checkInRange(uint32_t h , uint32_t w, bool destoryOnCheck = true){
                     chain = false;
                 }
 
-                if(count_chain == checkRange-1){
+                if(count_chain == checkRange){
                     chain = true;
                     for (int i = 0; i < checkRange; i++){
                         pices[iH][iW-i]->setDestroy();
@@ -121,6 +122,7 @@ int Board::checkInRange(uint32_t h , uint32_t w, bool destoryOnCheck = true){
         for (int iH = 0; iH < BOARD_H; iH++) {
             if (!pices[iH][iW]->isAnimating()) {
                 if(piceType == pices[iH][iW]->type){
+                    if(count_chain == 0) count_chain++;
                     count_chain++;
                     if(chain){
                         score+=1;
@@ -131,7 +133,7 @@ int Board::checkInRange(uint32_t h , uint32_t w, bool destoryOnCheck = true){
                     chain = false;
                 }
 
-                if(count_chain == checkRange -1){
+                if(count_chain == checkRange){
                     chain = true;
                     //destroy on the chain from beginning
                     for (int i = 0; i < checkRange; i++){
@@ -146,55 +148,6 @@ int Board::checkInRange(uint32_t h , uint32_t w, bool destoryOnCheck = true){
         chain = false;
         count_chain = 0;
     }
-
-
-
-//
-//    if(pices[h][w]){
-//        for (int i = 0; i < checkRange; i++){
-//            //H
-//            if(h +checkRange-i < BOARD_H && !pices[h +checkRange-i][w]->isAnimating()){ //TODO: remove second clasule?
-//                if(pices[h][w]->type == pices[h +checkRange-i][w]->type){
-//                    countH++;
-//                    if(countH == checkRange -1){
-//                        //TODO: clean this
-//                        if(destoryOnCheck){
-//                            pices[h][w]->setDestroy();
-//                            pices[h + 1][w]->setDestroy();
-//                            pices[h + 2][w]->setDestroy();
-//                        }
-//                        score += 3;
-//                    }
-//
-//                    //We could add more point types for more squares here
-////                    if(countH == checkRange+1){
-////                        pices[h][w]->setDestroy();
-////                        pices[h + 1][w]->setDestroy();
-////                        pices[h + 2][w]->setDestroy();
-////                        pices[h + 3][w]->setDestroy();
-////                        score += 1;
-////                    }
-//                }
-//            }
-//
-//            //W
-//            if(w +checkRange-i < BOARD_W && !pices[h][w+checkRange-i]->isAnimating()){
-//                if(pices[h][w]->type == pices[h][w+checkRange-i]->type){
-//                    count_chain++;
-//                    if(count_chain == checkRange-1 ){
-//                        if(destoryOnCheck){
-//                            pices[h][w]->setDestroy();
-//                            pices[h][w + 1]->setDestroy();
-//                            pices[h][w + 2]->setDestroy();
-//                        }
-//                        score += 3;
-//                    }
-//                }
-//            }
-//        }
-//        count_chain =0;
-//        countH =0;
-//    }
 
     return score;
 }
