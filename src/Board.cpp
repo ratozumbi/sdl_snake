@@ -24,7 +24,7 @@ void Board::genNew(uint32_t h, uint32_t w, int y){
     //make sure to not spawn equal pices nearby
     if (h> 0 && w > 0) {
         while (pices[h][w - 1]->type == PiceTypeToEnum[typeRand] ||
-                pices[h - 1][w]->type == PiceTypeToEnum[typeRand]) {
+               pices[h - 1][w]->type == PiceTypeToEnum[typeRand]) {
             typeRand = (int) (rand() % (int) PiceType::_LAST);
         }
     }
@@ -56,7 +56,7 @@ void Board::genNew(uint32_t h, uint32_t w, int y){
 
 Board::~Board(){
     for(uint32_t wInter = 0; wInter < BOARD_W; wInter ++) {
-            for (uint32_t hInter = 0; hInter < BOARD_H; hInter++) {
+        for (uint32_t hInter = 0; hInter < BOARD_H; hInter++) {
             pices[hInter][wInter]->setDestroy();
             pices[hInter][wInter]->active = false;
         }
@@ -74,55 +74,127 @@ void Board::start() {
 int Board::checkInRange(uint32_t h , uint32_t w, bool destoryOnCheck = true){
 
     int countH = 0;
-    int countW = 0;
+    int count_chain = 0;
+
+    PiceType piceType = PiceType::_LAST;
 
     int score = 0;
 
-    if(pices[h][w]){
-        for (int i = 0; i < checkRange; i++){
-            //H
-            if(h +checkRange-i < BOARD_H && !pices[h +checkRange-i][w]->isAnimating()){ //TODO: remove second clasule?
-                if(pices[h][w]->type == pices[h +checkRange-i][w]->type){
-                    countH++;
-                    if(countH == checkRange -1){
-                        //TODO: clean this
-                        if(destoryOnCheck){
-                            pices[h][w]->setDestroy();
-                            pices[h + 1][w]->setDestroy();
-                            pices[h + 2][w]->setDestroy();
-                        }
-                        score += 3;
+    //TODO: optimise these for loops
+
+    bool chain = false;
+    //W
+    for (int iH = 0; iH < BOARD_H; iH++) {
+        for (int iW = 0; iW < BOARD_W; iW++) {
+            if (!pices[iH][iW]->isAnimating()) {
+                if(piceType == pices[iH][iW]->type){
+                    count_chain++;
+                    if(chain){
+                        score+=1;
+                        pices[iH][iW]->setDestroy();
                     }
-
-                    //We could add more point types for more squares here
-//                    if(countH == checkRange+1){
-//                        pices[h][w]->setDestroy();
-//                        pices[h + 1][w]->setDestroy();
-//                        pices[h + 2][w]->setDestroy();
-//                        pices[h + 3][w]->setDestroy();
-//                        score += 1;
-//                    }
+                } else{
+                    count_chain=0;
+                    chain = false;
                 }
-            }
 
-            //W
-            if(w +checkRange-i < BOARD_W && !pices[h][w+checkRange-i]->isAnimating()){
-                if(pices[h][w]->type == pices[h][w+checkRange-i]->type){
-                    countW++;
-                    if(countW == checkRange-1 ){
-                        if(destoryOnCheck){
-                            pices[h][w]->setDestroy();
-                            pices[h][w + 1]->setDestroy();
-                            pices[h][w + 2]->setDestroy();
-                        }
-                        score += 3;
+                if(count_chain == checkRange-1){
+                    chain = true;
+                    for (int i = 0; i < checkRange; i++){
+                        pices[iH][iW-i]->setDestroy();
+                        score +=checkRange;
                     }
                 }
             }
+            piceType = pices[iH][iW]->type;
         }
-        countW =0;
-        countH =0;
+        piceType = PiceType::_LAST;
+        chain = false;
+        count_chain = 0;
     }
+
+    chain = false;
+    count_chain = 0;
+
+    //H
+    for (int iW = 0; iW < BOARD_W; iW++) {
+        for (int iH = 0; iH < BOARD_H; iH++) {
+            if (!pices[iH][iW]->isAnimating()) {
+                if(piceType == pices[iH][iW]->type){
+                    count_chain++;
+                    if(chain){
+                        score+=1;
+                        pices[iH][iW]->setDestroy();
+                    }
+                } else{
+                    count_chain=0;
+                    chain = false;
+                }
+
+                if(count_chain == checkRange -1){
+                    chain = true;
+                    //destroy on the chain from beginning
+                    for (int i = 0; i < checkRange; i++){
+                        pices[iH-i][iW]->setDestroy();
+                        score +=checkRange;
+                    }
+                }
+            }
+            piceType = pices[iH][iW]->type;
+        }
+        piceType = PiceType::_LAST;
+        chain = false;
+        count_chain = 0;
+    }
+
+
+
+//
+//    if(pices[h][w]){
+//        for (int i = 0; i < checkRange; i++){
+//            //H
+//            if(h +checkRange-i < BOARD_H && !pices[h +checkRange-i][w]->isAnimating()){ //TODO: remove second clasule?
+//                if(pices[h][w]->type == pices[h +checkRange-i][w]->type){
+//                    countH++;
+//                    if(countH == checkRange -1){
+//                        //TODO: clean this
+//                        if(destoryOnCheck){
+//                            pices[h][w]->setDestroy();
+//                            pices[h + 1][w]->setDestroy();
+//                            pices[h + 2][w]->setDestroy();
+//                        }
+//                        score += 3;
+//                    }
+//
+//                    //We could add more point types for more squares here
+////                    if(countH == checkRange+1){
+////                        pices[h][w]->setDestroy();
+////                        pices[h + 1][w]->setDestroy();
+////                        pices[h + 2][w]->setDestroy();
+////                        pices[h + 3][w]->setDestroy();
+////                        score += 1;
+////                    }
+//                }
+//            }
+//
+//            //W
+//            if(w +checkRange-i < BOARD_W && !pices[h][w+checkRange-i]->isAnimating()){
+//                if(pices[h][w]->type == pices[h][w+checkRange-i]->type){
+//                    count_chain++;
+//                    if(count_chain == checkRange-1 ){
+//                        if(destoryOnCheck){
+//                            pices[h][w]->setDestroy();
+//                            pices[h][w + 1]->setDestroy();
+//                            pices[h][w + 2]->setDestroy();
+//                        }
+//                        score += 3;
+//                    }
+//                }
+//            }
+//        }
+//        count_chain =0;
+//        countH =0;
+//    }
 
     return score;
 }
@@ -197,15 +269,11 @@ int Board::update(){
 //        }
     }
 
-    for(uint32_t  wInter = 0; wInter < BOARD_W; wInter ++) {
-        for (uint32_t  hInter = 0; hInter < BOARD_H; hInter++) {
-
-        }
-    }
+    initialScore += checkInRange(0,0);
 
     if(totalScore < initialScore){
         std::cout << "TOTAL SCORE: " << totalScore << "\n"
-        << " NOW SCORED: " << initialScore - totalScore << std::endl;
+                  << " NOW SCORED: " << initialScore - totalScore << std::endl;
         totalScore += initialScore;
     }
 
