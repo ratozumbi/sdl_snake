@@ -70,6 +70,7 @@ void Board::start() {
 int Board::checkInRange(){
 
     int count_chain = 0;
+    bool chain = false;
 
     PiceType piceType = PiceType::_LAST;
 
@@ -77,32 +78,28 @@ int Board::checkInRange(){
 
     //TODO: optimise these for loops
 
-    bool chain = false;
     //W
     for (int iH = 0; iH < BOARD_H; iH++) {
         for (int iW = 0; iW < BOARD_W; iW++) {
             if(piceType == pices[iH][iW]->type && !pices[iH][iW]->isAnimating()){
                 if(count_chain == 0) count_chain++;
                 count_chain++;
-                if(chain){
-                    score+=1;
-                    pices[iH][iW]->setDestroy();
-                }
             } else{
+                if(chain){
+                    for (int i = 0; i < count_chain; i++){
+                        pices[iH][iW-i -1]->setDestroy();//-1 because this is not the pice we want
+                        score ++;
+                    }
+                }
                 count_chain=0;
                 chain = false;
             }
 
             if(count_chain == checkRange && !pices[iH][iW]->isAnimating()){
                 chain = true;
-                for (int i = 0; i < checkRange; i++){
-//                    smash(iH, iW-1);
-                    pices[iH][iW-i]->setDestroy();
-                    score +=checkRange;
-                }
             }
-
             piceType = pices[iH][iW]->type;
+            if(pices[iH][iW]->isAnimating())piceType = PiceType::_LAST;
         }
         piceType = PiceType::_LAST;
         chain = false;
@@ -118,26 +115,23 @@ int Board::checkInRange(){
             if(piceType == pices[iH][iW]->type && !pices[iH][iW]->isAnimating()){
                 if(count_chain == 0) count_chain++;
                 count_chain++;
-                if(chain){
-                    score+=1;
-                    pices[iH][iW]->setDestroy();
-                }
             } else{
+                if(chain){
+                    for (int i = 0; i < count_chain; i++){
+                        pices[iH-i-1][iW]->setDestroy();//-1 because this is not the pice we want
+                        score ++;
+                    }
+                }
                 count_chain=0;
                 chain = false;
             }
 
             if(count_chain == checkRange && !pices[iH][iW]->isAnimating()){
                 chain = true;
-                //destroy on the chain from beginning
-                for (int i = 0; i < checkRange; i++){
-//                    smash(iH-i,iW);
-                    pices[iH-i][iW]->setDestroy();
-                    score +=checkRange;
-                }
             }
 
             piceType = pices[iH][iW]->type;
+            if(pices[iH][iW]->isAnimating())piceType = PiceType::_LAST;
         }
         piceType = PiceType::_LAST;
         chain = false;
@@ -172,7 +166,7 @@ void Board::smash(unsigned int h, unsigned int w, bool _firstCall){
     else
     {
 //        pices[h][w]->active = false;
-        genNew(h,w,0);
+        genNew(h,w,0);//TODO: y should be the amount of pices destroyed
         pices[h][w]->moveDown(1);
         //update actor list on this line <<<<
 
@@ -194,7 +188,7 @@ int Board::update(){
     for(uint32_t  wInter = 0; wInter < BOARD_W; wInter ++) {
         for (uint32_t  hInter = 0; hInter < BOARD_H; hInter++) {
             //dont mess with moving parts
-            if(pices[hInter][wInter]->isAnimating()){
+            if(pices[hInter][wInter]->isMoving == 1){
                 anyMoving = true;
             }
         }
