@@ -35,6 +35,7 @@ Not Optional:
 
 I don't own a MAC to test, but you should probably
 point SDL2 and SDL2Image librarys and headers for cmake to find.
+Maybe you will need to set the [CMAKE_GENERATOR_TOOLSET](https://cmake.org/cmake/help/v3.17/variable/CMAKE_GENERATOR_TOOLSET.html#visual-studio-toolset-selection)
 
 > LINUX
 - Use your package manager to install SDL2-dev and SDL2_image-dev
@@ -47,3 +48,5 @@ The commented lines in cmake should work for Ubuntu/apt-get.
 ``Error: could not load cache`` try to run cmake again or check if cmake-build-debug folder exists on the same folder CMakeLists.txt
 - Linker errors: check cmake paths for SDL libs.
 - Runtime does not start or keeps crashing: check if all DLLs from SDL2/dlls are copied to the exe folder.   
+
+[]: https://cmake.org/cmake/help/v3.17/variable/CMAKE_GENERATOR_TOOLSET.html#visual-studio-toolset-selectionCMAKE_GENERATOR_TOOLSET

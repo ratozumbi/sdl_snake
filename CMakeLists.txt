@@ -1,12 +1,15 @@
 # This cmake file should be the same as this command
 # g++ -I /usr/include/SDL2 ./include/*.h ./src/*.cpp -lSDL2 -lSDL2_image -std=c++11 -o game_file_name
-cmake_minimum_required(VERSION 3.11)
-set(CMAKE_C_COMPILER "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/Hostx86/x86/cl.exe")
-set(CMAKE_CXX_COMPILER "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/Hostx86/x86/cl.exe")
-set(CMAKE_MAKE_PROGRAM "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/Hostx86/x86/nmake.exe")
+cmake_minimum_required(VERSION 3.12)
+# uncomment these lines if not using clion on windows
+#set(CMAKE_C_COMPILER "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/Hostx86/x86/cl.exe")
+#set(CMAKE_CXX_COMPILER "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/Hostx86/x86/cl.exe")
+#set(CMAKE_MAKE_PROGRAM "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/Hostx86/x86/nmake.exe")
+#set(CMAKE_C_COMPILER_WORKS TRUE)
+#set(CMAKE_CXX_COMPILER_WORKS TRUE)
 project(enjoiado)
 message("Cmake running on directory ${CMAKE_CURRENT_LIST_DIR} SDL2 folder should be here")
-#set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 14)
 
 
 # set(SDL2_INCLUDE_DIR /usr/include/SDL2)
@@ -24,6 +27,6 @@ file(GLOB game_source
         )
 
 add_executable(enjoiado ${game_source})
-
+include_directories(SYSTEM)
 target_include_directories(enjoiado PUBLIC ${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} INCLUDE_DIRECTORIES)
 target_link_libraries(enjoiado  ${SDL2_LIBRARY} ${SDL2_MAIN_LIBRARY} ${SDL2_TEST_LIBRARY} ${SDL2_IMAGE})
