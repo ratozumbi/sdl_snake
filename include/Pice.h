@@ -7,6 +7,7 @@
 
 #include "../include/Actor.h"
 #include "Image.h"
+#include <vector>
 
 class Pice: public Actor {
 
@@ -37,6 +38,7 @@ public:
     PiceType type;
 
     //TODO: separate this to a component GameObject Movable
+    std::vector<SDL_Point> pointsToMove;
     void moveTo(int x, int y);
     int targetX = 0;
     int targetY = 0;

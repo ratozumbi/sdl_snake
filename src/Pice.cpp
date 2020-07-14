@@ -26,33 +26,28 @@ Pice::Pice(PiceType type): Actor() {
 void Pice::start() {
 };
 
-int Pice::update(){
+int Pice::update() {
     Actor::update();
-    if(movedownCount !=0 && isMoving != 1){
-        moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
-    }
-    if(isMoving == 1){
-        int speedX = 1;
-        int speedY = 1;
-        speedX = targetX < piceImg->rect.x ? speedX * -1: targetX == piceImg->rect.x? 0:speedX;
-        speedY = targetY < piceImg->rect.y ? speedY * -1: targetY == piceImg->rect.y? 0:speedY;
-//        piceImg->rect.x += speedX;
-//        piceImg->rect.y += speedY;
-        piceImg->rect.x = std::ceil(Util::lerp(piceImg->rect.x,targetX,0.1f));
-        piceImg->rect.y = std::ceil(Util::lerp(piceImg->rect.y,targetY,0.1f));
 
-        if(piceImg->rect.x == targetX && piceImg->rect.y == targetY )
-        {
-            movedownCount--;
-            if(movedownCount != 0){
-                moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
-            } else{
-                targetX = 0;
-                targetY = 0;
-                isMoving = 2;
+    if(isMoving ==1){
+        if(!pointsToMove.empty()){
+            piceImg->rect.x = std::ceil(Util::lerp(piceImg->rect.x,pointsToMove.at(0).x,0.05f));
+            piceImg->rect.y = std::ceil(Util::lerp(piceImg->rect.y,pointsToMove.at(0).y,0.05f));
+
+            if(piceImg->rect.x == pointsToMove.at(0).x && piceImg->rect.y == pointsToMove.at(0).y )
+            {
+                pointsToMove.erase(pointsToMove.begin());
+//                if(pointsToMove.empty()) isMoving =0;
             }
+        } else{
+            isMoving = 0;
         }
+
+    } else if(!pointsToMove.empty()){
+        isMoving =1;
     }
+
+    //spin
     if(isMoving != 1 && isSpining == 1){
         piceImg->angle+=2;
         if(piceImg->angle > 180){
@@ -61,7 +56,44 @@ int Pice::update(){
     }
 
     return 0;
-};
+}
+
+//int Pice::update(){
+//    Actor::update();
+//    if(movedownCount !=0 && isMoving != 1){
+//        moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
+//    }
+//    if(isMoving == 1){
+//        int speedX = 1;
+//        int speedY = 1;
+//        speedX = targetX < piceImg->rect.x ? speedX * -1: targetX == piceImg->rect.x? 0:speedX;
+//        speedY = targetY < piceImg->rect.y ? speedY * -1: targetY == piceImg->rect.y? 0:speedY;
+////        piceImg->rect.x += speedX;
+////        piceImg->rect.y += speedY;
+//        piceImg->rect.x = std::ceil(Util::lerp(piceImg->rect.x,targetX,0.05f));
+//        piceImg->rect.y = std::ceil(Util::lerp(piceImg->rect.y,targetY,0.05f));
+//
+//        if(piceImg->rect.x == targetX && piceImg->rect.y == targetY )
+//        {
+//            movedownCount--;
+//            if(movedownCount != 0){
+//                moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
+//            } else{
+//                targetX = 0;
+//                targetY = 0;
+//                isMoving = 2;
+//            }
+//        }
+//    }
+//    if(isMoving != 1 && isSpining == 1){
+//        piceImg->angle+=2;
+//        if(piceImg->angle > 180){
+//            isSpining = 2;
+//        }
+//    }
+//
+//    return 0;
+//};
 
 int Pice::onInput(SDL_Event e){
     Actor::onInput(e);
@@ -95,13 +127,15 @@ bool Pice::getDestroy() {
 }
 void Pice::moveTo(int x, int y) {
     isMoving = 1;
+    pointsToMove.push_back({x,y});
     targetX = x;
     targetY = y;
 }
 
 void Pice::moveDown(int squares) {
-    if(movedownCount == 0)moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
-    movedownCount += squares;
+    moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h * squares);
+//    if(movedownCount == 0)moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
+//    movedownCount += squares;
 
 //    moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
 //    piceImg->rect.y = piceImg->rect.y + piceImg->rect.h;

@@ -24,7 +24,7 @@ public:
 
     int checkInRange();
     void genNew(uint32_t h, uint32_t w,int y=-1);
-    void smash(unsigned int h, unsigned int w, bool _firstCall = true);
+    void smash(unsigned int h, unsigned int w, bool _firstCall = true, int Hchain=0);
 
 private:
     const int checkRange = 3;

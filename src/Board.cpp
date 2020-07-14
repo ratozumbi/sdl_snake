@@ -191,7 +191,7 @@ int Board::checkInRange(){
 /// \param h height of the pice on the board
 /// \param w width of the pice on the board
 /// \param _firstCall internal controller
-void Board::smash(unsigned int h, unsigned int w, bool _firstCall){
+void Board::smash(unsigned int h, unsigned int w, bool _firstCall, int Hchain){
     if(h >= BOARD_H || w>= BOARD_W){
         std::cout <<"error! pice to smash is out of range"<< std::endl;
         return;
@@ -207,11 +207,11 @@ void Board::smash(unsigned int h, unsigned int w, bool _firstCall){
     if(h != 0){
         pices[h][w] = pices[h-1][w];
         pices[h][w]->moveDown(1);
-        smash(h - 1, w, false);
+        smash(h - 1, w, false, Hchain);
     }
     else
     {
-        genNew(h,w,0);//TODO: y should be the amount of pices destroyed on this H
+        genNew(h,w,Hchain);//TODO: y should be the amount of pices destroyed on this H
         pices[h][w]->moveDown(1);
     }
 
@@ -238,12 +238,20 @@ int Board::update(){
 
     if(!anyMoving){
         for(uint32_t  wInter = 0; wInter < BOARD_W; wInter ++) {
+            int test = -1;
             for (uint32_t hInter = 0; hInter < BOARD_H; hInter++) {
                 if(pices[hInter][wInter]->isSpining == 2){
-                    smash(hInter,wInter);
+                    if(test==-1)test =hInter;
                     countDestroyH ++;
                 }
             }
+            if(test!=-1){
+                for(int i = 0; i< countDestroyH; i++){
+                    smash(test-i,wInter,true,i);
+                }
+            }
+            countDestroyH = 0;
+            test = -1;
         }
         initialScore += checkInRange();
     }
