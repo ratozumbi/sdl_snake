@@ -12,15 +12,11 @@
 
 class Pice: public Actor {
 
-//TODO: change to class enum (https://stackoverflow.com/questions/2102582/how-can-i-count-the-items-in-an-enum)
-
-
     friend class Board;
 public:
     bool clicked = false;
     Image *piceImg;
     Pice(PiceType type);
-//    Pice(int type);
     Pice();
     ~Pice();
     Pice(std::string);
@@ -33,7 +29,6 @@ public:
 
     void moveDown(int squares = 1);
 
-    const char *getRandomColor();
     const char * colors[5] ={"Color-1.png","Color-2.png","Color-3.png","Color-4.png","Color-5.png"};
 
     PiceType type;
@@ -41,14 +36,11 @@ public:
     //TODO: separate this to a component GameObject Movable
     std::vector<SDL_Point> pointsToMove;
     void moveTo(int x, int y);
-    int targetX = 0;
-    int targetY = 0;
-    int movedownCount = 0;
 
     bool isAnimating();
     void spin();
 private:
-    int isMoving = 0;
+    bool isMoving = false;
     int isSpining = 0;
 };
 

@@ -36,7 +36,7 @@ Image *Util::findImage(std::string name){
 }
 
 //TODO: safe convert to int
-float Util::lerp(float a, float b, float f)
+double Util::lerp(float a, float b, float f)
 {
     return a + f * (b - a);
 }

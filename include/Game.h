@@ -26,7 +26,7 @@ namespace Game {
 namespace Util {
     unsigned int findScene(std::string );
     Image *findImage(std::string );
-    float lerp(float,float,float);
+    double lerp(float,float,float);
 }
 
 #endif //SDL_SNAKE_GAME_H

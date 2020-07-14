@@ -6,16 +6,12 @@
 #include "../include/Game.h"
 #include "../include/Pice.h"
 
-const char * Pice::getRandomColor(){
-    return colors[rand() % 5];
-}
-
 Pice::Pice():Actor() {
 
 };
 
 Pice::~Pice() {
-    Game::scenes.at(1).deleteImage(piceImg);
+    Game::scenes.at(Util::findScene("game")).deleteImage(piceImg);
 };
 
 Pice::Pice(PiceType type): Actor() {
@@ -38,7 +34,7 @@ int Pice::update() {
         piceImg->rect.w = PICE_DIMENSION;
     }
 
-    if(isMoving ==1){
+    if(isMoving ==true){
         if(!pointsToMove.empty()){
             int lerpX =std::ceil(Util::lerp(piceImg->rect.x,pointsToMove.at(0).x,0.1f));
             int lerpY =std::ceil(Util::lerp(piceImg->rect.y,pointsToMove.at(0).y,0.1f));
@@ -47,25 +43,24 @@ int Pice::update() {
                 piceImg->rect.x = pointsToMove.at(0).x;
                 piceImg->rect.y = pointsToMove.at(0).y;
             } else{
-                piceImg->rect.x = lerpX;//std::ceil(Util::lerp(piceImg->rect.x,pointsToMove.at(0).x,1.0f));
-                piceImg->rect.y = lerpY;//std::ceil(Util::lerp(piceImg->rect.y,pointsToMove.at(0).y,1.0f));
+                piceImg->rect.x = lerpX;
+                piceImg->rect.y = lerpY;
             }
 
             if(piceImg->rect.x == pointsToMove.at(0).x && piceImg->rect.y == pointsToMove.at(0).y )
             {
                 pointsToMove.erase(pointsToMove.begin());
-//                if(pointsToMove.empty()) isMoving =0;
             }
         } else{
-            isMoving = 0;
+            isMoving = false;
         }
 
     } else if(!pointsToMove.empty()){
-        isMoving =1;
+        isMoving =true;
     }
 
     //spin
-    if(isMoving != 1 && isSpining == 1){
+    if(isMoving != true && isSpining == 1){
         piceImg->angle+=2;
         if(piceImg->angle > 180){
             isSpining = 2;
@@ -90,14 +85,6 @@ int Pice::onInput(SDL_Event e){
             clicked =true;
         }
     }
-
-//    if(insideBounds && e.type == SDL_MOUSEMOTION){
-//        if(e.motion.state == SDL_BUTTON_LMASK){
-//            clicked = true;
-////            piceImg->rect.x += e.motion.xrel;
-////            piceImg->rect.y += e.motion.yrel;
-//        }
-//    }
     return 0;
 }
 
@@ -112,26 +99,18 @@ bool Pice::getDestroy() {
 
 //TODO: swap x y
 void Pice::moveTo(int x, int y) {
-    isMoving = 1;
+    isMoving = true;
     pointsToMove.push_back({x,y});
-    targetX = x;
-    targetY = y;
 }
 
 void Pice::moveDown(int squares) {
     moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h * squares);
-//    if(movedownCount == 0)moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
-//    movedownCount += squares;
-
-//    moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
-//    piceImg->rect.y = piceImg->rect.y + piceImg->rect.h;
 }
 
 void Pice::spin(){
     isSpining = 1;
-//    piceImg->rect.
 }
 
 bool Pice::isAnimating() {
-    return isMoving == 1 || isSpining ==1;
+    return isMoving == true || isSpining ==1;
 }

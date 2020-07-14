@@ -242,8 +242,10 @@ int Board::update(){
             }
             if(pices[hInter][wInter]->clicked){
                 if(first.x != -1){
-                    if(first.x == wInter +1 || first.x == wInter -1 ||
-                        first.y == hInter +1 || first.y == hInter -1){
+                    if(
+                            ((first.x == wInter +1 || first.x == wInter -1) && first.y == hInter) ||
+                            ((first.y == hInter +1 || first.y == hInter -1) && first.x == wInter)
+                    ){
                         second.y = hInter;
                         second.x = wInter;
                     } else{//disable click if not near first click
