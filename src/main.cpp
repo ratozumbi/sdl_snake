@@ -91,25 +91,11 @@ int main(int argc, char **argv) {
     Game::scenes.at(Util::findScene("menu")).loadImage("pointer.png", 300, 425);
 
     Game::scenes.at(Util::findScene("game")).loadImage("Backdrop13.jpg");
-//    Game::scenes.at(Util::findScene("game")).loadImage("Color-1.png", 10, 10, false);
-//    Game::scenes.at(Util::findScene("game")).loadImage("Color-2.png", 10, 70, false);
-//    Game::scenes.at(Util::findScene("game")).loadImage("Color-3.png", 10, 140, false);
-//    Game::scenes.at(Util::findScene("game")).loadImage("Color-4.png", 10, 210, false);
-//    Game::scenes.at(Util::findScene("game")).loadImage("Color-5.png", 10, 280, false);
 
     //load actors
     Game::scenes.at(Util::findScene("menu")).loadActor<Arrow>();
 
     Game::scenes.at(Util::findScene("game")).loadActor<Board>();
-//    Arrow *b = dynamic_cast<Arrow*>(a);//(Game::scenes.at(Util::findScene("menu")).getActor(0));
-//    if (b) {
-//        if (b->pointer) {
-//            b->pointer->rect.y = 0;
-//        }
-//    }
-//    Arrow a = Actor();
-//    Game::scenes.at(Util::findScene("game")).loadActor<Pice>("Color-1.png");
-
 
     //inputs where not smooth in the main thread
     std::thread inputs(input);
@@ -126,10 +112,7 @@ int main(int argc, char **argv) {
         SDL_PumpEvents();//required to poll events in another thread
 
         //game update
-        //TODO: use vector iterator to make it more readable
-//        for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize(); ++i) {
         Game::scenes.at(Game::currentScene).update();
-//        }
 
         //set base color for renderer
         SDL_SetRenderDrawColor(Engine::renderer, 128, 0, 0, 0);
