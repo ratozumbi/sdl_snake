@@ -36,8 +36,10 @@ int Pice::update(){
         int speedY = 1;
         speedX = targetX < piceImg->rect.x ? speedX * -1: targetX == piceImg->rect.x? 0:speedX;
         speedY = targetY < piceImg->rect.y ? speedY * -1: targetY == piceImg->rect.y? 0:speedY;
-        piceImg->rect.x += speedX;
-        piceImg->rect.y += speedY;
+//        piceImg->rect.x += speedX;
+//        piceImg->rect.y += speedY;
+        piceImg->rect.x = std::ceil(Util::lerp(piceImg->rect.x,targetX,0.1f));
+        piceImg->rect.y = std::ceil(Util::lerp(piceImg->rect.y,targetY,0.1f));
 
         if(piceImg->rect.x == targetX && piceImg->rect.y == targetY )
         {
