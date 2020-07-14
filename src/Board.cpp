@@ -190,8 +190,9 @@ int Board::checkInRange(){
 /// Swap specified pice for the one on top recursivly. If none is on top, a new pice is created
 /// \param h height of the pice on the board
 /// \param w width of the pice on the board
+/// \param Hchain how many blocks where destroyed
 /// \param _firstCall internal controller
-void Board::smash(unsigned int h, unsigned int w, bool _firstCall, int Hchain){
+void Board::smash(unsigned int h, unsigned int w, int Hchain, bool _firstCall){
     if(h >= BOARD_H || w>= BOARD_W){
         std::cout <<"error! pice to smash is out of range"<< std::endl;
         return;
@@ -208,7 +209,7 @@ void Board::smash(unsigned int h, unsigned int w, bool _firstCall, int Hchain){
     if(h != 0){
         pices[h][w] = pices[h-1][w];
         pices[h][w]->moveDown(1);
-        smash(h - 1, w, false, Hchain);
+        smash(h - 1, w,  Hchain, false);
     }
     else
     {
@@ -275,7 +276,7 @@ int Board::update(){
             }
             if(HtoSmash != -1){
                 for(int i = 0; i< countDestroyH; i++){
-                    smash(HtoSmash - i, wInter, true, i);
+                    smash(HtoSmash, wInter, i, true);
                 }
             }
             countDestroyH = 0;
@@ -328,10 +329,9 @@ int Board::update(){
 
     if(totalScore < initialScore){
         std::cout << "TOTAL SCORE: " << totalScore << "\n"
-                  << " NOW SCORED: " << initialScore - totalScore << std::endl;
-        totalScore += initialScore;
+                  << " NOW SCORED: " << thisUpdateScore<< std::endl;
+        totalScore += thisUpdateScore;
     }
-
 
     return 0;
 };
