@@ -113,6 +113,14 @@ int Board::checkInRange(){
             if(pices[iH][iW]->isAnimating())piceType = PiceType::_LAST;
         }
         piceType = PiceType::_LAST;
+        if(chain){
+            struct_found f;
+            f.h = iH;
+            f.w = BOARD_W -1;
+            f.chain_size = count_chain;
+            f.direction = 2;
+            found.push_back(f);
+        }
         chain = false;
         count_chain = 0;
     }
@@ -147,6 +155,14 @@ int Board::checkInRange(){
             if(pices[iH][iW]->isAnimating())piceType = PiceType::_LAST;
         }
         piceType = PiceType::_LAST;
+        if(chain){
+            struct_found f;
+            f.h = BOARD_H-1;
+            f.w = iW;
+            f.chain_size = count_chain;
+            f.direction = 1;
+            found.push_back(f);
+        }
         chain = false;
         count_chain = 0;
     }
