@@ -16,7 +16,7 @@
 namespace Engine {
     extern SDL_Window *window;
     extern SDL_Renderer *renderer;
-    const int targetFPS = 90;
+    const int targetFPS = 120;
     const int frameDelay = 1000 / targetFPS;
 }
 namespace Game {
@@ -26,6 +26,7 @@ namespace Game {
 namespace Util {
     unsigned int findScene(std::string );
     Image *findImage(std::string );
+    float lerp(float,float,float);
 }
 
 #endif //SDL_SNAKE_GAME_H
