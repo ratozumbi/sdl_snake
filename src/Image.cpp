@@ -13,5 +13,5 @@ Image::Image (string name, SDL_Rect &rect1, SDL_Texture &texture): GameObject(na
 Image::Image():GameObject() { }
 
 Image::~Image() {
-    //don't delete texture as it might be used be others
+    //don't delete texture as it might be used by others
 }

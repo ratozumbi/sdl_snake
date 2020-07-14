@@ -23,30 +23,29 @@ void Board::genNew(uint32_t h, uint32_t w, int y){
 
     //make sure to not spawn equal pices nearby
     if (h> 0 && w > 0) {
-        while (pices[h][w - 1]->type == PiceTypeToEnum[typeRand] ||
-               pices[h - 1][w]->type == PiceTypeToEnum[typeRand]) {
+        while (pices[h][w - 1]->type == piceTypeToEnum[typeRand] ||
+               pices[h - 1][w]->type == piceTypeToEnum[typeRand]) {
             typeRand = (int) (rand() % (int) PiceType::_LAST);
         }
     }
     if (h > 0 && w == 0) {
-        while (pices[h - 1][w]->type == PiceTypeToEnum[typeRand]) {
+        while (pices[h - 1][w]->type == piceTypeToEnum[typeRand]) {
             typeRand = (int) (rand() % (int) PiceType::_LAST);
         }
     }
     if (w > 0 && h==0) {
-        while (pices[h][w - 1]->type == PiceTypeToEnum[typeRand]) {
+        while (pices[h][w - 1]->type == piceTypeToEnum[typeRand]) {
             typeRand = (int) (rand() % (int) PiceType::_LAST);
         }
     }
 
-    PiceType type = PiceTypeToEnum[typeRand];
+    PiceType type = piceTypeToEnum[typeRand];
     pices[h][w] = Game::scenes.at(Util::findScene("game")).loadActor<Pice>(type);
     pices[h][w]->type = type; //TODO: check why object is losing type
     pices[h][w]->piceImg->rect.x = (w * PICE_DIMENSION) + 200;
     if(y>=0){
         y++;
-        pices[h][w]->piceImg->rect.y = ((y * PICE_DIMENSION)*-1) + 100;//((y-1 * PICE_DIMENSION) * y==0?1:-1) + 100;
-//        pices[h][w]->moveDown(y);
+        pices[h][w]->piceImg->rect.y = ((y * PICE_DIMENSION)*-1) + 100;
     }else    {
         pices[h][w]->piceImg->rect.y = (h * PICE_DIMENSION) + 100;
     }

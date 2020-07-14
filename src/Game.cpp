@@ -25,10 +25,10 @@ unsigned int Util::findScene(std::string name){
 /// \return returns an Image* or NULL if not found
 Image *Util::findImage(std::string name){
     for(unsigned int iScene = 0; iScene < Game::scenes.size(); iScene++){
-        int imgs = Game::scenes.at(iScene).GetImagesSize();
+        int imgs = Game::scenes.at(iScene).getImagesSize();
         for(int iImage = 0; iImage < imgs; iImage++){
-            if(Game::scenes.at(iScene).GetImage(iImage)->name.compare(name) == 0){
-                return Game::scenes.at(iScene).GetImage(iImage);
+            if(Game::scenes.at(iScene).getImage(iImage)->name.compare(name) == 0){
+                return Game::scenes.at(iScene).getImage(iImage);
             }
         }
     }

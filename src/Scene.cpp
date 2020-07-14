@@ -3,16 +3,9 @@
 //
 
 #include <algorithm>
-#include <iostream>
 #include "../include/Scene.h"
 #include "../include/Arrow.h"
 
-#include "../include/Game.h"
-
-//std::string name;
-//
-//std::vector<Image*> images;
-//std::vector<Actor*> actors;
 
 Scene::Scene(){
 
@@ -45,7 +38,10 @@ Image *Scene::loadImage(string name) {
 
     if (texture == nullptr) {
         SDL_Log("Can't load image. %s", SDL_GetError());
-        throw std::exception(); //TODO: gracefuly exits
+        SDL_Event sdlevent;
+        sdlevent.type = SDL_QUIT;
+        SDL_PushEvent(&sdlevent);
+        return nullptr;
     }
     SDL_QueryTexture(texture, nullptr, nullptr, &w, &h); // get the width and height of the texture
     // put the location where we want the texture to be drawn into a rectangle
@@ -75,11 +71,11 @@ Image *Scene::loadImage(string name, int x, int y, bool active) {
     return newImage;
 }
 
-int Scene::GetActorsSize() {
+int Scene::getActorsSize() {
     return actors.size();
 }
 
-int Scene::GetImagesSize() {
+int Scene::getImagesSize() {
     return images.size();
 }
 
@@ -136,7 +132,7 @@ void Scene::deleteImage(Image *img) {
 //    TODO: throw not found
 }
 
-Image *Scene::GetImage(int position) {
+Image *Scene::getImage(int position) {
     return images.at(position);
 //    TODO: throw not found
 }

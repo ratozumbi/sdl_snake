@@ -55,7 +55,6 @@ public:
     /// \tparam T The class type derived from Actor
     /// \param i Any PiceType parameter to be passed to the constructor
     /// \return Pointer to the new Actor
-    //TODO: this is getting rediculous
     template <class T> T* loadActor(PiceType type){
         auto ret = new T(type);
         actors.push_back(ret);
@@ -65,12 +64,12 @@ public:
     //TODO: think a better way to pass parameters to constructors so the system is more scalable
 
 
-    int GetImagesSize();
-    int GetActorsSize();
+    int getImagesSize();
+    int getActorsSize();
 
-    Image *GetImage(int);
-    Image *getImage(string);
+    Image *getImage(int);
     Actor *getActor(int);
+    Image *getImage(string);
     void deleteActor(Actor *);
     void deleteActor(int);
     void deleteImage(Image *);

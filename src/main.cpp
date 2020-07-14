@@ -1,4 +1,4 @@
-#define SDL_MAIN_HANDLED //windows hack
+
 #include <iostream>
 #include <SDL.h>
 
@@ -58,7 +58,7 @@ void input(){
                     break;
             }
 
-            for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize() ; ++i) {
+            for (int i = 0; i < Game::scenes.at(Game::currentScene).getActorsSize() ; ++i) {
                 if (Game::scenes.at(Game::currentScene).getActor(i)->active) {
                     if(Game::scenes.at(Game::currentScene).getActor(i)->onInput(e) == -1){
                         running = false;
@@ -72,17 +72,15 @@ void input(){
 }
 
 int main(int argc, char **argv) {
-    SDL_SetMainReady();
 
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         SDL_Log("Can't init %s", SDL_GetError());
         return 1;
     }
-    Engine::window = SDL_CreateWindow("Snake", 100, 100, 1024, 768, 0);
+    Engine::window = SDL_CreateWindow("Snake", 50, 50, 1024, 768, 0);
     Engine::renderer = SDL_CreateRenderer(Engine::window, -1, SDL_RENDERER_ACCELERATED);
 
     // Initialize scenes
-    //TODO: encapsulate scene creation (create loadScene)
     Game::scenes.push_back(Scene("menu"));
     Game::scenes.push_back(Scene("game"));
 
@@ -119,12 +117,12 @@ int main(int argc, char **argv) {
         // clear the screen
         SDL_RenderClear(Engine::renderer);
         // copy the texture to the rendering context
-        for (int currImg = 0; currImg < Game::scenes.at(Game::currentScene).GetImagesSize(); ++currImg) {
-            if (Game::scenes.at(Game::currentScene).GetImage(currImg) != NULL &&
-                Game::scenes.at(Game::currentScene).GetImage(currImg)->active) {
-                SDL_RenderCopyEx(Engine::renderer, Game::scenes.at(Game::currentScene).GetImage(currImg)->texture, NULL,
-                                 &Game::scenes.at(Game::currentScene).GetImage(currImg)->rect,
-                                 Game::scenes.at(Game::currentScene).GetImage(currImg)->angle,
+        for (int currImg = 0; currImg < Game::scenes.at(Game::currentScene).getImagesSize(); ++currImg) {
+            if (Game::scenes.at(Game::currentScene).getImage(currImg) != NULL &&
+                Game::scenes.at(Game::currentScene).getImage(currImg)->active) {
+                SDL_RenderCopyEx(Engine::renderer, Game::scenes.at(Game::currentScene).getImage(currImg)->texture, NULL,
+                                 &Game::scenes.at(Game::currentScene).getImage(currImg)->rect,
+                                 Game::scenes.at(Game::currentScene).getImage(currImg)->angle,
                                  NULL,SDL_FLIP_NONE);
             }
         }
