@@ -73,14 +73,18 @@ public:
     Actor *getActor(int);
     void deleteActor(Actor *);
     void deleteActor(int);
-    void deleteActor();
     void deleteImage(Image *);
+    void deleteImage(int);
 
     int update();
 
     Scene();
     Scene(std::string);
     ~Scene();
+
+    void deleteActors();
+
+    void deleteImages();
 
 private:
     std::vector<Image*> images;

@@ -1,6 +1,6 @@
 # This cmake file should be the same as this command
 # g++ -I /usr/include/SDL2 ./include/*.h ./src/*.cpp -lSDL2 -lSDL2_image -std=c++11 -o game_file_name
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.11)
 # uncomment these lines if not using clion on windows
 #set(CMAKE_C_COMPILER "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/Hostx86/x86/cl.exe")
 #set(CMAKE_CXX_COMPILER "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.16.27023/bin/Hostx86/x86/cl.exe")

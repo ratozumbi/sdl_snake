@@ -1,21 +1,17 @@
 #define SDL_MAIN_HANDLED //windows hack
 #include <iostream>
 #include <SDL.h>
-#include <SDL_image.h>
 
 #include <thread>
-#include <future>
 
 #include "../include/Image.h"
 #include "../include/Game.h"
-#include "../include/Scene.h"
-#include "../include/Pice.h"
 #include "../include/Board.h"
 
 void exitGame(){
     std::cerr<< "END GAME";
 
-//    SDL_DestroyTexture(texture); TODO: free images and actors
+    Game::scenes.clear();
     SDL_DestroyRenderer(Engine::renderer);
     SDL_DestroyWindow(Engine::window);
     std::exit(0);

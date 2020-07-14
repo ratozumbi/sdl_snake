@@ -23,7 +23,8 @@ Scene::Scene(std::string name){
 }
 
 Scene::~Scene(){
-
+    deleteActors();
+    deleteImages();
 }
 
 Image *Scene::loadImage(string name) {
@@ -102,9 +103,9 @@ int Scene::update() {
     return retCode;
 }
 
-void Scene::deleteActor() {
-    delete (actors.at(0));
-    actors.erase(actors.begin());
+void Scene::deleteImage(int Iimg) {
+    delete (images.at(Iimg));
+    images.erase(images.begin());
 }
 
 void Scene::deleteActor(int iAct) {
@@ -147,4 +148,16 @@ Image *Scene::getImage(string name) {
     }
 //    TODO: throw not found
     return nullptr;
+}
+
+void Scene::deleteActors() {
+    while(actors.begin()!=actors.end()){
+        deleteActor(0);
+    }
+}
+
+void Scene::deleteImages() {
+    while(images.begin()!=images.end()){
+        deleteImage(0);
+    }
 }
