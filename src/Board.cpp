@@ -223,7 +223,8 @@ int Board::update(){
     Actor::update();
 
     static int totalScore = 0;
-    int scoreNow = totalScore;
+    int initialScore = totalScore;
+    int thisUpdateScore = 0;
 
     int countDestroyH =0;
     bool anyMoving = false;
@@ -241,8 +242,17 @@ int Board::update(){
             }
             if(pices[hInter][wInter]->clicked){
                 if(first.x != -1){
-                    second.y = hInter;
-                    second.x = wInter;
+                    if(first.x == wInter +1 || first.x == wInter -1 ||
+                        first.y == hInter +1 || first.y == hInter -1){
+                        second.y = hInter;
+                        second.x = wInter;
+                    } else{//disable click if not near first click
+                        pices[first.y][first.x]->clicked = false;
+                        pices[hInter][wInter]->clicked = false;
+                        clickedCount = 0;
+                        first.x = -1;
+                        first.y = -1;
+                    }
                 } else{
                     first.y = hInter;
                     first.x = wInter;
@@ -284,9 +294,10 @@ int Board::update(){
 
         if(!swap){
             //skip checking to wait for move animation on swap
-            scoreNow += checkInRange();
+            thisUpdateScore = checkInRange();
+            initialScore += thisUpdateScore;
             if(second.x != -1){//if there is a swap going on
-                if(scoreNow == 0){
+                if(thisUpdateScore == 0){
                     //if the swap scores, pice will set to destory and we are good. If not
                     //we check if there was a swap and not on this update. Then we swap back.
                     auto temp = pices[first.y][first.x];
@@ -314,10 +325,10 @@ int Board::update(){
         }
     }
 
-    if(totalScore < scoreNow){
+    if(totalScore < initialScore){
         std::cout << "TOTAL SCORE: " << totalScore << "\n"
-                  << " NOW SCORED: " << scoreNow - totalScore << std::endl;
-        totalScore += scoreNow;
+                  << " NOW SCORED: " << initialScore - totalScore << std::endl;
+        totalScore += initialScore;
     }
 
 

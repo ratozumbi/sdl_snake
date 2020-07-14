@@ -6,7 +6,7 @@
 #define GAME_BOARD_H
 #define BOARD_W 8
 #define BOARD_H 8
-#define PICE_DIMENSION 70
+
 
 #include "Actor.h"
 #include "Pice.h"

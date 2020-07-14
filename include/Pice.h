@@ -8,6 +8,7 @@
 #include "../include/Actor.h"
 #include "Image.h"
 #include <vector>
+#define PICE_DIMENSION 70
 
 class Pice: public Actor {
 

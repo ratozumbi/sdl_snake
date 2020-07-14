@@ -29,6 +29,15 @@ void Pice::start() {
 int Pice::update() {
     Actor::update();
 
+    //enlarge for click
+    if(clicked){
+        piceImg->rect.h = PICE_DIMENSION + 10;
+        piceImg->rect.w = PICE_DIMENSION + 10;
+    } else{
+        piceImg->rect.h = PICE_DIMENSION;
+        piceImg->rect.w = PICE_DIMENSION;
+    }
+
     if(isMoving ==1){
         if(!pointsToMove.empty()){
             int lerpX =std::ceil(Util::lerp(piceImg->rect.x,pointsToMove.at(0).x,0.1f));
