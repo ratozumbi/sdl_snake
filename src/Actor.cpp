@@ -2,7 +2,6 @@
 // Created by ratozumbi on 6/24/20.
 //
 
-#include <iostream>
 #include "../include/Actor.h"
 
 
