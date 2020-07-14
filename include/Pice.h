@@ -2,8 +2,8 @@
 // Created by Rato Zumbi on 03/07/2020.
 //
 
-#ifndef GAME_PICE_H
-#define GAME_PICE_H
+#ifndef ENJOIADO_PICE_H
+#define ENJOIADO_PICE_H
 
 #include "../include/Actor.h"
 #include "Image.h"
@@ -45,4 +45,4 @@ private:
 };
 
 
-#endif //GAME_PICE_H
+#endif //ENJOIADO_PICE_H

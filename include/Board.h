@@ -2,8 +2,8 @@
 // Created by Rato Zumbi on 07/07/2020.
 //
 
-#ifndef GAME_BOARD_H
-#define GAME_BOARD_H
+#ifndef ENJOIADO_BOARD_H
+#define ENJOIADO_BOARD_H
 #define BOARD_W 8
 #define BOARD_H 8
 
@@ -32,4 +32,4 @@ private:
 
 
 
-#endif //GAME_BOARD_H
+#endif //ENJOIADO_BOARD_H

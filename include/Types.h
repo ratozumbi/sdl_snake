@@ -2,8 +2,8 @@
 // Created by Rato Zumbi on 09/07/2020.
 //
 
-#ifndef GAME_TYPES_H
-#define GAME_TYPES_H
+#ifndef ENJOIADO_TYPES_H
+#define ENJOIADO_TYPES_H
 
 enum class PiceType{
     black = 0,
@@ -15,4 +15,4 @@ enum class PiceType{
 };
 const PiceType PiceTypeToEnum[5] = {PiceType::black,PiceType::white,PiceType::pink,PiceType::blue,PiceType::orange};
 
-#endif //GAME_TYPES_H
+#endif //ENJOIADO_TYPES_H

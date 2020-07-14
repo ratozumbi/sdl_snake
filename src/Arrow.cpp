@@ -2,7 +2,6 @@
 // Created by ratozumbi on 6/24/20.
 //
 
-#include <iostream>
 #include "../include/Arrow.h"
 
 Arrow::Arrow():Actor(){
@@ -10,11 +9,10 @@ Arrow::Arrow():Actor(){
 };
 
 Arrow::~Arrow(){
-//    delete pointer;
+    Game::scenes.at(Game::currentScene).deleteImage(pointer);
 };
 
 void Arrow::start() {
-//    Actor::start();
 }
 
 int Arrow::update() {

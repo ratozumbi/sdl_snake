@@ -2,8 +2,8 @@
 // Created by ratozumbi on 6/24/20.
 //
 
-#ifndef SDL_SNAKE_ARROW_H
-#define SDL_SNAKE_ARROW_H
+#ifndef ENJOIADO_ARROW_H
+#define ENJOIADO_ARROW_H
 
 #include "Actor.h"
 #include "Image.h"
@@ -21,4 +21,4 @@ public:
     int onInput(SDL_Event);
 };
 
-#endif //SDL_SNAKE_ARROW_H
+#endif //ENJOIADO_ARROW_H

@@ -2,8 +2,8 @@
 // Created by ratozumbi on 6/23/20.
 //
 
-#ifndef SDL_SNAKE_IMAGE_H
-#define SDL_SNAKE_IMAGE_H
+#ifndef ENJOIADO_IMAGE_H
+#define ENJOIADO_IMAGE_H
 
 #include "../include/GameObject.h"
 #include "GameObject.h"
@@ -25,4 +25,4 @@ public:
 };
 
 
-#endif //SDL_SNAKE_IMAGE_H
+#endif //ENJOIADO_IMAGE_H

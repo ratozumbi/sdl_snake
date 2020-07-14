@@ -2,8 +2,8 @@
 // Created by ratozumbi on 6/24/20.
 //
 
-#ifndef SDL_SNAKE_GAME_H
-#define SDL_SNAKE_GAME_H
+#ifndef ENJOIADO_GAME_H
+#define ENJOIADO_GAME_H
 
 
 #include <vector>
@@ -29,4 +29,4 @@ namespace Util {
     double lerp(float,float,float);
 }
 
-#endif //SDL_SNAKE_GAME_H
+#endif //ENJOIADO_GAME_H

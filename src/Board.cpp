@@ -212,7 +212,7 @@ void Board::smash(unsigned int h, unsigned int w, bool _firstCall, int Hchain){
     }
     else
     {
-        genNew(h,w,Hchain);//TODO: y should be the amount of pices destroyed on this H
+        genNew(h,w,Hchain);
         pices[h][w]->moveDown(1);
     }
 
@@ -279,7 +279,6 @@ int Board::update(){
                 }
             }
             countDestroyH = 0;
-            HtoSmash = -1;
         }
         // inside if !anyMoving
         if(clickedCount == 2){

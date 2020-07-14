@@ -2,8 +2,8 @@
 // Created by ratozumbi on 6/24/20.
 //
 
-#ifndef SDL_SNAKE_ACTOR_H
-#define SDL_SNAKE_ACTOR_H
+#ifndef ENJOIADO_ACTOR_H
+#define ENJOIADO_ACTOR_H
 
 #include <SDL_events.h>
 #include "../include/Types.h"
@@ -24,4 +24,4 @@ protected:
     bool markToDestroy = false;
 };
 
-#endif //SDL_SNAKE_ACTOR_H
+#endif //ENJOIADO_ACTOR_H

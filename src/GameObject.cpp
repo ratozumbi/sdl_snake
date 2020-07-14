@@ -9,11 +9,6 @@ GameObject::GameObject(string name, SDL_Rect &rect1) {
     this->rect = rect1;
 }
 
-GameObject::GameObject(SDL_Rect &rect1) {
-    name = "NewCustomGameObject";
-    this->rect = rect1;
-}
-
 GameObject::GameObject() {
     name = "NewGameObject";
     rect.x =2;
