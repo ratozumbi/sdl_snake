@@ -199,6 +199,7 @@ void Board::smash(unsigned int h, unsigned int w, bool _firstCall, int Hchain){
     if(_firstCall)
     {
         if(!pices[h][w]->getDestroy()){
+            //TODO: check why this is happening
             std::cout <<"error! cant smash on pice not marked to destroy"<< std::endl;
             return;
         }
@@ -222,44 +223,101 @@ int Board::update(){
     Actor::update();
 
     static int totalScore = 0;
-    int initialScore = totalScore;
+    int scoreNow = totalScore;
 
     int countDestroyH =0;
     bool anyMoving = false;
+    int clickedCount = 0;
+    bool swap = false;
+
+    static SDL_Point first = {-1,-1};
+    static SDL_Point second = {-1,-1};
 
     for(uint32_t  wInter = 0; wInter < BOARD_W; wInter ++) {
         for (uint32_t  hInter = 0; hInter < BOARD_H; hInter++) {
             //dont mess with moving parts
-            if(pices[hInter][wInter]->isMoving == 1){
+            if(pices[hInter][wInter]->isAnimating() == true){
                 anyMoving = true;
+            }
+            if(pices[hInter][wInter]->clicked){
+                if(first.x != -1){
+                    second.y = hInter;
+                    second.x = wInter;
+                } else{
+                    first.y = hInter;
+                    first.x = wInter;
+                }
+                clickedCount++;
             }
         }
     }
 
     if(!anyMoving){
         for(uint32_t  wInter = 0; wInter < BOARD_W; wInter ++) {
-            int test = -1;
+            int HtoSmash = -1;
             for (uint32_t hInter = 0; hInter < BOARD_H; hInter++) {
                 if(pices[hInter][wInter]->isSpining == 2){
-                    if(test==-1)test =hInter;
+                    if(HtoSmash == -1)HtoSmash =hInter;
                     countDestroyH ++;
                 }
             }
-            if(test!=-1){
+            if(HtoSmash != -1){
                 for(int i = 0; i< countDestroyH; i++){
-                    smash(test-i,wInter,true,i);
+                    smash(HtoSmash - i, wInter, true, i);
                 }
             }
             countDestroyH = 0;
-            test = -1;
+            HtoSmash = -1;
         }
-        initialScore += checkInRange();
+        // inside if !anyMoving
+        if(clickedCount == 2){
+            swap = true;
+
+            pices[first.y][first.x]->moveTo(pices[second.y][second.x]->piceImg->rect.x,pices[second.y][second.x]->piceImg->rect.y);
+            pices[second.y][second.x]->moveTo(pices[first.y][first.x]->piceImg->rect.x,pices[first.y][first.x]->piceImg->rect.y);
+            pices[first.y][first.x]->clicked = false;
+            pices[second.y][second.x]->clicked = false;
+            auto temp = pices[first.y][first.x];
+            pices[first.y][first.x] = pices[second.y][second.x];
+            pices[second.y][second.x] = temp;
+        }
+
+        if(!swap){
+            //skip checking to wait for move animation on swap
+            scoreNow += checkInRange();
+            if(second.x != -1){//if there is a swap going on
+                if(scoreNow == 0){
+                    //if the swap scores, pice will set to destory and we are good. If not
+                    //we check if there was a swap and not on this update. Then we swap back.
+                    auto temp = pices[first.y][first.x];
+                    pices[first.y][first.x] = pices[second.y][second.x];
+                    pices[second.y][second.x] = temp;
+                    pices[first.y][first.x]->moveTo(pices[second.y][second.x]->piceImg->rect.x,pices[second.y][second.x]->piceImg->rect.y);
+                    pices[second.y][second.x]->moveTo(pices[first.y][first.x]->piceImg->rect.x,pices[first.y][first.x]->piceImg->rect.y);
+                    first.x =-1;
+                    first.y =-1;
+                    second.x =-1;
+                    second.y =-1;
+                } else{
+                    first.x =-1;
+                    first.y =-1;
+                    second.x =-1;
+                    second.y =-1;
+                }
+            }
+            else
+            {
+                //no second to swap, resets first to get ready for new frame check
+                first.x =-1;
+                first.y =-1;
+            }
+        }
     }
 
-    if(totalScore < initialScore){
+    if(totalScore < scoreNow){
         std::cout << "TOTAL SCORE: " << totalScore << "\n"
-                  << " NOW SCORED: " << initialScore - totalScore << std::endl;
-        totalScore += initialScore;
+                  << " NOW SCORED: " << scoreNow - totalScore << std::endl;
+        totalScore += scoreNow;
     }
 
 

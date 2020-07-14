@@ -31,8 +31,16 @@ int Pice::update() {
 
     if(isMoving ==1){
         if(!pointsToMove.empty()){
-            piceImg->rect.x = std::ceil(Util::lerp(piceImg->rect.x,pointsToMove.at(0).x,0.05f));
-            piceImg->rect.y = std::ceil(Util::lerp(piceImg->rect.y,pointsToMove.at(0).y,0.05f));
+            int lerpX =std::ceil(Util::lerp(piceImg->rect.x,pointsToMove.at(0).x,0.1f));
+            int lerpY =std::ceil(Util::lerp(piceImg->rect.y,pointsToMove.at(0).y,0.1f));
+            //unstuck broken float to int conversion
+            if(lerpX == piceImg->rect.x && lerpY == piceImg->rect.y){
+                piceImg->rect.x = pointsToMove.at(0).x;
+                piceImg->rect.y = pointsToMove.at(0).y;
+            } else{
+                piceImg->rect.x = lerpX;//std::ceil(Util::lerp(piceImg->rect.x,pointsToMove.at(0).x,1.0f));
+                piceImg->rect.y = lerpY;//std::ceil(Util::lerp(piceImg->rect.y,pointsToMove.at(0).y,1.0f));
+            }
 
             if(piceImg->rect.x == pointsToMove.at(0).x && piceImg->rect.y == pointsToMove.at(0).y )
             {
@@ -58,43 +66,6 @@ int Pice::update() {
     return 0;
 }
 
-//int Pice::update(){
-//    Actor::update();
-//    if(movedownCount !=0 && isMoving != 1){
-//        moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
-//    }
-//    if(isMoving == 1){
-//        int speedX = 1;
-//        int speedY = 1;
-//        speedX = targetX < piceImg->rect.x ? speedX * -1: targetX == piceImg->rect.x? 0:speedX;
-//        speedY = targetY < piceImg->rect.y ? speedY * -1: targetY == piceImg->rect.y? 0:speedY;
-////        piceImg->rect.x += speedX;
-////        piceImg->rect.y += speedY;
-//        piceImg->rect.x = std::ceil(Util::lerp(piceImg->rect.x,targetX,0.05f));
-//        piceImg->rect.y = std::ceil(Util::lerp(piceImg->rect.y,targetY,0.05f));
-//
-//        if(piceImg->rect.x == targetX && piceImg->rect.y == targetY )
-//        {
-//            movedownCount--;
-//            if(movedownCount != 0){
-//                moveTo(piceImg->rect.x,piceImg->rect.y + piceImg->rect.h);
-//            } else{
-//                targetX = 0;
-//                targetY = 0;
-//                isMoving = 2;
-//            }
-//        }
-//    }
-//    if(isMoving != 1 && isSpining == 1){
-//        piceImg->angle+=2;
-//        if(piceImg->angle > 180){
-//            isSpining = 2;
-//        }
-//    }
-//
-//    return 0;
-//};
-
 int Pice::onInput(SDL_Event e){
     Actor::onInput(e);
     bool insideBounds = (e.button.x >= piceImg->rect.x &&
@@ -102,18 +73,22 @@ int Pice::onInput(SDL_Event e){
                          e.button.y >= piceImg->rect.y &&
                          e.button.y <= piceImg->rect.y + piceImg->rect.h);
 
-    if(insideBounds && e.type == SDL_MOUSEBUTTONUP){
+    if(insideBounds && e.type == SDL_MOUSEBUTTONDOWN){
         if(e.button.button == SDL_BUTTON_RIGHT){
             setDestroy();
         }
-    }
-
-    if(insideBounds && e.type == SDL_MOUSEMOTION){
-        if(e.motion.state == SDL_BUTTON_LMASK){
-            piceImg->rect.x += e.motion.xrel;
-            piceImg->rect.y += e.motion.yrel;
+        if(e.button.button == SDL_BUTTON_LEFT){
+            clicked =true;
         }
     }
+
+//    if(insideBounds && e.type == SDL_MOUSEMOTION){
+//        if(e.motion.state == SDL_BUTTON_LMASK){
+//            clicked = true;
+////            piceImg->rect.x += e.motion.xrel;
+////            piceImg->rect.y += e.motion.yrel;
+//        }
+//    }
     return 0;
 }
 
@@ -125,6 +100,8 @@ void Pice::setDestroy() {
 bool Pice::getDestroy() {
     return Actor::getDestroy();
 }
+
+//TODO: swap x y
 void Pice::moveTo(int x, int y) {
     isMoving = 1;
     pointsToMove.push_back({x,y});

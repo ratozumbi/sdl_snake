@@ -16,7 +16,7 @@ class Pice: public Actor {
 
     friend class Board;
 public:
-    bool clicked;
+    bool clicked = false;
     Image *piceImg;
     Pice(PiceType type);
 //    Pice(int type);

@@ -31,7 +31,10 @@ void input(){
         SDL_Event e;
         bool hasEvent = SDL_PollEvent(&e);
 
+        static bool lockBtnLeft = false;
+        static bool lockBtnRight = false;
         if (hasEvent) {
+            //TODO: change ifs to switch cases
             if (e.type == SDL_QUIT){
                 running = false;
                 exitGame();
@@ -42,9 +45,25 @@ void input(){
                 running = false;
                 exitGame();
             }
-            else if ( e.key.keysym.sym == SDLK_1)
-            {
-                Game::scenes.at(1).deleteActor(1);
+            //dont let update happen on repeted mouse inputs
+            else if(e.type == SDL_MOUSEBUTTONDOWN){
+                if(e.button.button == SDL_BUTTON_RIGHT){
+                    if(lockBtnRight)
+                        return;
+                    lockBtnRight = true;
+                }
+                if(e.button.button == SDL_BUTTON_LEFT){
+                    if(lockBtnLeft)
+                        return;
+                    lockBtnLeft = true;
+                }
+            }else if(e.type == SDL_MOUSEBUTTONUP){
+                if(e.button.button == SDL_BUTTON_RIGHT){
+                    lockBtnRight = false;
+                }
+                if(e.button.button == SDL_BUTTON_LEFT){
+                    lockBtnLeft = false;
+                }
             }
 
             for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize() ; ++i) {
@@ -81,11 +100,11 @@ int main(int argc, char **argv) {
     Game::scenes.at(Util::findScene("menu")).loadImage("pointer.png", 300, 425);
 
     Game::scenes.at(Util::findScene("game")).loadImage("Backdrop13.jpg");
-    Game::scenes.at(Util::findScene("game")).loadImage("Color-1.png", 10, 10, false);
-    Game::scenes.at(Util::findScene("game")).loadImage("Color-2.png", 10, 70, false);
-    Game::scenes.at(Util::findScene("game")).loadImage("Color-3.png", 10, 140, false);
-    Game::scenes.at(Util::findScene("game")).loadImage("Color-4.png", 10, 210, false);
-    Game::scenes.at(Util::findScene("game")).loadImage("Color-5.png", 10, 280, false);
+//    Game::scenes.at(Util::findScene("game")).loadImage("Color-1.png", 10, 10, false);
+//    Game::scenes.at(Util::findScene("game")).loadImage("Color-2.png", 10, 70, false);
+//    Game::scenes.at(Util::findScene("game")).loadImage("Color-3.png", 10, 140, false);
+//    Game::scenes.at(Util::findScene("game")).loadImage("Color-4.png", 10, 210, false);
+//    Game::scenes.at(Util::findScene("game")).loadImage("Color-5.png", 10, 280, false);
 
     //load actors
     Game::scenes.at(Util::findScene("menu")).loadActor<Arrow>();
