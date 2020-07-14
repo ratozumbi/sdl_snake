@@ -78,9 +78,6 @@ int Pice::onInput(SDL_Event e){
                          e.button.y <= piceImg->rect.y + piceImg->rect.h);
 
     if(insideBounds && e.type == SDL_MOUSEBUTTONDOWN){
-        if(e.button.button == SDL_BUTTON_RIGHT){
-            setDestroy();
-        }
         if(e.button.button == SDL_BUTTON_LEFT){
             clicked =true;
         }

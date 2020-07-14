@@ -20,46 +20,42 @@ void exitGame(){
 //inputs where not smooth in the main thread
 //TODO: double check if this is needed
 void input(){
-    std::cout<<"works" << std::endl;
     bool running = true;
     while(running){
         // event handling
         SDL_Event e;
         bool hasEvent = SDL_PollEvent(&e);
 
-        static bool lockBtnLeft = false;
-        static bool lockBtnRight = false;
+        static bool lockBtnLeft = false;//dont let update happen on repeated mouse inputs
         if (hasEvent) {
-            //TODO: change ifs to switch cases
-            if (e.type == SDL_QUIT){
-                running = false;
-                exitGame();
-            }
-            //TODO: #BUG 1 esc key freezes the game
-            else if ( e.key.keysym.sym == SDLK_F1)
-            {
-                running = false;
-                exitGame();
-            }
-            //dont let update happen on repeted mouse inputs
-            else if(e.type == SDL_MOUSEBUTTONDOWN){
-                if(e.button.button == SDL_BUTTON_RIGHT){
-                    if(lockBtnRight)
-                        return;
-                    lockBtnRight = true;
-                }
-                if(e.button.button == SDL_BUTTON_LEFT){
-                    if(lockBtnLeft)
-                        return;
-                    lockBtnLeft = true;
-                }
-            }else if(e.type == SDL_MOUSEBUTTONUP){
-                if(e.button.button == SDL_BUTTON_RIGHT){
-                    lockBtnRight = false;
-                }
-                if(e.button.button == SDL_BUTTON_LEFT){
-                    lockBtnLeft = false;
-                }
+            switch (e.type){
+                case SDL_QUIT:
+                    running = false;
+                    exitGame();
+                    break;
+                case SDL_KEYDOWN:
+                    //TODO: #BUG 1 esc key freezes the game
+                    if ( e.key.keysym.sym == SDLK_F1){
+                        running = false;
+                        exitGame();
+                    }
+                    break;
+                case SDL_MOUSEBUTTONDOWN:
+                    if(e.button.button == SDL_BUTTON_LEFT){
+                        if(lockBtnLeft)
+                            return;
+                        lockBtnLeft = true;
+                    }else if(e.type == SDL_MOUSEBUTTONUP){
+                        if(e.button.button == SDL_BUTTON_LEFT){
+                            lockBtnLeft = false;
+                        }
+                    }
+                    break;
+                case SDL_MOUSEBUTTONUP:
+                    if(e.button.button == SDL_BUTTON_LEFT){
+                        lockBtnLeft = false;
+                    }
+                    break;
             }
 
             for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize() ; ++i) {
@@ -73,7 +69,6 @@ void input(){
         }
     }
 
-    std::cout<<"off";
 }
 
 int main(int argc, char **argv) {
@@ -133,7 +128,7 @@ int main(int argc, char **argv) {
         //game update
         //TODO: use vector iterator to make it more readable
 //        for (int i = 0; i < Game::scenes.at(Game::currentScene).GetActorsSize(); ++i) {
-            Game::scenes.at(Game::currentScene).update();
+        Game::scenes.at(Game::currentScene).update();
 //        }
 
         //set base color for renderer
@@ -145,7 +140,7 @@ int main(int argc, char **argv) {
             if (Game::scenes.at(Game::currentScene).GetImage(currImg) != NULL &&
                 Game::scenes.at(Game::currentScene).GetImage(currImg)->active) {
                 SDL_RenderCopyEx(Engine::renderer, Game::scenes.at(Game::currentScene).GetImage(currImg)->texture, NULL,
-                               &Game::scenes.at(Game::currentScene).GetImage(currImg)->rect,
+                                 &Game::scenes.at(Game::currentScene).GetImage(currImg)->rect,
                                  Game::scenes.at(Game::currentScene).GetImage(currImg)->angle,
                                  NULL,SDL_FLIP_NONE);
             }
