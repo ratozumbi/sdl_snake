@@ -157,3 +157,29 @@ void Scene::deleteImages() {
         deleteImage(0);
     }
 }
+
+/// The given img will have Z position and the element on Z will swap with whatever position img is
+/// \param img The image pointer to move
+/// \param z The Z that image will have
+void Scene::setZindex(Image* img, uint32_t z){
+    std::vector<Image*>::iterator it =
+            std::find_if(images.begin(), images.end(), [&,img](Image* e) { return (int)e == (int)img; });
+
+    if (it != images.end()) {
+        if(z>= images.size()) z = images.size()-1;
+        std::iter_swap(it,images.begin()+z);
+    }
+}
+
+/// Get Z of given image
+/// \param img The image
+/// \return The Z index
+uint32_t Scene::getZindex(Image* img){
+    std::vector<Image*>::iterator it =
+            std::find_if(images.begin(), images.end(), [&,img](Image* e) { return (int)e == (int)img; });
+
+    if (it != images.end()) {
+        uint32_t indx = std::distance(images.begin(),it);
+        return indx;
+    }
+}

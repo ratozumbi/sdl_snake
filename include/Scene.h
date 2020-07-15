@@ -67,6 +67,9 @@ public:
     int getImagesSize();
     int getActorsSize();
 
+    uint32_t getZindex(Image *img);
+    void setZindex(Image *img, uint32_t z);
+
     Image *getImage(int);
     Actor *getActor(int);
     Image *getImage(string);

@@ -81,6 +81,51 @@ int Pice::onInput(SDL_Event e){
         if(e.button.button == SDL_BUTTON_LEFT){
             clicked =true;
         }
+        if(e.button.button == SDL_BUTTON_RIGHT && drag == false && isMoving != 1){
+            drag =true;
+            //set Z to front most
+            Game::scenes.at(1).setZindex(piceImg,SDL_MAX_SINT16);
+        }
+    }
+    if(e.type == SDL_MOUSEBUTTONUP){
+        if(e.button.button == SDL_BUTTON_RIGHT && drag == true){
+            drag =false;
+            //notify drag drop
+
+            SDL_Event event;
+            SDL_zero(event);//SDL_memset(&event, 0, sizeof(event));
+            event.type = Engine::dragEventType;
+            event.user.code = 0;
+            event.user.data1 = piceImg;
+            event.user.data2 = this;
+            SDL_PushEvent(&event);
+
+            clicked = true;
+        }
+    }
+    //listen to drop
+    if(e.type == SDL_USEREVENT){
+        if(e.user.type == Engine::dragEventType){
+            if(
+                    ((Image*)e.user.data1)->rect.x >= piceImg->rect.x &&
+                    ((Image*)e.user.data1)->rect.x <= piceImg->rect.x + piceImg->rect.w &&
+                    ((Image*)e.user.data1)->rect.y >= piceImg->rect.y &&
+                    ((Image*)e.user.data1)->rect.y <= piceImg->rect.y + piceImg->rect.h
+                    &&
+                    ((Pice*)e.user.data2) != this)
+            {
+                clicked = true;
+            }
+        }
+    }
+
+    if(insideBounds && e.type == SDL_MOUSEMOTION){
+        if(e.motion.type == SDL_MOUSEMOTION){
+            if(drag){
+                piceImg->rect.x += e.motion.xrel;
+                piceImg->rect.y += e.motion.yrel;
+            }
+        }
     }
     return 0;
 }

@@ -18,6 +18,7 @@ namespace Engine {
     extern SDL_Renderer *renderer;
     const int targetFPS = 120;
     const int frameDelay = 1000 / targetFPS;
+    extern Uint32 dragEventType;
 }
 namespace Game {
     extern std::vector<Scene> scenes;
