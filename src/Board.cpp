@@ -200,7 +200,7 @@ void Board::smash(unsigned int h, unsigned int w, int Hchain, bool _firstCall){
     {
         if(!pices[h][w]->getDestroy()){
             //TODO: check why this is happening
-            std::cout <<"error! cant smash on pice not marked to destroy"<< std::endl;
+//            std::cout <<"error! cant smash on pice not marked to destroy"<< std::endl;
             return;
         }
         pices[h][w]->active = false;
