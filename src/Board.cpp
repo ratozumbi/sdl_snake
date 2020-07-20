@@ -42,12 +42,12 @@ void Board::genNew(uint32_t h, uint32_t w, int y){
     PiceType type = piceTypeToEnum[typeRand];
     pices[h][w] = Game::scenes.at(Util::findScene("game")).loadActor<Pice>(type);
     pices[h][w]->type = type; //TODO: check why object is losing type
-    pices[h][w]->piceImg->rect.x = (w * PICE_DIMENSION) + 200;
+    pices[h][w]->piceImg->rect.x = (w * PICE_DIMENSION) + BOARD_MARGIN_LEFT;
     if(y>=0){
         y++;
-        pices[h][w]->piceImg->rect.y = ((y * PICE_DIMENSION)*-1) + 100;
+        pices[h][w]->piceImg->rect.y = ((y * PICE_DIMENSION)*-1) + BOARD_MARGIN_TOP;
     }else    {
-        pices[h][w]->piceImg->rect.y = (h * PICE_DIMENSION) + 100;
+        pices[h][w]->piceImg->rect.y = (h * PICE_DIMENSION) + BOARD_MARGIN_TOP;
     }
     pices[h][w]->piceImg->active = true;
 }
@@ -284,8 +284,10 @@ int Board::update(){
         if(clickedCount == 2){
             swap = true;
 
-            pices[first.y][first.x]->moveTo(pices[second.y][second.x]->piceImg->rect.x,pices[second.y][second.x]->piceImg->rect.y);
-            pices[second.y][second.x]->moveTo(pices[first.y][first.x]->piceImg->rect.x,pices[first.y][first.x]->piceImg->rect.y);
+            pices[first.y][first.x]->moveTo((second.x * PICE_DIMENSION) + BOARD_MARGIN_LEFT,
+                    (second.y * PICE_DIMENSION) + BOARD_MARGIN_TOP);
+            pices[second.y][second.x]->moveTo((first.x * PICE_DIMENSION) + BOARD_MARGIN_LEFT,
+                    (first.y * PICE_DIMENSION) + BOARD_MARGIN_TOP);
             pices[first.y][first.x]->clicked = false;
             pices[second.y][second.x]->clicked = false;
             auto temp = pices[first.y][first.x];
@@ -304,8 +306,10 @@ int Board::update(){
                     auto temp = pices[first.y][first.x];
                     pices[first.y][first.x] = pices[second.y][second.x];
                     pices[second.y][second.x] = temp;
-                    pices[first.y][first.x]->moveTo(pices[second.y][second.x]->piceImg->rect.x,pices[second.y][second.x]->piceImg->rect.y);
-                    pices[second.y][second.x]->moveTo(pices[first.y][first.x]->piceImg->rect.x,pices[first.y][first.x]->piceImg->rect.y);
+                    pices[first.y][first.x]->moveTo((second.x * PICE_DIMENSION) + BOARD_MARGIN_LEFT,
+                                                    (second.y * PICE_DIMENSION) + BOARD_MARGIN_TOP);
+                    pices[second.y][second.x]->moveTo((first.x * PICE_DIMENSION) + BOARD_MARGIN_LEFT,
+                                                      (first.y * PICE_DIMENSION) + BOARD_MARGIN_TOP);
                     first.x =-1;
                     first.y =-1;
                     second.x =-1;

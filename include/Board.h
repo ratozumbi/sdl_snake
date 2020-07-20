@@ -6,6 +6,8 @@
 #define ENJOIADO_BOARD_H
 #define BOARD_W 8
 #define BOARD_H 8
+#define BOARD_MARGIN_LEFT 200
+#define BOARD_MARGIN_TOP 100
 
 
 #include "Actor.h"

@@ -81,7 +81,7 @@ int Pice::onInput(SDL_Event e){
         if(e.button.button == SDL_BUTTON_LEFT){
             clicked =true;
         }
-        if(e.button.button == SDL_BUTTON_RIGHT && drag == false && isMoving != 1){
+        if(e.button.button == SDL_BUTTON_RIGHT && drag == false && isMoving == false){
             drag =true;
             //set Z to front most
             Game::scenes.at(1).setZindex(piceImg,SDL_MAX_SINT16);
