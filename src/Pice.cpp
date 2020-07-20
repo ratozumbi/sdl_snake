@@ -96,7 +96,7 @@ int Pice::onInput(SDL_Event e){
             SDL_zero(event);//SDL_memset(&event, 0, sizeof(event));
             event.type = Engine::dragEventType;
             event.user.code = 0;
-            event.user.data1 = piceImg;
+            event.user.data1 = new SDL_Point {e.motion.x,e.motion.y};
             event.user.data2 = this;
             SDL_PushEvent(&event);
 
@@ -107,10 +107,10 @@ int Pice::onInput(SDL_Event e){
     if(e.type == SDL_USEREVENT){
         if(e.user.type == Engine::dragEventType){
             if(
-                    ((Image*)e.user.data1)->rect.x >= piceImg->rect.x &&
-                    ((Image*)e.user.data1)->rect.x <= piceImg->rect.x + piceImg->rect.w &&
-                    ((Image*)e.user.data1)->rect.y >= piceImg->rect.y &&
-                    ((Image*)e.user.data1)->rect.y <= piceImg->rect.y + piceImg->rect.h
+                    ((SDL_Point*)e.user.data1)->x >= piceImg->rect.x &&
+                    ((SDL_Point*)e.user.data1)->x <= piceImg->rect.x + piceImg->rect.w &&
+                    ((SDL_Point*)e.user.data1)->y >= piceImg->rect.y &&
+                    ((SDL_Point*)e.user.data1)->y <= piceImg->rect.y + piceImg->rect.h
                     &&
                     ((Pice*)e.user.data2) != this)
             {
