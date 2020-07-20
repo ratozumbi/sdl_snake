@@ -303,13 +303,14 @@ int Board::update(){
                 if(thisUpdateScore == 0){
                     //if the swap scores, pice will set to destory and we are good. If not
                     //we check if there was a swap and not on this update. Then we swap back.
-                    auto temp = pices[first.y][first.x];
-                    pices[first.y][first.x] = pices[second.y][second.x];
-                    pices[second.y][second.x] = temp;
                     pices[first.y][first.x]->moveTo((second.x * PICE_DIMENSION) + BOARD_MARGIN_LEFT,
                                                     (second.y * PICE_DIMENSION) + BOARD_MARGIN_TOP);
                     pices[second.y][second.x]->moveTo((first.x * PICE_DIMENSION) + BOARD_MARGIN_LEFT,
                                                       (first.y * PICE_DIMENSION) + BOARD_MARGIN_TOP);
+                    auto temp = pices[first.y][first.x];
+                    pices[first.y][first.x] = pices[second.y][second.x];
+                    pices[second.y][second.x] = temp;
+
                     first.x =-1;
                     first.y =-1;
                     second.x =-1;
