@@ -44,6 +44,10 @@ public:
 private:
     bool isMoving = false;
     int isSpining = 0;
+
+    void click();
+
+    void setClicked(bool stateClicked);
 };
 
 

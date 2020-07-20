@@ -26,13 +26,15 @@ int Pice::update() {
     Actor::update();
 
     //enlarge for click
-    if(clicked){
-        piceImg->rect.h = PICE_DIMENSION + 10;
-        piceImg->rect.w = PICE_DIMENSION + 10;
-    } else{
-        piceImg->rect.h = PICE_DIMENSION;
-        piceImg->rect.w = PICE_DIMENSION;
-    }
+//    if(clicked){
+//        piceImg->rect.x = PICE_DIMENSION - 5;
+//        piceImg->rect.y = PICE_DIMENSION - 5;
+//        piceImg->rect.h = PICE_DIMENSION + 10;
+//        piceImg->rect.w = PICE_DIMENSION + 10;
+//    } else{
+//        piceImg->rect.h = PICE_DIMENSION;
+//        piceImg->rect.w = PICE_DIMENSION;
+//    }
 
     if(isMoving ==true){
         if(!pointsToMove.empty()){
@@ -79,10 +81,12 @@ int Pice::onInput(SDL_Event e){
 
     if(insideBounds && e.type == SDL_MOUSEBUTTONDOWN){
         if(e.button.button == SDL_BUTTON_LEFT){
-            clicked =true;
+            setClicked(true);
+            //set Z to front most
+            Game::scenes.at(1).setZindex(piceImg,SDL_MAX_SINT16);
         }
         if(e.button.button == SDL_BUTTON_RIGHT && drag == false && isMoving == false){
-            drag =true;
+            setClicked(true);
             //set Z to front most
             Game::scenes.at(1).setZindex(piceImg,SDL_MAX_SINT16);
         }
@@ -99,8 +103,6 @@ int Pice::onInput(SDL_Event e){
             event.user.data1 = new SDL_Point {e.motion.x,e.motion.y};
             event.user.data2 = this;
             SDL_PushEvent(&event);
-
-            clicked = true;
         }
     }
     //listen to drop
@@ -114,7 +116,7 @@ int Pice::onInput(SDL_Event e){
                     &&
                     ((Pice*)e.user.data2) != this)
             {
-                clicked = true;
+                setClicked(true);
             }
         }
     }
@@ -155,4 +157,21 @@ void Pice::spin(){
 
 bool Pice::isAnimating() {
     return isMoving == true || isSpining ==1;
+}
+
+void Pice::setClicked(bool stateClicked)
+{
+    if(stateClicked){
+        piceImg->rect.x -= 5;
+        piceImg->rect.y -= 5;
+        piceImg->rect.h = PICE_DIMENSION + 10;
+        piceImg->rect.w = PICE_DIMENSION + 10;
+        clicked = true;
+    } else{
+        piceImg->rect.x += 5;
+        piceImg->rect.y += 5;
+        piceImg->rect.h = PICE_DIMENSION;
+        piceImg->rect.w = PICE_DIMENSION;
+        clicked = false;
+    }
 }

@@ -249,8 +249,8 @@ int Board::update(){
                         second.y = hInter;
                         second.x = wInter;
                     } else{//disable click if not near first click
-                        pices[first.y][first.x]->clicked = false;
-                        pices[hInter][wInter]->clicked = false;
+                        pices[first.y][first.x]->setClicked(false);
+                        pices[hInter][wInter]->setClicked(false);
                         clickedCount = 0;
                         first.x = -1;
                         first.y = -1;
@@ -288,8 +288,8 @@ int Board::update(){
                     (second.y * PICE_DIMENSION) + BOARD_MARGIN_TOP);
             pices[second.y][second.x]->moveTo((first.x * PICE_DIMENSION) + BOARD_MARGIN_LEFT,
                     (first.y * PICE_DIMENSION) + BOARD_MARGIN_TOP);
-            pices[first.y][first.x]->clicked = false;
-            pices[second.y][second.x]->clicked = false;
+            pices[first.y][first.x]->setClicked(false);
+            pices[second.y][second.x]->setClicked(false);
             auto temp = pices[first.y][first.x];
             pices[first.y][first.x] = pices[second.y][second.x];
             pices[second.y][second.x] = temp;
