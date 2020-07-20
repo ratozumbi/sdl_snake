@@ -268,6 +268,11 @@ int Board::update(){
         for(uint32_t  wInter = 0; wInter < BOARD_W; wInter ++) {
             int HtoSmash = -1;
             for (uint32_t hInter = 0; hInter < BOARD_H; hInter++) {
+//                //realign to compensate for unsuccessful drag movemet
+//                if(pices[hInter][wInter]->clicked && !pices[hInter][wInter]->drag)
+//                    pices[hInter][wInter]->moveTo((wInter * PICE_DIMENSION) + BOARD_MARGIN_LEFT,
+//                                                (hInter * PICE_DIMENSION) + BOARD_MARGIN_TOP);
+
                 if(pices[hInter][wInter]->isSpining == 2){
                     if(HtoSmash == -1)HtoSmash =hInter;
                     countDestroyH ++;

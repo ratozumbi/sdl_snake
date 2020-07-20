@@ -87,10 +87,20 @@ int Pice::onInput(SDL_Event e){
         }
         if(e.button.button == SDL_BUTTON_RIGHT && drag == false && isMoving == false){
             setClicked(true);
+            drag = true;
             //set Z to front most
             Game::scenes.at(1).setZindex(piceImg,SDL_MAX_SINT16);
         }
     }
+
+    //move the pice
+    if(e.type == SDL_MOUSEMOTION){
+        if(drag){
+            piceImg->rect.x = e.motion.x - PICE_DIMENSION/2;
+            piceImg->rect.y = e.motion.y- PICE_DIMENSION/2;
+        }
+    }
+
     if(e.type == SDL_MOUSEBUTTONUP){
         if(e.button.button == SDL_BUTTON_RIGHT && drag == true){
             drag =false;
